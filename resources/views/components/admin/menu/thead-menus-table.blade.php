@@ -1,0 +1,9 @@
+<thead>
+<tr>
+    <th>#</th>
+    <th>name</th>
+    <th>url</th>
+    <th>parent</th>
+    <th>setting</th>
+</tr>
+</thead>
