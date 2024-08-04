@@ -43,20 +43,14 @@ class MenuController extends Controller
        return redirect('admin/menu');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Menu $menu)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Menu $menu)
     {
-        //
+        $menus = Menu::all();
+        return view('admin.menu.edit',[
+            'menu'=>$menu,
+            'menus'=>$menus
+        ]);
     }
 
     /**
@@ -64,7 +58,7 @@ class MenuController extends Controller
      */
     public function update(Request $request, Menu $menu)
     {
-        //
+        dd($request->all());
     }
 
     /**
