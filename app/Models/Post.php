@@ -20,11 +20,11 @@ protected $fillable = [
 ];
 public function user()
 {
-    $this->belongsTo(User::class,'user_id');
+   return $this->belongsTo(User::class,'user_id');
 }
 public function category()
 {
-    $this->belongsTo(Category::class,'category_id');
+   return $this->belongsTo(Category::class,'category_id');
 }
 public function comment()
 {
