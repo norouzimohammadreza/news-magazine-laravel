@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{$title}}</title>
     <x-admin.layout.css-loader/>
+    @stack('CkEditorCss')
 </head>
 
 <body>
@@ -20,4 +21,6 @@
     </div>
 </div>
 <x-admin.layout.scripts/>
+@stack('ckEditorJs')
+
 </body>

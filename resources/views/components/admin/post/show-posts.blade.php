@@ -24,7 +24,7 @@
         <td>
             {{$post->category->title}}
         </td>
-        <td><img style="width: 80px;" src="{{asset($post['image'])}}" alt=""></td>
+        <td><img style="width: 80px;" src="{{ asset('posts/'.$post->image) }}" alt=""></td>
         <td style="width: 25rem;">
             <a role="button" class="btn btn-sm btn-warning btn-dark text-white" href="{{route('user.breaking-news',[$post])}}">
                 @if($post['breaking_news'] == 1)  remove breaking news @else add breaking news @endif

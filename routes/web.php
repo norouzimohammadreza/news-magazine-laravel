@@ -16,7 +16,7 @@ Route::prefix('admin')->group(function () {
         Route::resource('/menu',MenuController::class);
         Route::resource('/post',PostController::class);
         Route::get('user/{user}',[UserController::class,'isAdmin'])->name('user.is-admin');
-        Route::get('post/{post}', [PostController::class, 'isSelected'])->name('user.is-selected');
+        Route::get('post/selected/{post}', [PostController::class, 'isSelected'])->name('user.is-selected');
         Route::get('post/breaking-news/{post}',[PostController::class,'breakingNews'])->name('user.breaking-news');
 
 });
