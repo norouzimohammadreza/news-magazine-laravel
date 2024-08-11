@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Banner\store;
 use App\Models\Banner;
 use Illuminate\Http\Request;
 
@@ -24,15 +25,21 @@ class BannerController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.banner.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(store $store)
     {
-        //
+        $imageName= time() .'.'. $store->file('image')->extension();
+        $store->file('image')->storeAs(('banners'),$imageName);
+        Banner::create([
+            'url'=> $store->url,
+            'image'=>$imageName
+        ]);
+        return redirect('admin/banner');
     }
 
     /**
