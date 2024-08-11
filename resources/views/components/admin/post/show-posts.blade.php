@@ -33,7 +33,7 @@
                 @if ($post['selected'] == 1) remove selected  @else add selected @endif
             </a>
             <hr class="my-1" />
-            <a role="button" class="btn btn-sm btn-primary text-white" href="">edit</a>
+            <a role="button" class="btn btn-sm btn-primary text-white" href="{{ route('post.edit',[$post]) }}">edit</a>
             <a role="button" class="btn btn-sm btn-danger text-white" href="">delete</a>
         </td>
     </tr>
