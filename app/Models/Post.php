@@ -28,6 +28,6 @@ public function category()
 }
 public function comment()
 {
-    $this->hasMany(Comment::class);
+    return $this->hasMany(Comment::class);
 }
 }

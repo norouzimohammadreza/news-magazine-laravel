@@ -15,10 +15,10 @@ class User extends Model
     ];
     public function post()
     {
-        $this->hasMany(Post::class);
+        return  $this->hasMany(Post::class);
     }
     public function comment()
     {
-        $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class);
     }
 }
