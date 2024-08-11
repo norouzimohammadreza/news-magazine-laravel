@@ -34,7 +34,12 @@
             </a>
             <hr class="my-1" />
             <a role="button" class="btn btn-sm btn-primary text-white" href="{{ route('post.edit',[$post]) }}">edit</a>
-            <a role="button" class="btn btn-sm btn-danger text-white" href="">delete</a>
+            <form action="{{ route('post.destroy',[$post]) }}" method="post">
+                @csrf
+                @method('delete')
+                <button type="submit" class="btn btn-sm btn-danger text-white" href="">delete</button>
+            </form>
+
         </td>
     </tr>
 @endforeach

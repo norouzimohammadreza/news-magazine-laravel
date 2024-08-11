@@ -129,6 +129,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        Post::find($post->id)->delete();
+        return redirect('admin/post');
     }
 }
