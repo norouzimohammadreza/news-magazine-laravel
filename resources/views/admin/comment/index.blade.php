@@ -7,8 +7,8 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>user ID</th>
-                    <th>post ID</th>
+                    <th>username</th>
+                    <th>post</th>
                     <th>comment</th>
                     <th>status</th>
                     <th>setting</th>
