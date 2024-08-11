@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Banner\store;
+use App\Http\Requests\Admin\Banner\update;
 use App\Models\Banner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BannerController extends Controller
 {
@@ -42,28 +44,32 @@ class BannerController extends Controller
         return redirect('admin/banner');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Banner $banner)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Banner $banner)
     {
-        //
+        return view('admin.banner.edit',[
+            'banner'=>$banner
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Banner $banner)
+    public function update(update $update, Banner $banner)
     {
-        //
+        if($update->hasFile('image')){
+            Storage::delete('banners/'.$banner->image);
+            $imageName= time() .'.'. $update->file('image')->extension();
+            $update->file('image')->storeAs(('banners'),$imageName);
+        }
+        Banner::where('id',$banner->id)->update([
+            'url'=>$update->url,
+            'image'=> ($update->hasFile('image'))?$imageName:$banner->image
+        ]);
+        return redirect('admin/banner');
     }
 
     /**
@@ -71,6 +77,7 @@ class BannerController extends Controller
      */
     public function destroy(Banner $banner)
     {
-        //
+        Banner::find($banner->id)->delete();
+        return redirect('admin/banner');
     }
 }
