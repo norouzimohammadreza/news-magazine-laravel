@@ -1,11 +1,7 @@
 <x-admin.layout.master>
     <x-slot name="title">Banners Management</x-slot>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h5"><i class="fas fa-image"></i>Banner</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-            <a role="button" href="{{ route('banner.create') }}" class="btn btn-sm btn-success">create</a>
-            </div>
-        </div>
+<x-admin.banner.title/>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
                 <caption>List of banners</caption>
@@ -17,24 +13,7 @@
                         <th>setting</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach ($banners as $banner)
-                    <tr>
-                        <td>{{ $banner->id }}</td>
-                        <td>{{ $banner->url }}</td>
-                        <td><img style="width: 80px;" src="{{ asset('banners/'.$banner->image) }}" alt=""></td>
-                        <td>
-                            <a role="button" class="btn btn-sm btn-primary text-white" href="{{ route('banner.edit',$banner) }}">edit</a>
-                            <form action="{{ route('banner.destroy',$banner) }}" method="post">
-                                @csrf
-                                @method('delete')
-                            <button type="submit" class="btn btn-sm btn-danger text-white">delete</button>
-                        </form>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-
+                <x-admin.banner.show-tables :banners="$banners"/>
             </table>
         </div>
 

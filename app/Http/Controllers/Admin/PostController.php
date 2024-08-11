@@ -130,6 +130,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         Post::find($post->id)->delete();
+        Storage::delete('posts/'.$post->image);
         return redirect('admin/post');
     }
 }

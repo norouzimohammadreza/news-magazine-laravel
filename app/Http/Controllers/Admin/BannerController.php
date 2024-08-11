@@ -78,6 +78,7 @@ class BannerController extends Controller
     public function destroy(Banner $banner)
     {
         Banner::find($banner->id)->delete();
+        Storage::delete('banners/'.$banner->image);
         return redirect('admin/banner');
     }
 }
