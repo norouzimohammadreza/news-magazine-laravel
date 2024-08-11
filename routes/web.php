@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\UserController;
 use \App\Http\Controllers\Admin\SettingController;
@@ -21,5 +22,7 @@ Route::prefix('admin')->group(function () {
         Route::get('post/breaking-news/{post}',[PostController::class,'breakingNews'])->name('user.breaking-news');
         Route::resource('/comment', CommentController::class);
         Route::get('comment/change-status/{comment}',[CommentController::class,'change'])->name('comment.status');
+        Route::resource('/banner', BannerController::class);
+
 
 });
