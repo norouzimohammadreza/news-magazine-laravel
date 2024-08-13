@@ -6,7 +6,6 @@
             <x-admin.user.edit.name-input :user="$user"/>
             <x-admin.user.edit.permission-input :user="$user"/>
             <x-admin.user.edit.submit-button/>
-
         </form>
 
     </section>

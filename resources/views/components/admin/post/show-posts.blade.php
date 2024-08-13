@@ -33,13 +33,14 @@
                 @if ($post['selected'] == 1) remove selected  @else add selected @endif
             </a>
             <hr class="my-1" />
-            <a role="button" class="btn btn-sm btn-primary text-white" href="{{ route('post.edit',[$post]) }}">edit</a>
+            <div class="d-flex">
+            <a role="button" class="btn btn-sm btn-primary text-white ms-2 my-0 mx-1" href="{{ route('post.edit',[$post]) }}">edit</a>
             <form action="{{ route('post.destroy',[$post]) }}" method="post">
                 @csrf
                 @method('delete')
-                <button type="submit" class="btn btn-sm btn-danger text-white" href="">delete</button>
+                <button type="submit" class="btn btn-sm btn-danger text-white ms-2 my-0 mx-1">delete</button>
             </form>
-
+            </div>
         </td>
     </tr>
 @endforeach

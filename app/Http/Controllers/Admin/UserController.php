@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\User\store;
 use App\Http\Requests\Admin\User\update;
 use App\Http\Requests\Admin\User\updateUser;
 use App\Models\User;
@@ -32,7 +33,22 @@ class UserController extends Controller
         ]);
         return redirect()->back();
     }
+    public function create()
+    {
+        return view('admin.user.create');
+    }
+    public function store(store $store)
+    {
 
+        User::create([
+            'name'=> $store->name,
+            'email'=> $store->email,
+            'password'=> $store->password,
+            'is_active'=> 1,
+            'is_admin'=> $store->is_admin,
+        ]);
+        return redirect('admin/user');
+    }
     public function edit(User $user)
     {
         return view('admin.user.edit',[
