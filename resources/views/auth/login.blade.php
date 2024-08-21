@@ -2,7 +2,8 @@
     <x-slot name="title">Login</x-slot>
 
 
-    <form method="post" action="" class="login100-form validate-form">
+    <form method="post" action="{{route('login.store')}}" class="login100-form validate-form">
+        @csrf
     <span class="login100-form-title">
         Member Login
     </span>

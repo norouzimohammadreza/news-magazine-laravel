@@ -11,8 +11,9 @@ use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\AuthController;
 Route::get('register',[AuthController::class,'register'])->name('register');
-Route::post('register/store',[AuthController::class,'store'])->name('register.store');
+Route::post('register/store',[AuthController::class,'registerStore'])->name('register.store');
 Route::get('login',[AuthController::class,'login'])->name('login');
+Route::post('login/store',[AuthController::class,'loginStore'])->name('login.store');
 Route::prefix('admin')->group(function () {
     Route::get('/' ,[AdminDashboardController::class,'index']);
         Route::resource('/category',CategoryController::class);
