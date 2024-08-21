@@ -9,7 +9,8 @@ use \App\Http\Controllers\Admin\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\CommentController;
-
+use App\Http\Controllers\AuthController;
+Route::get('register',[AuthController::class,'register'])->name('register');
 Route::prefix('admin')->group(function () {
     Route::get('/' ,[AdminDashboardController::class,'index']);
         Route::resource('/category',CategoryController::class);
