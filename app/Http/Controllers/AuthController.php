@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 
 
+use App\Http\Requests\Auth\ForgotPassword;
 use App\Http\Requests\Auth\Register;
 use App\Models\User;
 use App\Http\Requests\Auth\Login;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -81,4 +83,40 @@ please click on the link below to verify account
         Auth::logout();
         return redirect('/');
     }
+    public function resetPassword(){
+        return view('auth.reset-password');
 }
+public function forgotPassword(ForgotPassword $forgotPassword)
+{
+
+    $forgetToken = Str::random(55);
+    $user = User::where('email', $forgotPassword->email)->first();
+    if ($user->is_active==0){
+        return redirect()->back()->with('error','This account is not verified yet');
+    }
+    $forgetToken = Str::random(55);
+    $user->forget_token =$forgetToken;
+    $user->forget_token_expire = now()->addMinutes(60);
+    $user->save();
+
+    return redirect()->route('sendForgotPassword',[
+        'token' => $forgetToken,
+        'email' => $forgotPassword->email
+    ]);
+}
+    public function sendForgotPassword($token,$email){
+
+        $text = 'for verify your email </br>
+        please click on the link below to receive new password
+        <a href="'. route('newPassword', $token );'"> New Password account</a>';
+        Mail::raw($text, function ($message) use ($email) {
+            $message->to($email)->subject('New Password');
+        });
+        return redirect('reset-password')->with('verifyMessage','Please check your email to receive new password');
+    }
+    public function newPassword($token)
+    {
+        return view('auth.login');
+    }
+}
+

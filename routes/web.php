@@ -12,19 +12,21 @@ use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\Auth;
 
-
-Route::get('sendMail/{token}/{email}',[AuthController::class,'sendMail'])->name('sendMail');
-Route::get('verify-account/{token}/',[AuthController::class,'verifyAccount'])->name('verifyAccount');
-
 Route::middleware(Auth::class)->group(function (){
     Route::get('register',[AuthController::class,'register'])->name('register');
     Route::post('register/store',[AuthController::class,'registerStore'])->name('register.store');
     Route::get('login',[AuthController::class,'login'])->name('login');
     Route::post('login/store',[AuthController::class,'loginStore'])->name('login.store');
-});
+    Route::get('sendMail/{token}/{email}',[AuthController::class,'sendMail'])->name('sendMail');
+    Route::get('verify-account/{token}/',[AuthController::class,'verifyAccount'])->name('verifyAccount');
+    Route::get('reset-password/',[AuthController::class,'resetPassword'])->name('resetPassword');
+    Route::Post('forgot-password/',[AuthController::class,'forgotPassword'])->name('forgotPassword');
+    Route::get('send-password/{token}/{email}', [AuthController::class, 'sendForgotPassword'])->name('sendForgotPassword');});
+    Route::get('new-password',[AuthController::class,'newPassword'])->name('newPassword');
 Route::get('check',function (){
-    dd(\auth()->user());
+    dd(auth()->user());
 });
+
 Route::get('logout',[AuthController::class,'logout'])->name('logout');
 
 Route::prefix('admin')->group(function () {
