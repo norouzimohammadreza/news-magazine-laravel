@@ -11,6 +11,11 @@ use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\Auth;
+
+
+Route::get('sendMail/{token}/{email}',[AuthController::class,'sendMail'])->name('sendMail');
+Route::get('verify-account/{token}/',[AuthController::class,'verifyAccount'])->name('verifyAccount');
+
 Route::middleware(Auth::class)->group(function (){
     Route::get('register',[AuthController::class,'register'])->name('register');
     Route::post('register/store',[AuthController::class,'registerStore'])->name('register.store');
@@ -35,6 +40,4 @@ Route::prefix('admin')->group(function () {
         Route::resource('/comment', CommentController::class);
         Route::get('comment/change-status/{comment}',[CommentController::class,'change'])->name('comment.status');
         Route::resource('/banner', BannerController::class);
-
-
 });

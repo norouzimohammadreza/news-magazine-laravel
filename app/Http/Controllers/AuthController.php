@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Http\Requests\Auth\Login;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 
@@ -30,7 +31,10 @@ class AuthController extends Controller
             'password'=>Hash::make($register->password),
             'verify_token'=> $verify_token
         ]);
-        return redirect()->back();
+        return redirect()->route('sendMail',[
+           'token'=> $verify_token,
+            'email' =>$register->email
+        ]);
     }
     public function login()
     {
@@ -52,10 +56,26 @@ class AuthController extends Controller
         Auth::login($user);
         return redirect('/');
     }
-    public function verifyAccount()
+    public function sendMail($token,$email)
     {
-    
+        $text = 'for verify your email </br>
+please click on the link below to verify account
+<a href="'. route('verifyAccount', $token );'"> verify account</a>';
+       Mail::raw($text, function ($message) use ($email) {
+           $message->to($email)->subject('Verify Account');
+       });
+        return redirect('login')->with('verifyMessage','Please check your email to verify your account');
+
     }
+    public function verifyAccount($token)
+    {
+       $user= User::where('verify_token',$token)->first();
+       $user->is_active = 1;
+        $user->save();
+        if ($user->is_active){
+        return redirect('login')->with('verifyMessage','Your account is verified');
+
+    }}
     public function logout()
     {
         Auth::logout();
