@@ -16,8 +16,11 @@ Route::middleware(Auth::class)->group(function (){
     Route::post('register/store',[AuthController::class,'registerStore'])->name('register.store');
     Route::get('login',[AuthController::class,'login'])->name('login');
     Route::post('login/store',[AuthController::class,'loginStore'])->name('login.store');
-    Route::get('logout',[AuthController::class,'logout'])->name('logout');
 });
+Route::get('check',function (){
+    dd(\auth()->user());
+});
+Route::get('logout',[AuthController::class,'logout'])->name('logout');
 
 Route::prefix('admin')->group(function () {
     Route::get('/' ,[AdminDashboardController::class,'index']);

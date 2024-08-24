@@ -16,7 +16,8 @@ class AuthController extends Controller
 {
     public function register()
     {
-        return view('auth.register');
+            return view('auth.register');
+
 }
     public function registerStore(Register $register)
     {
@@ -49,16 +50,15 @@ class AuthController extends Controller
 
         //do stuff
         Auth::login($user);
-        if (auth()->check()){
-            dd(auth()->user());
-        }
+        return redirect('/');
     }
     public function verifyAccount()
     {
-
+    
     }
     public function logout()
     {
         Auth::logout();
+        return redirect('/');
     }
 }

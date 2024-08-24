@@ -15,7 +15,8 @@ class Auth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->check() and !$request->is('/')){
+        if (auth()->check() and !$request->is('/')){
+
             return redirect('/');
         }
             return $next($request);
