@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Requests\Auth\ForgotPassword;
+use App\Http\Requests\Auth\PasswordConfirmation;
 use App\Http\Requests\Auth\Register;
 use App\Models\User;
 use App\Http\Requests\Auth\Login;
@@ -86,21 +87,24 @@ please click on the link below to verify account
     public function resetPassword(){
         return view('auth.reset-password');
 }
-public function forgotPassword(ForgotPassword $forgotPassword)
+    public function forgotPassword(ForgotPassword $forgotPassword)
 {
 
-    $forgetToken = Str::random(55);
+
     $user = User::where('email', $forgotPassword->email)->first();
+    if (!$user->forget_token_expire == null && $user->forget_token_expire < now()){
+        return redirect()->back()->with('error','This token is not expired yet');
+    }
     if ($user->is_active==0){
         return redirect()->back()->with('error','This account is not verified yet');
     }
-    $forgetToken = Str::random(55);
-    $user->forget_token =$forgetToken;
+
+    $user->forget_token =Str::random(55);
     $user->forget_token_expire = now()->addMinutes(60);
     $user->save();
 
     return redirect()->route('sendForgotPassword',[
-        'token' => $forgetToken,
+        'token' => $user->forget_token,
         'email' => $forgotPassword->email
     ]);
 }
@@ -116,7 +120,19 @@ public function forgotPassword(ForgotPassword $forgotPassword)
     }
     public function newPassword($token)
     {
-        return view('auth.login');
+        $user = User::where('forget_token',$token)->first();
+
+        if ($user->forget_token_expire < now()){
+            return redirect('reset-password')->with('error','Your token is Expired');
+        }
+        return view('auth.new-password',compact('token'));
     }
+    public function confirmPassword(PasswordConfirmation $confirmation,$token){
+        $user =  User::where('forget_token',$token)->first();
+        $user->password = Hash::make($confirmation->password);
+        $user->save();
+        return redirect('login')->with('verifyMessage','Your password has been changed');
+    }
+
 }
 
