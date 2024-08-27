@@ -6,11 +6,15 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\UserController;
 use \App\Http\Controllers\Admin\SettingController;
 use \App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\Auth;
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('category/{category}',[HomeController::class,'category'])->name('category');
 
 Route::middleware(Auth::class)->group(function (){
     Route::get('register',[AuthController::class,'register'])->name('register');
