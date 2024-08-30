@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\View\Components\App;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -11,9 +11,11 @@ class TopPosts extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public $topSelectedPosts,$breakingNews;
+    public function __construct($topSelectedPosts,$breakingNews)
     {
-        //
+        $this->topSelectedPosts=$topSelectedPosts;
+        $this->breakingNews=$breakingNews;
     }
 
     /**

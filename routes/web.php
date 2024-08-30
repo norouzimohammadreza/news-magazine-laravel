@@ -35,7 +35,7 @@ Route::get('check',function (){
 
 Route::get('logout',[AuthController::class,'logout'])->name('logout');
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(Auth::class)->group(function () {
     Route::get('/' ,[AdminDashboardController::class,'index']);
         Route::resource('/category',CategoryController::class);
         Route::resource('/user',UserController::class);

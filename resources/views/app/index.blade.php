@@ -1,7 +1,8 @@
 <x-app.master :categories="$categories">
     <x-slot name="title">News Website</x-slot>
     <div class="site-main-container">
-       <x-app.top-posts/>
+       <x-app.top-posts :topSelectedPosts="$topSelectedPosts"
+       :breakingNews="$breakingNews"/>
         <!-- Start latest-post Area -->
 
         <!-- End latest-post Area -->
