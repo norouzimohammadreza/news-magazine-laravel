@@ -11,10 +11,11 @@ class SideBar extends Component
     /**
      * Create a new component instance.
      */
-    public $mostComments;
-    public function __construct($mostComments)
+    public $mostComments,$banner;
+    public function __construct($mostComments,$banner)
     {
         $this->mostComments=$mostComments;
+        $this->banner=$banner;
     }
 
     /**

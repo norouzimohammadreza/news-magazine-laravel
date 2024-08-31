@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -43,6 +44,7 @@ class HomeController extends Controller
             ->orderBy('comments', 'DESC')
             ->limit(3)
             ->get();
+            $banner = Banner::first();
 
         $categories = Category::all();
         return view('app.index',[
@@ -51,7 +53,8 @@ class HomeController extends Controller
             'breakingNews' => $breakingNews,
             'latestPosts' => $latestPosts,
             'popularPosts' => $popularPosts,
-            'mostComments' => $mostComments
+            'mostComments' => $mostComments,
+            'banner' => $banner
         ]);
     }
     public function category($category)

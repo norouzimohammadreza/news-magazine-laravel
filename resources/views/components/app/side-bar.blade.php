@@ -3,7 +3,7 @@
     <div class="sidebars-area">
         <!-- ads -->
         <div class="single-sidebar-widget ads-widget">
-            <img class="img-fluid" src="" alt="">
+            <img class="img-fluid" src="{{asset('banners/'. $banner->image)}}" alt="">
         </div>
         <!-- end ads -->
         <div class="single-sidebar-widget most-popular-widget">
