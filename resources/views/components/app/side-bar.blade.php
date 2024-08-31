@@ -2,7 +2,7 @@
 <div class="col-lg-4">
     <div class="sidebars-area">
         <!-- ads -->
-        <div class="single-sidebar-widget ads-widget">
+        <div class="single-sidebar-widget">
             <img class="img-fluid" src="{{asset('banners/'. $banner->image)}}" alt="">
         </div>
         <!-- end ads -->
