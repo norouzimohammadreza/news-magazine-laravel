@@ -3,7 +3,6 @@
     <div class="site-main-container">
        <x-app.top-posts :topSelectedPosts="$topSelectedPosts"
        :breakingNews="$breakingNews"/>
-        <!-- Start latest-post Area -->
         <section class="latest-post-area pb-120">
             <div class="container no-padding">
                 <div class="row">
@@ -13,7 +12,7 @@
                         <x-app.banner-ads/>
                         <x-app.popular-posts :popularPosts="$popularPosts"/>
                     <!-- sidebar -->
-                        
+                        <x-app.side-bar :mostComments="$mostComments"/>
                     </div>
                     </div>
                 </div>

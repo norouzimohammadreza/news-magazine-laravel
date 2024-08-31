@@ -37,6 +37,12 @@ class HomeController extends Controller
             ->orderBy('view', 'DESC')
             ->limit(3)
             ->get();
+        $mostComments = Post::select('posts.*',DB::raw('COUNT(comments.post_id) as comments'))
+            ->leftJoin('comments', 'posts.id', '=', 'comments.post_id')
+            ->groupBy('posts.id')
+            ->orderBy('comments', 'DESC')
+            ->limit(3)
+            ->get();
 
         $categories = Category::all();
         return view('app.index',[
@@ -44,7 +50,8 @@ class HomeController extends Controller
             'topSelectedPosts' => $topSelectedPosts,
             'breakingNews' => $breakingNews,
             'latestPosts' => $latestPosts,
-            'popularPosts' => $popularPosts
+            'popularPosts' => $popularPosts,
+            'mostComments' => $mostComments
         ]);
     }
     public function category($category)
