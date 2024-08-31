@@ -10,7 +10,7 @@
             <ul class="tags">
                 <li><a href="{{route('category',$post->category_id)}}">{{$post->category->title}}</a></li>
             </ul>
-            <a href="">
+            <a href="{{route('post',$post)}}">
                 <h3>{{$post->title}}</h3>
             </a>
             <ul class="meta">

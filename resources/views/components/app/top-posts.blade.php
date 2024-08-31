@@ -13,7 +13,7 @@
                             <a href="{{route('category',$topSelectedPosts[0]->category_id)}}">{{$topSelectedPosts[0]->category->title}}</a>
                         </li>
                     </ul>
-                    <a href=""> <h3 class="text-info">{{$topSelectedPosts[0]->title}}</h3></a>
+                    <a href="{{route('post',$topSelectedPosts[0])}}"> <h3 class="text-info">{{$topSelectedPosts[0]->title}}</h3></a>
                     <ul class="meta bg-secondary">
                         <li><span class="lnr lnr-user"> {{$topSelectedPosts[0]->user->name}}</span></li>
                         <li>
@@ -38,7 +38,7 @@
                                 <a href="{{route('category',$topSelectedPosts[1]->category_id)}}">{{$topSelectedPosts[1]->category->title}}</a>
                             </li>
                         </ul>
-                        <a href="">
+                        <a href="{{route('post',$topSelectedPosts[1])}}">
                             <h4>{{$topSelectedPosts[1]->title}}</h4>
                         </a>
                         <ul class="meta">
@@ -61,7 +61,7 @@
                                 <a href="{{route('category',$topSelectedPosts[2]->category_id)}}">{{$topSelectedPosts[2]->category->title}}</a>
                             </li>
                         </ul>
-                        <a href="">
+                        <a href="{{route('post',$topSelectedPosts[2])}}">
                             <h4>{{$topSelectedPosts[2]->title}}</h4>
                         </a>
                         <ul class="meta">

@@ -14,7 +14,7 @@
                     <img class="img-fluid" src="{{asset('posts/'.$post->image)}}" width="120px" height="85px" alt="">
                 </div>
                 <div class="details">
-                    <a href="">
+                    <a href="{{route('post',$post)}}">
                         <h6>{{$post->title}}</h6>
                     </a>
                     <ul class="meta">

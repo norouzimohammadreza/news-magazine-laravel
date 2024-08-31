@@ -12,7 +12,7 @@
             </ul>
         </div>
         <div class="col-lg-7 post-right">
-            <a href="">
+            <a href="{{route('post',$post)}}">
                 <h4>{{$post->title}}</h4>
             </a>
             <ul class="meta">

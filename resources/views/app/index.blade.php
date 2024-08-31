@@ -11,14 +11,14 @@
                         <x-app.latest-posts :latestPosts="$latestPosts"/>
 
                         <x-app.popular-posts :popularPosts="$popularPosts"/>
-                    <!-- sidebar -->
+
                         <x-app.side-bar :mostComments="$mostComments"
                                         :banner="$banner"/>
                     </div>
                     </div>
                 </div>
         </section>
-        <!-- End latest-post Area -->
+
     </div>
 
 
