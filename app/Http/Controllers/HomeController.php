@@ -31,14 +31,20 @@ class HomeController extends Controller
             ->orderBy('published_at', 'DESC')
             ->limit(4)
             ->get();
-       
+        $popularPosts = Post::select('posts.*',DB::raw('COUNT(comments.post_id) as comments'))
+            ->leftJoin('comments', 'posts.id', '=', 'comments.post_id')
+            ->groupBy('posts.id')
+            ->orderBy('view', 'DESC')
+            ->limit(3)
+            ->get();
 
         $categories = Category::all();
         return view('app.index',[
             'categories' => $categories,
             'topSelectedPosts' => $topSelectedPosts,
             'breakingNews' => $breakingNews,
-            'latestPosts' => $latestPosts
+            'latestPosts' => $latestPosts,
+            'popularPosts' => $popularPosts
         ]);
     }
     public function category($category)

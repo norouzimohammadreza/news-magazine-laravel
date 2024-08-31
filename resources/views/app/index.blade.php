@@ -11,10 +11,9 @@
 
                         <x-app.latest-posts :latestPosts="$latestPosts"/>
                         <x-app.banner-ads/>
-
                         <x-app.popular-posts :popularPosts="$popularPosts"/>
-
                     <!-- sidebar -->
+                        
                     </div>
                     </div>
                 </div>

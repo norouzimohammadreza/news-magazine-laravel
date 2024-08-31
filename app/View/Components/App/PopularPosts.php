@@ -11,9 +11,10 @@ class PopularPosts extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public $popularPosts;
+    public function __construct($popularPosts)
     {
-        //
+        $this->popularPosts = $popularPosts;
     }
 
     /**
