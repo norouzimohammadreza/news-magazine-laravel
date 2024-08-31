@@ -1,5 +1,5 @@
 <x-app.master :categories="$categories">
-<x-slot name="title">{{$posts[0]->category->title}}</x-slot>
+<x-slot name="title">{{$category}}</x-slot>
     <div class="site-main-container">
         <section class="latest-post-area pb-120">
             <div class="container no-padding">
@@ -28,6 +28,14 @@
                                 </div>
                             </div>
                             @endforeach
+
+                            @if(empty($posts->all()))
+                                <div class="single-latest-post row align-items-center">
+                                    <div class="col-lg-5 post-left">
+                                        <p>پستی در این دسته بندی وجود ندارد.</p>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
 
                         <x-app.banner-ads :banner="$banner"/>
