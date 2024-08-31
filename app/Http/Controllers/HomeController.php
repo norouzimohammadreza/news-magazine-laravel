@@ -59,6 +59,27 @@ class HomeController extends Controller
     }
     public function category($category)
     {
-        return $category;
+        $categories = Category::all();
+        $mostComments = Post::select('posts.*',DB::raw('COUNT(comments.post_id) as comments'))
+            ->leftJoin('comments', 'posts.id', '=', 'comments.post_id')
+            ->groupBy('posts.id')
+            ->orderBy('comments', 'DESC')
+            ->limit(3)
+            ->get();
+        $banner = Banner::first();
+
+        $posts=Post::select('posts.*',DB::raw('COUNT(comments.post_id) as comments'))
+            ->leftJoin('comments', 'posts.id', '=', 'comments.post_id')
+            ->groupBy('posts.id')->where('category_id',$category)->get();
+         return view('app.category',[
+             'categories' => $categories,
+             'mostComments' => $mostComments,
+             'banner' => $banner,
+             'posts' => $posts
+         ]);
+    }
+    public function post($post)
+    {
+        return $post;
     }
 }

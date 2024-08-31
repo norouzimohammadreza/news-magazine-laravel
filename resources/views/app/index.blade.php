@@ -9,7 +9,7 @@
                     <div class="col-lg-8 post-list">
 
                         <x-app.latest-posts :latestPosts="$latestPosts"/>
-                        <x-app.banner-ads :banner="$banner"/>
+
                         <x-app.popular-posts :popularPosts="$popularPosts"/>
                     <!-- sidebar -->
                         <x-app.side-bar :mostComments="$mostComments"
