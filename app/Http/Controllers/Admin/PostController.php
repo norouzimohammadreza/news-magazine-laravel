@@ -75,7 +75,7 @@ class PostController extends Controller
             'published_at' =>  date('Y-m-d H:i:s', (int)$realTimeStamp),
             'category_id' => $store->category_id,
             'image' => $imageName,
-            'user_id' => 1,
+            'user_id' => auth()->user()->id,
         ]);
 
         return redirect('admin/post');
