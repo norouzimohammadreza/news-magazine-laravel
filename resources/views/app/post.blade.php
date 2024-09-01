@@ -26,8 +26,12 @@
                                     <hr>
                                     <p>{{$post->body}}</p>
                                 </div>
-
-                          <x-app.show-comments/>
+                                @if(session()->has('Password'))
+                                <div class="mb-2 alert alert-success">
+                                    <small class="form-text text-success">{{session('Password')}}</small>
+                                </div>
+                                @endif
+                          <x-app.show-comments :comments="$comments"/>
                             </div>
 
                            <x-app.submit-comment/>

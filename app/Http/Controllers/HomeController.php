@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -97,12 +98,17 @@ class HomeController extends Controller
             ->get();
         $banner = Banner::first();
         $article = Post::where('id',$post)->first();
-
+        $comments= Comment::where('post_id',$post)->where('status','approved')->get();
         return view('app.post',[
             'categories' => $categories,
             'mostComments' => $mostComments,
             'banner' => $banner,
-            'post' => $article
+            'post' => $article,
+            'comments' => $comments
         ]);
+    }
+    public function comment(Request $request)
+    {
+        dd($request->all());
     }
 }

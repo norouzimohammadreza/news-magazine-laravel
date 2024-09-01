@@ -16,6 +16,7 @@ use App\Http\Middleware\Auth;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('category/{category}',[HomeController::class,'category'])->name('category');
 Route::get('post/{post}',[HomeController::class,'post'])->name('post');
+Route::get('comment/{post}',[HomeController::class,'comment'])->name('comment');
 
 Route::middleware(Auth::class)->group(function (){
     Route::get('register',[AuthController::class,'register'])->name('register');
