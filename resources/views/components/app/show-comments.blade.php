@@ -1,4 +1,5 @@
 @if(!empty($comments))
+
 <div class="comment-sec-area">
     <div class="container">
         <div class="row flex-column">

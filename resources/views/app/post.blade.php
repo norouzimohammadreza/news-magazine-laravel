@@ -33,8 +33,14 @@
                                 @endif
                           <x-app.show-comments :comments="$comments"/>
                             </div>
-
-                           <x-app.submit-comment/>
+                            @auth
+                                <x-app.submit-comment/>
+                            @endauth
+                            @guest()
+                                <div class="mb-2 alert alert-danger">
+                                    <small class="form-text text-black">لطفا در سایت لاگین کنید.</small>
+                                </div>
+                            @endguest
 
                         </div>
                         <x-app.side-bar :mostComments="$mostComments"
