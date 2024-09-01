@@ -107,8 +107,14 @@ class HomeController extends Controller
             'comments' => $comments
         ]);
     }
-    public function comment(Request $request)
+    public function comment($post,\App\Http\Requests\Comment $comment)
     {
-        dd($request->all());
+
+        Comment::create([
+            'body'=> $comment->body,
+            'post_id' => $post,
+            'user_id' => auth()->user()->id
+        ]);
+       return redirect()->back()->with('password','کامنت شما ثبت و پس از تایید به نمایش در خواهد امد.');
     }
 }
