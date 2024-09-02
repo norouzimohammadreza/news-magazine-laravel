@@ -1,7 +1,11 @@
 <x-admin.layout.master>
     <x-slot name="title">Banners Management</x-slot>
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-<x-admin.banner.title/>
+
+<x-admin.dashboard-title>
+    <x-slot name="title"> Banners</x-slot>
+    <x-slot name="goto">{{route('banner.create')}}</x-slot>
+    <x-slot name="create">create</x-slot>
+</x-admin.dashboard-title>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
                 <caption>List of banners</caption>
@@ -16,6 +20,4 @@
                 <x-admin.banner.show-tables :banners="$banners"/>
             </table>
         </div>
-
-
 </x-admin.layout>
