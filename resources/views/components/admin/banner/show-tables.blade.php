@@ -10,7 +10,7 @@
                 @csrf
                 @method('delete')
             <button type="submit" class="btn btn-sm btn-danger my-0 mx-1 text-white ms-2">delete</button>
-        </form>
+            </form>
         </td>
     </tr>
     @endforeach
