@@ -16,5 +16,7 @@
     <p class="text-danger">@error('image') {{ $message }} @enderror</p>
     </div>
 
-    <button type="submit" class="btn btn-primary btn-sm">Update</button>
+    <x-admin.ui.submit-button>
+        <x-slot name="button">Update</x-slot>
+    </x-admin.ui.submit-button>
 </form>

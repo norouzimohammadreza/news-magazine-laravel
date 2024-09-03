@@ -40,5 +40,7 @@
         <textarea class="form-control" id="body" name="body" placeholder="body ..." rows="5" autofocus></textarea>
         <p class="text-danger">@error('body'){{ $message }} @enderror </p>
     </div>
-    <x-admin.post.create.store-button/>
+    <x-admin.ui.submit-button>
+        <x-slot name="button">Store</x-slot>
+    </x-admin.ui.submit-button>
 </form>

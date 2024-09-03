@@ -12,5 +12,7 @@
         <input type="file" id="image" name="image" class="form-control-file"  autofocus>
         <p class="text-danger">@error('image') {{ $message }} @enderror</p>
     </div>
-    <button type="submit" class="btn btn-primary btn-sm">store</button>
+    <x-admin.ui.submit-button>
+        <x-slot name="button">Store</x-slot>
+    </x-admin.ui.submit-button>
 </form>

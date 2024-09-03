@@ -23,5 +23,7 @@
 
     </div>
 
-    <button type="submit" class="btn btn-primary btn-sm">update</button>
+    <x-admin.ui.submit-button>
+        <x-slot name="button">Update</x-slot>
+    </x-admin.ui.submit-button>
 </form>

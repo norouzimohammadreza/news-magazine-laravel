@@ -25,7 +25,9 @@
                 </select>
                 <p class="text-danger">@error('is_admin'){{$message}}  @enderror</p>
             </div>
-            <button type="submit" class="btn btn-primary btn-sm">Store</button>
+            <x-admin.ui.submit-button>
+                <x-slot name="button">Store</x-slot>
+            </x-admin.ui.submit-button>
 
         </form>
 

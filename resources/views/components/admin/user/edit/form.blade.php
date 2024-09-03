@@ -5,7 +5,9 @@
             @method('PUT')
             <x-admin.user.edit.name-input :user="$user"/>
             <x-admin.user.edit.permission-input :user="$user"/>
-            <x-admin.user.edit.submit-button/>
+            <x-admin.ui.submit-button>
+                <x-slot name="button">Update</x-slot>
+            </x-admin.ui.submit-button>
         </form>
 
     </section>

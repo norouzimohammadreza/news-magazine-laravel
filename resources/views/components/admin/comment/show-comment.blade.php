@@ -8,9 +8,9 @@
     <td>{{ $comment->status }}</td>
     <td>
         @if($comment->status =='seen' ||$comment->status =='unseen' )
-        <a role="button " class="btn btn-sm btn-success text-white " href="{{ route('comment.status',$comment) }}">click to approved</a>
+        <a role="button" class="btn btn-sm btn-success text-white" href="{{ route('comment.status',$comment) }}">click to approved</a>
         @else
-        <a role="button " class="btn btn-sm btn-warning text-white " href="{{ route('comment.status',$comment) }}">click not to approved</a>
+        <a role="button" class="btn btn-sm btn-warning text-white" href="{{ route('comment.status',$comment) }}">click not to approved</a>
         @endif
     </td>
     </tr>

@@ -43,5 +43,7 @@
 <p class="text-danger">@error('body'){{ $message }} @enderror </p>
 </div>
 
-<x-admin.post.edit.update-button/>
+    <x-admin.ui.submit-button>
+        <x-slot name="button">Update</x-slot>
+    </x-admin.ui.submit-button>
 </form>

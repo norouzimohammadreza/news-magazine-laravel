@@ -4,7 +4,9 @@
             @csrf
             @method('PUT')
             <x-admin.category.edit.input :category="$category"/>
-            <x-admin.category.edit.submit-button/>
+            <x-admin.ui.submit-button>
+                <x-slot name="button">Update</x-slot>
+            </x-admin.ui.submit-button>
         </form>
     </section>
 </section>

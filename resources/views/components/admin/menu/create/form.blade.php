@@ -23,5 +23,7 @@
         <p class="text-danger">@error('parent_id'){{$message}}@enderror</p>
     </div>
 
-<x-admin.menu.create.submit-button/>
+    <x-admin.ui.submit-button>
+        <x-slot name="button">Store</x-slot>
+    </x-admin.ui.submit-button>
 </form>
