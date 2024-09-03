@@ -35,11 +35,10 @@
             <hr class="my-1" />
             <div class="d-flex">
             <a role="button" class="btn btn-sm btn-primary text-white ms-2 my-0 mx-1" href="{{ route('post.edit',[$post]) }}">edit</a>
-            <form action="{{ route('post.destroy',[$post]) }}" method="post">
-                @csrf
-                @method('delete')
-                <button type="submit" class="btn btn-sm btn-danger text-white ms-2 my-0 mx-1">delete</button>
-            </form>
+                <x-admin.ui.delete-component>
+                    <x-slot name="route">{{ route('post.destroy',[$post]) }}</x-slot>
+                    <x-slot name="cssClass">btn btn-sm btn-danger text-white ms-2 my-0 mx-1</x-slot>
+                </x-admin.ui.delete-component>
             </div>
         </td>
     </tr>

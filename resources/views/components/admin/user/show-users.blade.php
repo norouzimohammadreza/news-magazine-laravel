@@ -13,11 +13,10 @@
         <a role="button" class="btn btn-sm btn-warning text-white my-0 mx-1" href="{{route('user.is-admin',[$user])}}">click not to be admin</a>
         @endif
         <a role="button" class="btn btn-sm btn-primary text-white my-0 mx-1" href="{{route('user.edit',[$user])}}">edit</a>
-            <form method="post" action="{{route('user.destroy',$user)}}">
-                @csrf
-                @method('DELETE')
-        <button type="submit" class="btn btn-sm btn-danger text-white my-0 mx-1" href="">delete</button>
-            </form>
+            <x-admin.ui.delete-component>
+                <x-slot name="route">{{route('user.destroy',$user)}}</x-slot>
+                <x-slot name="cssClass">btn btn-sm btn-danger text-white my-0 mx-1</x-slot>
+            </x-admin.ui.delete-component>
     </td>
 </tr>
 @endforeach
