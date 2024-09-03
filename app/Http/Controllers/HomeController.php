@@ -98,6 +98,8 @@ class HomeController extends Controller
             ->get();
         $banner = Banner::first();
         $article = Post::where('id',$post)->first();
+        $article->view+=1;
+        $article->save();
         $comments= Comment::where('post_id',$post)->where('status','approved')->get();
         return view('app.post',[
             'categories' => $categories,

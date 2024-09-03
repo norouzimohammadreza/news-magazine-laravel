@@ -74,7 +74,7 @@
                     <td>{{$mostCommentsUser->id}}</td>
                     <td>{{$mostCommentsUser->name}}</td>
                     <td>{{$mostCommentsUser->comment_count}}</td>
-                    <td><span class="badge badge-warning">{{$mostCommentsUser->status}}</span></td>
+                    <td><span class="badge badge-warning">@if($mostCommentsUser->status==1) approved @else not approved @endif</span></td>
                 </tr>
         @endforeach
                 </tbody>
