@@ -1,8 +1,6 @@
 <x-admin.layout.master>
     <x-slot name="title">Set Setting</x-slot>
-    <section class="pt-3 pb-1 mb-2 border-bottom">
-        <h1 class="h5">Set Web Setting</h1>
-    </section>
+    <x-admin.modify-title :name="'Set Web Setting'" />
 
     <section class="row my-3">
         <section class="col-12">

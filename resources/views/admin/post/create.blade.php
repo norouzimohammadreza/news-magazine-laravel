@@ -1,6 +1,6 @@
 <x-admin.layout.master>
     <x-slot name="title">Create Post</x-slot>
-<x-admin.post.create.title/>
+    <x-admin.modify-title :name="'Create Post'" />
     <x-admin.post.ck-editor.css/>
 
     <section class="row my-3">
