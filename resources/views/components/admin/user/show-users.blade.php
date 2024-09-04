@@ -17,7 +17,6 @@
                                       :name="'Edit'"/>
             <x-admin.ui.delete-component>
                 <x-slot name="route">{{route('user.destroy',$user)}}</x-slot>
-                <x-slot name="cssClass">btn btn-sm btn-danger text-white my-0 mx-1</x-slot>
             </x-admin.ui.delete-component>
     </td>
 </tr>

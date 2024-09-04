@@ -27,24 +27,23 @@
         <td><img style="width: 80px;" src="{{ asset('posts/'.$post->image) }}" alt=""></td>
         <td style="width: 25rem;">
 
-            <x-admin.ui.modify-button :css-class="'btn btn-sm btn-warning btn-dark text-white'"
-                                      :url="route('user.breaking-news',[$post])"
-                                      :name="($post['breaking_news'] == 1)? 'remove breaking news'  : 'add breaking news'"/>
 
-            <x-admin.ui.modify-button :css-class="'btn btn-sm btn-warning btn-dark text-white'"
-                                      :url="route('user.is-selected',[$post])"
-                                      :name="($post['selected'] == 1)? 'remove selected'  : 'add selected'"/>
+            <x-admin.ui.modify-button class="btn-warning btn-dark"
+                                      url="{{route('user.breaking-news',[$post])}}"
+                                      name="{{($post['breaking_news'] == 1)? 'remove breaking news'  : 'add breaking news'}}"/>
+            <x-admin.ui.modify-button class="btn-warning btn-dark"
+                                      url="{{route('user.is-selected',[$post])}}"
+                                      name="{{($post['selected'] == 1)? 'remove selected'  : 'add selected'}}"/>
 
             <hr class="my-1" />
             <div class="d-flex">
 
-                <x-admin.ui.modify-button :css-class="'btn btn-sm btn-primary text-white ms-2 my-0 mx-1'"
-                                          :url=" route('post.edit',[$post])"
-                                          :name="'Edit'"/>
+                <x-admin.ui.modify-button class="btn-primary ms-2 my-0 mx-1"
+                                          url="{{route('post.edit',[$post])}}"
+                                          name="'Edit'"/>
 
                 <x-admin.ui.delete-component>
                     <x-slot name="route">{{ route('post.destroy',[$post]) }}</x-slot>
-                    <x-slot name="cssClass">btn btn-sm btn-danger text-white ms-2 my-0 mx-1</x-slot>
                 </x-admin.ui.delete-component>
             </div>
         </td>
