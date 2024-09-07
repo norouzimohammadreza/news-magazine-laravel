@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Post\store;
 use App\Http\Resources\API\Admin\Users\UserDetailesApiResource;
 use App\Http\Resources\API\Admin\Users\UsersListApiResource;
 use App\Models\Post;
