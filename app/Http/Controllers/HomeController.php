@@ -112,6 +112,7 @@ class HomeController extends Controller
     public function comment($post,\App\Http\Requests\Comment $comment)
     {
 
+
         Comment::create([
             'body'=> $comment->body,
             'post_id' => $post,

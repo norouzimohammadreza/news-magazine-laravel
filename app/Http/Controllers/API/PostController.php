@@ -7,6 +7,7 @@ use App\Http\Resources\API\Admin\Posts\PostDetailsApiResource;
 use App\Http\Resources\API\Admin\Posts\PostsListApiResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
@@ -24,7 +25,26 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = Validator::make($request->all(), [
+            'title' => 'required|min:5|max:100',
+            'summary' => 'required',
+            'body' => 'required',
+        ]);
+        if ($validation->fails()) {
+            return response()->json([
+                'message' => $validation->errors()
+            ]);
+        }
+        $input = $validation->validated();
+        $input['user_id'] =1;
+        $input['category_id'] =2;
+        $input['image'] ='perspolis.jpg';
+        $input['published_at'] ='2024-08-29 07:37:08';
+        Post::create($input);
+        return response()->json([
+            'message' => 'Post created successfully'
+        ]);
+
     }
 
     /**
@@ -41,7 +61,24 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $validation = Validator::make($request->all(), [
+            'title' => 'min:5|max:100'
+        ]);
+        if ($validation->fails()) {
+            return response()->json([
+                'message' => $validation->errors()
+            ]);
+        }
+        $input = $validation->validated();
+        $input['user_id'] =1;
+        $input['category_id'] =2;
+        $input['image'] ='perspolis.jpg';
+        $input['published_at'] ='2024-08-29 07:37:08';
+        $post->update($input);
+        return response()->json([
+            'message' => 'Post updated successfully'
+        ]);
+
     }
 
     /**
@@ -49,6 +86,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return response()->json([
+            'message' => 'Post deleted successfully'
+        ]);
     }
 }
