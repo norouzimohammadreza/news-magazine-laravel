@@ -23,6 +23,8 @@ class store extends FormRequest
     {
         return [
             'name' => 'required|min:5|max:50|unique:users',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
             'is_admin'=>'required'
         ];
     }
