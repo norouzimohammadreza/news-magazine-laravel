@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('posts', function (Blueprint $table) {
+
             $table->innoDb();
             $table->id();
             $table->string('title',100);

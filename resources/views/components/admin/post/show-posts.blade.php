@@ -40,7 +40,7 @@
 
                 <x-admin.ui.modify-button class="btn-primary ms-2 my-0 mx-1"
                                           url="{{route('post.edit',[$post])}}"
-                                          name="'Edit'"/>
+                                          name="Edit"/>
 
                 <x-admin.ui.delete-component>
                     <x-slot name="route">{{ route('post.destroy',[$post]) }}</x-slot>

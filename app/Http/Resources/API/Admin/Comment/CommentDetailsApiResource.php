@@ -17,7 +17,8 @@ class CommentDetailsApiResource extends JsonResource
         return [
         'body'=> $this->body,
         'user'=> $this->user->name,
-        'post'=> $this->post->title
+        'post'=> $this->post->title,
+        'status'=>$this->status
     ];
     }
 }

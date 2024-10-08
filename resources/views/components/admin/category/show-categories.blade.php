@@ -15,9 +15,9 @@
             <td>{{$category->id}}</td>
             <td>{{$category->title}}</td>
             <td class="d-flex">
-                <x-admin.ui.modify-button :css-class="'btn btn-sm btn-primary my-0 mx-1 text-white'"
-                                          :url="route('category.edit',[$category])"
-                                          :name="'Edit'"/>
+                <x-admin.ui.modify-button class="btn btn-sm btn-primary my-0 mx-1 text-white"
+                                          url="{{route('category.edit',[$category])}}"
+                                          name="Edit"/>
                 <x-admin.ui.delete-component>
                     <x-slot name="route">{{route('category.destroy',[$category])}}</x-slot>
                 </x-admin.ui.delete-component>

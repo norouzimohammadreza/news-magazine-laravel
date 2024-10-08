@@ -8,13 +8,13 @@
     <td>{{ $comment->status }}</td>
     <td>
         @if($comment->status =='seen' ||$comment->status =='unseen' )
-            <x-admin.ui.modify-button :css-class="'btn btn-sm btn-success text-white'"
-                                      :url="route('comment.status',$comment)"
-                                      :name="'click to approved'"/>
+            <x-admin.ui.modify-button class="btn btn-sm btn-success text-white"
+                                      url="{{route('comment.status',$comment)}}"
+                                      name="click to approved"/>
         @else
-            <x-admin.ui.modify-button :css-class="'btn btn-sm btn-warning text-white'"
-                                      :url="route('comment.status',$comment)"
-                                      :name="'click not to approved'"/>
+            <x-admin.ui.modify-button class="btn btn-sm btn-warning text-white"
+                                      url="{{route('comment.status',$comment)}}"
+                                      name="click not to approved"/>
         @endif
     </td>
     </tr>
