@@ -3,38 +3,40 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Admin\Category\StoreRequest;
 use App\Http\Resources\API\Admin\Categories\CategoriesListApiResource;
 use App\Http\Resources\API\Admin\Categories\CategoryDetailesApiResource;
 use App\Models\Category;
+use App\RestfulApi\Facade\Response;
+use App\Services\Admin\CategoryService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct(private CategoryService $categoryService)
+    {
+    }
+
     public function index()
     {
-        $categories = Category::all();
-        return CategoriesListApiResource::collection($categories);
+        $result = $this->categoryService->showCategries();
+        if (!$result->success){
+            return Response::withStatus(500)->withData($result->data)->withMessage('wrong')->build()->response();
+        }
+        return Response::withStatus(200)->withData($result->data)->build()->response();
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $validation = Validator::make($request->all(),[
-           'title'=>' required|min:3|max:50'
-        ]);
-        if($validation->fails()){
-            return response()->json($validation->errors(),400);
+        $result = $this->categoryService->addCategory($request->all());
+        if (!$result->success){
+            return Response::withStatus(500)->withData($result->data)->withMessage('wrong')->build()->response();
         }
-        Category::create($validation->validated());
-        return response()->json([
-            'message'=>'Category created successfully'
-        ]);
+        return Response::withStatus(200)->withData($result->data)->withMessage('Category created successfully')->build()->response();
     }
 
     /**
@@ -42,7 +44,11 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return new CategoryDetailesApiResource($category);
+        $result = $this->categoryService->showCategory($category);
+        if (!$result->success){
+            return Response::withStatus(500)->withData($result->data)->withMessage('wrong')->build()->response();
+        }
+        return Response::withStatus(200)->withData($result->data)->build()->response();
     }
 
     /**
@@ -50,16 +56,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $validation = Validator::make($request->all(),[
-            'title'=>' required|min:3|max:50'
-        ]);
-        if($validation->fails()){
-            return response()->json($validation->errors(),400);
+       $result = $this->categoryService->updateCategory($request->all(),$category);
+        if (!$result->success){
+            return Response::withStatus(500)->withData($result->data)->withMessage('wrong')->build()->response();
         }
-            $category->update($validation->validated());
-        return response()->json([
-            'message'=>'Category created successfully'
-        ]);
+        return Response::withStatus(200)->withData('Category updated successfully')->build()->response();
     }
 
     /**
@@ -67,9 +68,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->delete();
-        return response()->json([
-            'message'=>'Category deleted successfully'
-        ]);
+        $result = $this->categoryService->deleteCategory($category);
+        if (!$result->success){
+            return Response::withStatus(500)->withData($result->data)->withMessage('wrong')->build()->response();
+        }
+        return Response::withStatus(200)->withData('Category deleted successfully')->build()->response();
     }
 }

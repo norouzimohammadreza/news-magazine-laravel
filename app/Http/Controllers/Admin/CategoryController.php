@@ -6,18 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Category\store;
 use App\Http\Requests\Admin\Category\update;
 use App\Models\Category;
+use App\Services\Admin\CategoryService;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    public function __construct(private CategoryService $categoryService)
+    {
+    }
     public function index()
     {
-        $categories = Category::all();
+
+        $result = $this->categoryService->showCategries();
+        $result = $result->data->all();
         return view('admin.category.index',[
-           'categories' => $categories
+           'categories' => $result
         ]);
     }
     public function show(Request $request)
@@ -38,7 +42,7 @@ class CategoryController extends Controller
      */
     public function store(store $store)
     {
-        Category::create($store->all());
+        $this->categoryService->addCategory($store->all());
         return redirect('admin/category');
     }
 
@@ -57,11 +61,7 @@ class CategoryController extends Controller
      */
     public function update(update $update, Category $category)
     {
-        Category::where('id','=',$category->id)->update(
-            [
-                'title' => $update->title
-            ]
-        );
+        $this->categoryService->updateCategory($update->all(),$category);
         return redirect('admin/category');
     }
 
@@ -70,7 +70,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        Category::find($category->id)->delete();
+        $this->categoryService->deleteCategory($category);
         return redirect('admin/category');
     }
 }
