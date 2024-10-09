@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Admin\Category\StoreRequest;
+use App\Http\Requests\Api\Admin\Category\UpdateRequest;
 use App\Http\Resources\API\Admin\Categories\CategoriesListApiResource;
 use App\Http\Resources\API\Admin\Categories\CategoryDetailesApiResource;
 use App\Models\Category;
@@ -54,7 +55,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(UpdateRequest $request, Category $category)
     {
        $result = $this->categoryService->updateCategory($request->all(),$category);
         if (!$result->success){

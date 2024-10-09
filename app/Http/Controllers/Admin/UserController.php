@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\User\store;
 use App\Http\Requests\Admin\User\update;
 use App\Http\Requests\Admin\User\updateUser;
 use App\Models\User;
+use App\Services\Admin\UserService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -14,23 +15,20 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct(private UserService $userService)
+    {
+    }
+
     public function index()
     {
-        $users=User::all();
+        $result = $this->userService->getList();
         return view('admin.user.index',[
-            'users' => $users
+            'users' => $result->data->all()
         ]);
     }
     public function isAdmin(User $user)
     {
-        if ($user->is_admin){
-            $user->is_admin = 0;
-        }else{
-            $user->is_admin = 1;
-        }
-        User::where('id','=',$user->id)->update([
-            'is_admin'=>$user->is_admin
-        ]);
+        $this->userService->isAdmin($user);
         return redirect()->back();
     }
     public function create()
@@ -39,14 +37,7 @@ class UserController extends Controller
     }
     public function store(store $store)
     {
-
-        User::create([
-            'name'=> $store->name,
-            'email'=> $store->email,
-            'password'=> $store->password,
-            'is_active'=> 1,
-            'is_admin'=> $store->is_admin,
-        ]);
+        $this->userService->createUser($store->all());
         return redirect('admin/user');
     }
     public function edit(User $user)
@@ -61,10 +52,7 @@ class UserController extends Controller
      */
     public function update(update $update, User $user)
     {
-        User::where('id','=',$user->id)->update([
-            'name'=>$update->name,
-            'is_admin'=>$update->is_admin
-        ]);
+        $this->userService->updateUser($update->all(),$user);
         return redirect('admin/user');
     }
 
@@ -73,7 +61,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        User::find($user->id)->delete();
+        $this->userService->deleteUser($user);
         return redirect('admin/user');
     }
 }
