@@ -22,6 +22,7 @@ class AuthController extends Controller
     public function login(Login $login)
     {
         $result = $this->authService->login($login->all());
+        return response()->json($result->data);
         if (isset($result->data['passwordCheck'])){
             if(!$result->data['passwordCheck']){
                 return response()->json('Password is wrong.');
@@ -31,6 +32,6 @@ class AuthController extends Controller
             if (!$result->data['userActive']){
                 return response()->json('This account is not verified yet');
             }}
-        return response()->json($result->data);
+
     }
 }
