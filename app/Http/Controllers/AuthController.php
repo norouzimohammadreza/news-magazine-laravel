@@ -9,6 +9,7 @@ use App\Http\Requests\Auth\PasswordConfirmation;
 use App\Http\Requests\Auth\Register;
 use App\Models\User;
 use App\Http\Requests\Auth\Login;
+use App\Services\AuthService;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,6 +19,9 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+    public function __construct(private AuthService $authService)
+    {
+    }
     public function register()
     {
             return view('auth.register');
@@ -25,19 +29,13 @@ class AuthController extends Controller
 }
     public function registerStore(Register $register)
     {
-
-        $verify_token = Str::random(55);
-
-        User::create([
-            'name'=>$register->name,
-            'email'=>$register->email,
-            'password'=>Hash::make($register->password),
-            'verify_token'=> $verify_token
-        ]);
+        $result = $this->authService->Register($register->all());
+        $user =$result->data['user'];
         return redirect()->route('sendMail',[
-           'token'=> $verify_token,
-            'email' =>$register->email
+           'token'=> $user['verify_token'],
+            'email' =>$user['email']
         ]);
+
     }
     public function login()
     {
@@ -45,18 +43,19 @@ class AuthController extends Controller
     }
     public function loginStore(Login $login)
     {
-        $user = User::where('email',$login->email)->first();
-
-        if(!Hash::check($login->password,$user->password)){
-            return redirect()->back()->with('error','Password is wrong.');
+        $result = $this->authService->login($login->all());
+        if (isset($result->data['passwordCheck'])){
+            if(!$result->data['passwordCheck']){
+                return redirect()->back()->with('error','Password is wrong.');
+            }
         }
-
-        if (!$user->is_active){
+        if (isset($result->data['userActive'])){
+        if (!$result->data['userActive']){
             return redirect()->back()->with('error','This account is not verified yet');
-        }
+        }}
 
         //do stuff
-        Auth::login($user);
+        Auth::login($result->data['user']);
         return redirect('/');
     }
     public function sendMail($token,$email)
@@ -74,9 +73,9 @@ please click on the link below to verify account
     {
        $user= User::where('verify_token',$token)->first();
        $user->is_active = 1;
-        $user->save();
-        if ($user->is_active){
-        return redirect('login')->with('verifyMessage','Your account is verified');
+       $user->save();
+       if ($user->is_active){
+       return redirect('login')->with('verifyMessage','Your account is verified');
 
     }}
     public function logout()
