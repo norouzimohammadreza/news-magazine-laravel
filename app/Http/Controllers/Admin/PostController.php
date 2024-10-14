@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\Post\store;
 use App\Http\Requests\Admin\Post\update;
 use App\Models\Category;
 use App\Models\Post;
+use App\Services\Admin\PostServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,9 +16,15 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct(private PostServices $postServices)
+    {
+    }
+
+
     public function index()
     {
-        $posts = Post::all();
+        $result = $this->postServices->getPosts();
+        $posts = $result->data->all();
         return view('admin.post.index',[
             'posts'=>$posts
         ]);
@@ -64,20 +71,7 @@ class PostController extends Controller
      */
     public function store(store $store)
     {
-        $realTimeStamp = substr($store->published_at, 0, 10);
-        $imageName= time() .'.'. $store->file('image')->extension();
-        $store->file('image')->storeAs(('posts'),$imageName);
-        //dd($store->all());
-        Post::create([
-            'title' => $store->title,
-            'summary' => $store->summary,
-            'body' => $store->body,
-            'published_at' =>  date('Y-m-d H:i:s', (int)$realTimeStamp),
-            'category_id' => $store->category_id,
-            'image' => $imageName,
-            'user_id' => auth()->user()->id,
-        ]);
-
+        $this->postServices->createPost($store->all());
         return redirect('admin/post');
 
     }

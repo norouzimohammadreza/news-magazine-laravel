@@ -20,7 +20,7 @@ class IsAdmin
         return redirect('/');
     }
         $user = auth()->user();
-        if ($user->is_admin ==0 and !$request->is('/')){
+        if ($user->is_admin == 0 and !$request->is('/')){
 
             return redirect('/');
         }

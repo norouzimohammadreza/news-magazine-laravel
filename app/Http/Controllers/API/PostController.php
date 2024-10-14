@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\ApiRequests\Api\Admin\Post\Store;
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\Auth;
 use App\Http\Resources\API\Admin\Posts\PostDetailsApiResource;
 use App\Http\Resources\API\Admin\Posts\PostsListApiResource;
 use App\Models\Post;
+use App\Services\Admin\PostServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,33 +17,21 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct(private PostServices $postServices)
+    {
+    }
     public function index()
     {
-        $posts = Post::all();
-        return PostsListApiResource::collection($posts);
+        $result = $this->postServices->getPosts();
+        return response()->json($result);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Store $request)
     {
-        $validation = Validator::make($request->all(), [
-            'title' => 'required|min:5|max:100',
-            'summary' => 'required',
-            'body' => 'required',
-        ]);
-        if ($validation->fails()) {
-            return response()->json([
-                'message' => $validation->errors()
-            ]);
-        }
-        $input = $validation->validated();
-        $input['user_id'] =1;
-        $input['category_id'] =2;
-        $input['image'] ='perspolis.jpg';
-        $input['published_at'] ='2024-08-29 07:37:08';
-        Post::create($input);
+        $this->postServices->createPost($request->all());
         return response()->json([
             'message' => 'Post created successfully'
         ]);
@@ -52,8 +43,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-
-       return new PostDetailsApiResource($post);
+        $result = $this->postServices->getPost($post);
+        return response()->json($result);
     }
 
     /**
