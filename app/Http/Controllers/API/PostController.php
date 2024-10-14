@@ -52,20 +52,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $validation = Validator::make($request->all(), [
-            'title' => 'min:5|max:100'
-        ]);
-        if ($validation->fails()) {
-            return response()->json([
-                'message' => $validation->errors()
-            ]);
-        }
-        $input = $validation->validated();
-        $input['user_id'] =1;
-        $input['category_id'] =2;
-        $input['image'] ='perspolis.jpg';
-        $input['published_at'] ='2024-08-29 07:37:08';
-        $post->update($input);
+        $this->postServices->updatePost($request,$post);
         return response()->json([
             'message' => 'Post updated successfully'
         ]);
@@ -77,7 +64,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post->delete();
+        $this->postServices->deletePost($post);
         return response()->json([
             'message' => 'Post deleted successfully'
         ]);

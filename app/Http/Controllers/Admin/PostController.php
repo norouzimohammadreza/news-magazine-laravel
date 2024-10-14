@@ -101,20 +101,7 @@ class PostController extends Controller
      */
     public function update(update $update, Post $post)
     {
-        $realTimeStamp = substr($update->published_at, 0, 10);
-        if($update->hasFile('image')){
-            Storage::delete('posts/'.$post->image);
-            $imageName= time() .'.'. $update->file('image')->extension();
-            $update->file('image')->storeAs(('posts'),$imageName);
-        }
-        Post::where('id',$post->id)->update([
-            'title' => $update->title,
-            'summary' => $update->summary,
-            'body' => $update->body,
-            'published_at' =>  date('Y-m-d H:i:s', (int)$realTimeStamp),
-            'category_id' => $update->category_id,
-            'image' => $update->hasFile('image')?$imageName:$post->image
-        ]);
+        $this->postServices->updatePost($update,$post);
         return redirect('admin/post');
     }
 
@@ -123,8 +110,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        Post::find($post->id)->delete();
-        Storage::delete('posts/'.$post->image);
+        $this->postServices->deletePost($post);
         return redirect('admin/post');
     }
 }
