@@ -46,19 +46,11 @@ class UserController extends Controller
             'user' => $user
         ]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(update $update, User $user)
     {
         $this->userService->updateUser($update->all(),$user);
         return redirect('admin/user');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(User $user)
     {
         $this->userService->deleteUser($user);

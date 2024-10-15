@@ -4,13 +4,11 @@ namespace App\Http\Controllers\API;
 
 use App\Http\ApiRequests\Api\Admin\Post\Store;
 use App\Http\Controllers\Controller;
-use App\Http\Middleware\Auth;
-use App\Http\Resources\API\Admin\Posts\PostDetailsApiResource;
-use App\Http\Resources\API\Admin\Posts\PostsListApiResource;
 use App\Models\Post;
+use App\RestfulApi\Facade\Response;
 use App\Services\Admin\PostServices;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+
 
 class PostController extends Controller
 {
@@ -23,7 +21,7 @@ class PostController extends Controller
     public function index()
     {
         $result = $this->postServices->getPosts();
-        return response()->json($result);
+        return Response::withData($result->data)->build()->response();
     }
 
     /**
@@ -32,9 +30,7 @@ class PostController extends Controller
     public function store(Store $request)
     {
         $this->postServices->createPost($request->all());
-        return response()->json([
-            'message' => 'Post created successfully'
-        ]);
+        return Response::withMessage('Post created successfully')->build()->response();
 
     }
 
@@ -44,7 +40,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $result = $this->postServices->getPost($post);
-        return response()->json($result);
+        return Response::withData($result->data)->build()->response();
     }
 
     /**
@@ -53,9 +49,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $this->postServices->updatePost($request,$post);
-        return response()->json([
-            'message' => 'Post updated successfully'
-        ]);
+        return Response::withMessage('Post updated successfully')->build()->response();
 
     }
 
@@ -65,8 +59,6 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $this->postServices->deletePost($post);
-        return response()->json([
-            'message' => 'Post deleted successfully'
-        ]);
+        return Response::withMessage('Post deleted successfully')->build()->response();
     }
 }

@@ -18,10 +18,11 @@ Route::middleware([Auth::class])->group(function (){
 Route::post('register',[AuthController::class,'register']);
 Route::post('login',[AuthController::class,'login']);
 });
-Route::middleware(['auth:sanctum',\App\Http\Middleware\IsAdmin::class])->group(function () {
-    Route::apiResource('/admin/', AdminDashboardController::class);
-    Route::apiResource('/admin/users',UserController::class);
-    Route::apiResource('/admin/categories',CategoryController::class);
-    Route::apiResource('/admin/posts',PostController::class);
-    Route::apiResource('/admin/comments',CommentController::class);
+Route::middleware(['auth:sanctum',\App\Http\Middleware\IsAdmin::class])->prefix('admin')->group(function () {
+    Route::apiResource('/', AdminDashboardController::class);
+    Route::apiResource('/users',UserController::class);
+    Route::get('/users/admin/{user}',[UserController::class,'isAdmin']);
+    Route::apiResource('/categories',CategoryController::class);
+    Route::apiResource('/posts',PostController::class);
+    Route::apiResource('/comments',CommentController::class);
 });
