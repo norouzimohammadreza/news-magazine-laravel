@@ -13,36 +13,26 @@ class HomeController extends Controller
 {
 
     public function index(){
+        $topSelectedPosts = Post::withCount('comment')
+            ->where('published_at','<',now())
+            ->orderBy('published_at', 'DESC')
+            ->limit(3)
+            ->get();
 
-        $topSelectedPosts = Post::select('posts.*',DB::raw('COUNT(comments.post_id) as comments'))
-                ->leftJoin('comments', 'posts.id', '=', 'comments.post_id')
-                ->where('selected', 1)
-                ->where('published_at','<',now())
-                ->groupBy('posts.id')
-                ->orderBy('published_at', 'DESC')
-                ->limit(3)
-                ->get();
         $breakingNews = Post::where('breaking_news', 1)
             ->where('published_at','<',now())
-            ->groupBy('posts.id')
             ->orderBy('published_at', 'DESC')
         ->first();
-        $latestPosts = Post::select('posts.*',DB::raw('COUNT(comments.post_id) as comments'))
-            ->leftJoin('comments', 'posts.id', '=', 'comments.post_id')
-            ->groupBy('posts.id')
+        $latestPosts = Post::withCount('comment')
             ->orderBy('published_at', 'DESC')
             ->limit(4)
             ->get();
-        $popularPosts = Post::select('posts.*',DB::raw('COUNT(comments.post_id) as comments'))
-            ->leftJoin('comments', 'posts.id', '=', 'comments.post_id')
-            ->groupBy('posts.id')
+        $popularPosts = Post::withCount('comment')
             ->orderBy('view', 'DESC')
             ->limit(3)
             ->get();
-        $mostComments = Post::select('posts.*',DB::raw('COUNT(comments.post_id) as comments'))
-            ->leftJoin('comments', 'posts.id', '=', 'comments.post_id')
-            ->groupBy('posts.id')
-            ->orderBy('comments', 'DESC')
+        $mostComments = Post::withCount('comment')
+            ->orderBy('comment_count', 'DESC')
             ->limit(3)
             ->get();
             $banner = Banner::first();
@@ -50,7 +40,7 @@ class HomeController extends Controller
         $categories = Category::all();
         return view('app.index',[
             'categories' => $categories,
-            'topSelectedPosts' => $topSelectedPosts,
+            'topSelectedPosts' => $topSelectedPosts->all(),
             'breakingNews' => $breakingNews,
             'latestPosts' => $latestPosts,
             'popularPosts' => $popularPosts,
@@ -62,17 +52,13 @@ class HomeController extends Controller
     {
 
         $categories = Category::all();
-        $mostComments = Post::select('posts.*',DB::raw('COUNT(comments.post_id) as comments'))
-            ->leftJoin('comments', 'posts.id', '=', 'comments.post_id')
-            ->groupBy('posts.id')
-            ->orderBy('comments', 'DESC')
+        $mostComments = Post::withCount('comment')
+            ->orderBy('comment_count', 'DESC')
             ->limit(3)
             ->get();
         $banner = Banner::first();
 
-        $posts=Post::select('posts.*',DB::raw('COUNT(comments.post_id) as comments'))
-            ->leftJoin('comments', 'posts.id', '=', 'comments.post_id')
-            ->groupBy('posts.id')
+        $posts=Post::withCount('comment')
             ->where('category_id',$category)->get();
 
        if ($posts){
@@ -90,10 +76,8 @@ class HomeController extends Controller
     public function post($post)
     {
         $categories = Category::all();
-        $mostComments = Post::select('posts.*',DB::raw('COUNT(comments.post_id) as comments'))
-            ->leftJoin('comments', 'posts.id', '=', 'comments.post_id')
-            ->groupBy('posts.id')
-            ->orderBy('comments', 'DESC')
+        $mostComments = Post::withCount('comment')
+            ->orderBy('comment_count', 'DESC')
             ->limit(3)
             ->get();
         $banner = Banner::first();
@@ -111,8 +95,6 @@ class HomeController extends Controller
     }
     public function comment($post,\App\Http\Requests\Comment $comment)
     {
-
-
         Comment::create([
             'body'=> $comment->body,
             'post_id' => $post,

@@ -19,7 +19,7 @@
                     </a>
                     <ul class="meta">
                         <li><span class="lnr lnr-calendar-full"> {{$post->published_at}}</span></li>
-                        <li><span class="lnr lnr-bubble"> {{$post->comments}}</span></li>
+                        <li><span class="lnr lnr-bubble"> {{$post->comment_count}}</span></li>
                     </ul>
                 </div>
             </div>

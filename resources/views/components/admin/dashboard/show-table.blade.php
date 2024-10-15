@@ -64,18 +64,18 @@
                     <th>#</th>
                     <th>username</th>
                     <th>comment</th>
-                    <th>status</th>
                 </tr>
                 </thead>
                 <tbody>
 
         @foreach($mostCommentsUsers as $mostCommentsUser)
+            @if($mostCommentsUser->comment_count>0)
                 <tr>
                     <td>{{$mostCommentsUser->id}}</td>
                     <td>{{$mostCommentsUser->name}}</td>
-                    <td>{{$mostCommentsUser->comment_count}}</td>
-                    <td><span class="badge badge-warning">@if($mostCommentsUser->status==1) approved @else not approved @endif</span></td>
+                    <td><span class="badge badge-warning">{{$mostCommentsUser->comment_count}}</span></td>
                 </tr>
+            @endif
         @endforeach
                 </tbody>
             </table>

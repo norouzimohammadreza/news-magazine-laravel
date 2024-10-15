@@ -16,9 +16,9 @@
                 <h4>{{$post->title}}</h4>
             </a>
             <ul class="meta">
-                <li><span class="lnr lnr-user">{{$post->user->name}}</span></li>
-                <li><span class="lnr lnr-calendar-full">{{$post->published_at}}</span></li>
-                <li><span class="lnr lnr-bubble">{{$post->comments}}</span></li>
+                <li><span class="lnr lnr-user"> {{$post->user->name}}</span></li>
+                <li><span class="lnr lnr-calendar-full"> {{$post->published_at}}</span></li>
+                <li><span class="lnr lnr-bubble"> {{$post->comment_count}}</span></li>
             </ul>
             <p class="excert">{{substr($post->summary,0,150)}}</p>
         </div>

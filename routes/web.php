@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\Auth;
 
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('category/{category}',[HomeController::class,'category'])->name('category');
 Route::get('post/{post}',[HomeController::class,'post'])->name('post');
