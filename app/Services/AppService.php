@@ -5,7 +5,10 @@ namespace App\Services;
 use App\Base\ServiceResult;
 use App\Models\Banner;
 use App\Models\Category;
+use App\Models\Comment;
+
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 class AppService
 {
@@ -49,7 +52,27 @@ class AppService
             ->where('category_id',$category->id)->get();
         return new ServiceResult(200,$posts);
     }
-    
+    public function showPost(Post $post) :ServiceResult
+    {
+        $article = Post::where('id',$post->id)->first();
+        $article->view+=1;
+        $article->save();
+        $comments= Comment::where('post_id',$post->id)->where('status','approved')->get();
+        return new ServiceResult(true,[
+            'article'=>$article,
+            'comments'=>$comments
+        ]);
+    }
+    public function comment($post,array $comment)
+    {
+
+        Comment::create([
+            'body'=> $comment['body'],
+            'post_id' => $post,
+            'user_id' => Auth::user()->id
+        ]);
+        return new ServiceResult(true);
+    }
 
 
 }

@@ -20,6 +20,9 @@ Route::get('/user', function (Request $request) {
 Route::get('logout',[AuthController::class,'logout']);
 Route::get('/',[AppController::class,'index']);
 Route::get('/category/{category}',[AppController::class,'category']);
+Route::get('/post/{post}',[AppController::class,'post']);
+Route::post('comment/{post}',[AppController::class,'comment'])->middleware('auth:sanctum');
+
 
 Route::middleware([Auth::class])->group(function (){
     Route::post('register',[AuthController::class,'register']);

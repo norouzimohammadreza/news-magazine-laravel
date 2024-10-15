@@ -42,27 +42,21 @@ class HomeController extends Controller
          ]);
 
     }
-    public function post($post)
+    public function post(Post $post)
     {
-        $article = Post::where('id',$post)->first();
-        $article->view+=1;
-        $article->save();
-        $comments= Comment::where('post_id',$post)->where('status','approved')->get();
+        $result = $this->appService->showPost($post);
+        $data = $result->data;
         return view('app.post',[
             'categories' => $this->appService->categories,
             'mostComments' => $this->appService->mostComments,
             'banner' => $this->appService->banner,
-            'post' => $article,
-            'comments' => $comments
+            'post' => $data['article'],
+            'comments' => $data['comments'],
         ]);
     }
     public function comment($post,\App\Http\Requests\Comment $comment)
     {
-        Comment::create([
-            'body'=> $comment->body,
-            'post_id' => $post,
-            'user_id' => auth()->user()->id
-        ]);
+        $this->appService->comment($post,$comment->all());
        return redirect()->back()->with('password','کامنت شما ثبت و پس از تایید به نمایش در خواهد امد.');
     }
 }
