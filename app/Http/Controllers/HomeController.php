@@ -30,47 +30,28 @@ class HomeController extends Controller
             'banner' => $this->appService->banner
         ]);
     }
-    public function category($category)
+    public function category(Category $category)
     {
-
-        $categories = Category::all();
-        $mostComments = Post::withCount('comment')
-            ->orderBy('comment_count', 'DESC')
-            ->limit(3)
-            ->get();
-        $banner = Banner::first();
-
-        $posts=Post::withCount('comment')
-            ->where('category_id',$category)->get();
-
-       if ($posts){
-         return view('app.category',[
-             'categories' => $categories,
-             'mostComments' => $mostComments,
-             'banner' => $banner,
-             'posts' => $posts,
-             'category' => Category::find($category)->title
+        $result = $this->appService->categoryPage($category);
+        return view('app.category',[
+             'categories' => $this->appService->categories,
+             'mostComments' => $this->appService->mostComments,
+             'banner' => $this->appService->banner,
+             'posts' => $result->data,
+             'category' => Category::find($category->id)->title
          ]);
-       }else{
-           return redirect()->route('home');
-       }
+
     }
     public function post($post)
     {
-        $categories = Category::all();
-        $mostComments = Post::withCount('comment')
-            ->orderBy('comment_count', 'DESC')
-            ->limit(3)
-            ->get();
-        $banner = Banner::first();
         $article = Post::where('id',$post)->first();
         $article->view+=1;
         $article->save();
         $comments= Comment::where('post_id',$post)->where('status','approved')->get();
         return view('app.post',[
-            'categories' => $categories,
-            'mostComments' => $mostComments,
-            'banner' => $banner,
+            'categories' => $this->appService->categories,
+            'mostComments' => $this->appService->mostComments,
+            'banner' => $this->appService->banner,
             'post' => $article,
             'comments' => $comments
         ]);

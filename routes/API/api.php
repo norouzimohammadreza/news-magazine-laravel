@@ -19,6 +19,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 Route::get('logout',[AuthController::class,'logout']);
 Route::get('/',[AppController::class,'index']);
+Route::get('/category/{category}',[AppController::class,'category']);
 
 Route::middleware([Auth::class])->group(function (){
     Route::post('register',[AuthController::class,'register']);

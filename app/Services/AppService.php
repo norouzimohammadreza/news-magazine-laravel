@@ -43,5 +43,13 @@ class AppService
         'popularPosts'=>$popularPosts,
     ]);
 }
+    public function categoryPage(Category $category) :ServiceResult
+    {
+        $posts=Post::withCount('comment')
+            ->where('category_id',$category->id)->get();
+        return new ServiceResult(200,$posts);
+    }
+    
+
 
 }
