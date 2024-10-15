@@ -96,5 +96,16 @@ please click on the link below to verify account
         });
         return new ServiceResult(true);
     }
+    public function confirmPassword(array $confirmation,string $token) : ServiceResult
+    {
+        $user =  User::where('forget_token',$token)->first();
+        if (!$user->forget_token_expire == null && $user->forget_token_expire < now()){
+            return new ServiceResult(false,[
+                'tokenExpired' => true
+            ]);
+        }
+        $user->password = Hash::make($confirmation['password']);
+        $user->save();
+        return new ServiceResult(true);
 
-}
+}}

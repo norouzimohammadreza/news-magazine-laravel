@@ -21,6 +21,7 @@ Route::middleware([Auth::class])->group(function (){
     Route::post('login',[AuthController::class,'login']);
     Route::get('verify-account/{token}/',[AuthController::class,'verifyAccount']);
     Route::Post('forgot-password/',[AuthController::class,'forgotPassword']);
+    Route::Post('confirm-password/{token}',[AuthController::class,'confirmPassword']);
 });
 
 Route::middleware(['auth:sanctum',\App\Http\Middleware\IsAdmin::class])->prefix('admin')->group(function () {

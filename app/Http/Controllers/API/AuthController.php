@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Base\ServiceResult;
+
 use App\Http\ApiRequests\Api\Auth\ForgotPassword;
 use App\Http\ApiRequests\Api\Auth\Login;
 use App\Http\ApiRequests\Api\Auth\Register;
 use App\Http\Controllers\Controller;
+use App\Http\ApiRequests\Api\Auth\PasswordConfirmation;
 use App\RestfulApi\Facade\Response;
 use App\Services\AuthService;
 
@@ -46,7 +47,7 @@ class AuthController extends Controller
         $this->authService->logout();
         return Response::withMessage('User logout successfully.')->build()->response();
     }
-    public function forgotPassword(ForgotPassword $forgotPassword) : ServiceResult
+    public function forgotPassword(ForgotPassword $forgotPassword)
     {
         $result = $this->authService->forgetPassword($forgotPassword->all());
         if (isset($result->data['userActive'])){
@@ -57,11 +58,18 @@ class AuthController extends Controller
             if ($result->data['tokenExpired']){
                 return Response::withMessage('This token is expired yet')->build()->response();
             }}
+        return Response::withMessage('Please check your email to receive new password.')->build()->response();
 
     }
-    public function sendForgotPassword(string $token,string $email) : ServiceResult
+    public function confirmPassword(PasswordConfirmation $confirmation,$token)
     {
-
+       $result= $this->authService->confirmPassword($confirmation->all(),$token);
+        if (isset($result->data['tokenExpired'])){
+            if ($result->data['tokenExpired']){
+                return Response::withMessage('This token is expired yet')->build()->response();
+            }}
+        return Response::withMessage('User password is changed successfully.')->build()->response();
     }
+
 
 }

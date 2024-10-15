@@ -92,9 +92,12 @@ class AuthController extends Controller
         return view('auth.new-password',compact('token'));
     }
     public function confirmPassword(PasswordConfirmation $confirmation,$token){
-        $user =  User::where('forget_token',$token)->first();
-        $user->password = Hash::make($confirmation->password);
-        $user->save();
+        $result = $this->authService->confirmPassword($confirmation->all(),$token);
+        if (isset($result->data['tokenExpired'])){
+            if ($result->data['tokenExpired']){
+                return redirect()->back()->with('error','This token is expired yet');
+            }}
+
         return redirect('login')->with('verifyMessage','Your password has been changed');
     }
 
