@@ -27,4 +27,5 @@ Route::middleware(['auth:sanctum',\App\Http\Middleware\IsAdmin::class])->prefix(
     Route::get('posts/selected/{post}',[PostController::class,'isSelected']);
     Route::get('post/breaking-news/{post}',[PostController::class,'breakingNews']);
     Route::apiResource('/comments',CommentController::class);
+    Route::get('comments/change-status/{comment}',[CommentController::class,'change']);
 });

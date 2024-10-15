@@ -31,6 +31,7 @@ class AuthController extends Controller
     {
         $result = $this->authService->Register($register->all());
         $user =$result->data['user'];
+        return $this->sendMail($user['verify_token'],$user['email']);
         return redirect()->route('sendMail',[
            'token'=> $user['verify_token'],
             'email' =>$user['email']

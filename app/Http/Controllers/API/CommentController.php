@@ -6,74 +6,37 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\API\Admin\Comment\CommentDetailsApiResource;
 use App\Http\Resources\API\Admin\Comment\CommentListApiResource;
 use App\Models\Comment;
+use App\RestfulApi\Facade\Response;
+use App\Services\Admin\CommentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    public function __construct(private CommentService $commentService)
+    {
+    }
+
     public function index()
     {
-        $comments = Comment::all();
-        return CommentListApiResource::collection($comments);
+        $result = $this->commentService->getComments();
+        return Response::withData($result->data)->build()->response();
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function change(Comment $comment)
     {
-        $validation = Validator::make($request->all(),[
-            'body' => 'required|min:5'
-        ]);
-        if($validation->fails()){
-            return response()->json($validation->errors());
-        }
-        $input = $validation->validated();
-        $input['user_id'] = 1;
-        $input['post_id'] = 1;
-        Comment::create($input);
-        return response()->json([
-            'message' => 'Comment created successfully'
-        ]);
+        $this->commentService->change($comment);
+        return Response::withMessage('Comment visibility is changed successfully.')->build()->response();
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Comment $comment)
     {
-        return new CommentDetailsApiResource($comment);
+        return Response::withData(new CommentDetailsApiResource($comment))->build()->response();
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Comment $comment)
-    {
-        $validation = Validator::make($request->all(),[
-            'body' => 'required|min:5'
-        ]);
-        if($validation->fails()){
-            return response()->json($validation->errors());
-        }
-        $input = $validation->validated();
-        $input['user_id'] = 1;
-        $input['post_id'] = 1;
-        $comment->update($input);
-        return response()->json([
-            'message' => 'Comment updated successfully'
-        ]);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Comment $comment)
     {
         $comment->delete();
-        return response()->json(['message' => 'Comment deleted successfully']);
+        return Response::withMessage('Comment deleted successfully.')->build()->response();
     }
 }
