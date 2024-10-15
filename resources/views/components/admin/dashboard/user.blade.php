@@ -1,5 +1,5 @@
 <div class="col-sm-6 col-lg-3">
-    <a href="" class="text-decoration-none">
+    <a href="{{route('user.index')}}" class="text-decoration-none">
         <div class="card text-white bg-juicy-orange mb-3">
             <div class="card-header d-flex justify-content-between align-items-center"><span><i class="fas fa-users">
 

@@ -6,46 +6,28 @@ use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Post;
+use App\Services\AppService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-
+    public function __construct(private AppService $appService)
+    {
+    }
     public function index(){
-        $topSelectedPosts = Post::withCount('comment')
-            ->where('published_at','<',now())
-            ->orderBy('published_at', 'DESC')
-            ->limit(3)
-            ->get();
 
-        $breakingNews = Post::where('breaking_news', 1)
-            ->where('published_at','<',now())
-            ->orderBy('published_at', 'DESC')
-        ->first();
-        $latestPosts = Post::withCount('comment')
-            ->orderBy('published_at', 'DESC')
-            ->limit(4)
-            ->get();
-        $popularPosts = Post::withCount('comment')
-            ->orderBy('view', 'DESC')
-            ->limit(3)
-            ->get();
-        $mostComments = Post::withCount('comment')
-            ->orderBy('comment_count', 'DESC')
-            ->limit(3)
-            ->get();
-            $banner = Banner::first();
+       $result = $this->appService->mainPage();
+       $data = $result->data;
 
-        $categories = Category::all();
         return view('app.index',[
-            'categories' => $categories,
-            'topSelectedPosts' => $topSelectedPosts->all(),
-            'breakingNews' => $breakingNews,
-            'latestPosts' => $latestPosts,
-            'popularPosts' => $popularPosts,
-            'mostComments' => $mostComments,
-            'banner' => $banner
+            'categories' => $this->appService->categories,
+            'topSelectedPosts' => $data['topSelectedPosts'],
+            'breakingNews' => $data['breakingNews'],
+            'latestPosts' => $data['latestPosts'],
+            'popularPosts' => $data['popularPosts'],
+            'mostComments' => $this->appService->mostComments,
+            'banner' => $this->appService->banner
         ]);
     }
     public function category($category)

@@ -11,10 +11,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Middleware\Auth;
 use App\Http\Middleware\IsAdmin;
+use App\Http\Controllers\API\AppController;
+
+
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 Route::get('logout',[AuthController::class,'logout']);
+Route::get('/',[AppController::class,'index']);
 
 Route::middleware([Auth::class])->group(function (){
     Route::post('register',[AuthController::class,'register']);
