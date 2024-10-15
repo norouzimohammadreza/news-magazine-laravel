@@ -55,7 +55,6 @@ class AuthController extends Controller
         Auth::login($result->data['user']);
         return redirect('/');
     }
-
     public function verifyAccount($token)
     {
         $this->authService->verifyAccount($token);
@@ -63,7 +62,7 @@ class AuthController extends Controller
     }
     public function logout()
     {
-        Auth::logout();
+        $this->authService->logout();
         return redirect('/');
     }
     public function resetPassword(){
@@ -71,35 +70,18 @@ class AuthController extends Controller
 }
     public function forgotPassword(ForgotPassword $forgotPassword)
 {
-
-
-    $user = User::where('email', $forgotPassword->email)->first();
-    if (!$user->forget_token_expire == null && $user->forget_token_expire < now()){
-        return redirect()->back()->with('error','This token is not expired yet');
-    }
-    if ($user->is_active==0){
-        return redirect()->back()->with('error','This account is not verified yet');
-    }
-
-    $user->forget_token =Str::random(55);
-    $user->forget_token_expire = now()->addMinutes(60);
-    $user->save();
-
-    return redirect()->route('sendForgotPassword',[
-        'token' => $user->forget_token,
-        'email' => $forgotPassword->email
-    ]);
+    $result = $this->authService->forgetPassword($forgotPassword->all());
+    if (isset($result->data['userActive'])){
+        if (!$result->data['userActive']){
+            return redirect()->back()->with('error','This account is not verified yet');
+        }}
+    if (isset($result->data['tokenExpired'])){
+        if ($result->data['tokenExpired']){
+            return redirect()->back()->with('error','This token is expired yet');
+        }}
+    return redirect('reset-password')->with('verifyMessage','Please check your email to receive new password');
 }
-    public function sendForgotPassword($token,$email){
 
-        $text = 'for verify your email </br>
-        please click on the link below to receive new password
-        <a href="'. route('newPassword', $token );'"> New Password account</a>';
-        Mail::raw($text, function ($message) use ($email) {
-            $message->to($email)->subject('New Password');
-        });
-        return redirect('reset-password')->with('verifyMessage','Please check your email to receive new password');
-    }
     public function newPassword($token)
     {
         $user = User::where('forget_token',$token)->first();

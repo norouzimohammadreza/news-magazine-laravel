@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Base\ServiceResult;
+use App\Http\ApiRequests\Api\Auth\ForgotPassword;
 use App\Http\ApiRequests\Api\Auth\Login;
 use App\Http\ApiRequests\Api\Auth\Register;
 use App\Http\Controllers\Controller;
@@ -17,7 +19,7 @@ class AuthController extends Controller
 
     public function Register(Register $register)
     {
-       $this->authService->Register($register->all());
+       $result = $this->authService->Register($register->all());
        return Response::withMessage('User created successfully')->build()->response();
     }
     public function login(Login $login)
@@ -38,6 +40,28 @@ class AuthController extends Controller
     }
     public function verifyAccount($token){
         $this->authService->verifyAccount($token);
-        return Response::withMessage('This account is verified successfully.')->build()->response();
+        return Response::withMessage('Your account is verified successfully.')->build()->response();
     }
+    public function logout(){
+        $this->authService->logout();
+        return Response::withMessage('User logout successfully.')->build()->response();
+    }
+    public function forgotPassword(ForgotPassword $forgotPassword) : ServiceResult
+    {
+        $result = $this->authService->forgetPassword($forgotPassword->all());
+        if (isset($result->data['userActive'])){
+            if (!$result->data['userActive']){
+                return Response::withMessage('This account is not verified yet')->build()->response();
+            }}
+        if (isset($result->data['tokenExpired'])){
+            if ($result->data['tokenExpired']){
+                return Response::withMessage('This token is expired yet')->build()->response();
+            }}
+
+    }
+    public function sendForgotPassword(string $token,string $email) : ServiceResult
+    {
+
+    }
+
 }

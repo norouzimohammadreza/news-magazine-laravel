@@ -26,9 +26,10 @@ Route::middleware(Auth::class)->group(function (){
     Route::get('verify-account/{token}/',[AuthController::class,'verifyAccount'])->name('verifyAccount');
     Route::get('reset-password/',[AuthController::class,'resetPassword'])->name('resetPassword');
     Route::Post('forgot-password/',[AuthController::class,'forgotPassword'])->name('forgotPassword');
-    Route::get('send-password/{token}/{email}', [AuthController::class, 'sendForgotPassword'])->name('sendForgotPassword');});
     Route::get('new-password/{token}',[AuthController::class,'newPassword'])->name('newPassword');
     Route::Post('confirm-password/{token}',[AuthController::class,'confirmPassword'])->name('confirmPassword');
+});
+
 
 Route::get('check',function (){
     dd(auth()->user());

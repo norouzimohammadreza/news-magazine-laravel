@@ -14,11 +14,13 @@ use App\Http\Middleware\Auth;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+Route::get('logout',[AuthController::class,'logout']);
 
 Route::middleware([Auth::class])->group(function (){
     Route::post('register',[AuthController::class,'register']);
     Route::post('login',[AuthController::class,'login']);
     Route::get('verify-account/{token}/',[AuthController::class,'verifyAccount']);
+    Route::Post('forgot-password/',[AuthController::class,'forgotPassword']);
 });
 
 Route::middleware(['auth:sanctum',\App\Http\Middleware\IsAdmin::class])->prefix('admin')->group(function () {
