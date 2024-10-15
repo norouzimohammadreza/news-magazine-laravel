@@ -29,13 +29,9 @@ class AuthController extends Controller
 }
     public function registerStore(Register $register)
     {
-        $result = $this->authService->Register($register->all());
-        $user =$result->data['user'];
-        return $this->sendMail($user['verify_token'],$user['email']);
-        return redirect()->route('sendMail',[
-           'token'=> $user['verify_token'],
-            'email' =>$user['email']
-        ]);
+        $this->authService->Register($register->all());
+        return redirect('login')->with('verifyMessage','Please check your email to verify your account');
+
 
     }
     public function login()
@@ -59,26 +55,12 @@ class AuthController extends Controller
         Auth::login($result->data['user']);
         return redirect('/');
     }
-    public function sendMail($token,$email)
-    {
-        $text = 'for verify your email </br>
-please click on the link below to verify account
-<a href="'. route('verifyAccount', $token );'"> verify account</a>';
-       Mail::raw($text, function ($message) use ($email) {
-           $message->to($email)->subject('Verify Account');
-       });
-        return redirect('login')->with('verifyMessage','Please check your email to verify your account');
 
-    }
     public function verifyAccount($token)
     {
-       $user= User::where('verify_token',$token)->first();
-       $user->is_active = 1;
-       $user->save();
-       if ($user->is_active){
+        $this->authService->verifyAccount($token);
        return redirect('login')->with('verifyMessage','Your account is verified');
-
-    }}
+    }
     public function logout()
     {
         Auth::logout();

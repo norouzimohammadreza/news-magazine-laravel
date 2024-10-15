@@ -23,7 +23,6 @@ Route::middleware(Auth::class)->group(function (){
     Route::post('register/store',[AuthController::class,'registerStore'])->name('register.store');
     Route::get('login',[AuthController::class,'login'])->name('login');
     Route::post('login/store',[AuthController::class,'loginStore'])->name('login.store');
-    Route::get('sendMail/{token}/{email}',[AuthController::class,'sendMail'])->name('sendMail');
     Route::get('verify-account/{token}/',[AuthController::class,'verifyAccount'])->name('verifyAccount');
     Route::get('reset-password/',[AuthController::class,'resetPassword'])->name('resetPassword');
     Route::Post('forgot-password/',[AuthController::class,'forgotPassword'])->name('forgotPassword');
