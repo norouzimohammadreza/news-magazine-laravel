@@ -55,5 +55,25 @@ class PostServices
         Post::destroy($post->id);
         return new ServiceResult(true);
     }
+    public function isSelected(Post $post) :serviceResult
+    {
+        if ($post->selected){
+            $post->selected=0;
+        }else{
+            $post->selected=1;
+        }
+        $post->update();
+        return new ServiceResult(true);
+    }
+    public function breakingNews(Post $post):ServiceResult
+    {
+        if ($post->breaking_news){
+            $post->breaking_news=0;
+        }else{
+            $post->breaking_news=1;
+        }
+        $post->update();
+        return new ServiceResult(true);
+    }
 
 }

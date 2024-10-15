@@ -12,9 +12,7 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function __construct(private PostServices $postServices)
     {
     }
@@ -23,39 +21,33 @@ class PostController extends Controller
         $result = $this->postServices->getPosts();
         return Response::withData($result->data)->build()->response();
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function isSelected(Post $post)
+    {
+        $this->postServices->isSelected($post);
+        return Response::withMessage('Post selected state is changed.')->build()->response();
+    }
+    public function breakingNews(Post $post)
+    {
+        $this->postServices->breakingNews($post);
+        return Response::withData('Post breaking news state is changed.')->build()->response();
+    }
     public function store(Store $request)
     {
         $this->postServices->createPost($request->all());
         return Response::withMessage('Post created successfully')->build()->response();
 
     }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Post $post)
     {
         $result = $this->postServices->getPost($post);
         return Response::withData($result->data)->build()->response();
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Post $post)
     {
         $this->postServices->updatePost($request,$post);
         return Response::withMessage('Post updated successfully')->build()->response();
 
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Post $post)
     {
         $this->postServices->deletePost($post);

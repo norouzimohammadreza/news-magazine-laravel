@@ -24,5 +24,7 @@ Route::middleware(['auth:sanctum',\App\Http\Middleware\IsAdmin::class])->prefix(
     Route::get('/users/admin/{user}',[UserController::class,'isAdmin']);
     Route::apiResource('/categories',CategoryController::class);
     Route::apiResource('/posts',PostController::class);
+    Route::get('posts/selected/{post}',[PostController::class,'isSelected']);
+    Route::get('post/breaking-news/{post}',[PostController::class,'breakingNews']);
     Route::apiResource('/comments',CommentController::class);
 });
