@@ -23,7 +23,6 @@ Route::get('/category/{category}',[AppController::class,'category']);
 Route::get('/post/{post}',[AppController::class,'post']);
 Route::post('comment/{post}',[AppController::class,'comment'])->middleware('auth:sanctum');
 
-
 Route::middleware([Auth::class])->group(function (){
     Route::post('register',[AuthController::class,'register']);
     Route::post('login',[AuthController::class,'login']);
@@ -35,6 +34,7 @@ Route::middleware([Auth::class])->group(function (){
 Route::middleware(['auth:sanctum',IsAdmin::class])->prefix('admin')->group(function () {
     Route::apiResource('/', AdminDashboardController::class);
     Route::apiResource('/users',UserController::class);
+    Route::apiResource('/banners',\App\Http\Controllers\API\BannerController::class);
     Route::get('/users/admin/{user}',[UserController::class,'isAdmin']);
     Route::apiResource('/categories',CategoryController::class);
     Route::apiResource('/posts',PostController::class);

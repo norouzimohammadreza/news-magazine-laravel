@@ -23,5 +23,4 @@
 </div>
 <x-admin.layout.scripts/>
 @stack('ckEditorJs')
-
 </body>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Banner\store;
 use App\Http\Requests\Admin\Banner\update;
 use App\Models\Banner;
+use App\Services\Admin\BannerService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,11 +15,14 @@ class BannerController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct(private BannerService $bannerService)
+    {
+    }
     public function index()
     {
-        $banners = Banner::all();
+        $result = $this->bannerService->ListsBanners();
         return view('admin.banner.index',[
-            'banners'=>$banners
+            'banners'=> $result->data
         ]);
     }
 
@@ -35,12 +39,7 @@ class BannerController extends Controller
      */
     public function store(store $store)
     {
-        $imageName= time() .'.'. $store->file('image')->extension();
-        $store->file('image')->storeAs(('banners'),$imageName);
-        Banner::create([
-            'url'=> $store->url,
-            'image'=>$imageName
-        ]);
+        $this->bannerService->createBanner($store);
         return redirect('admin/banner');
     }
 

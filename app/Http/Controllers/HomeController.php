@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Banner;
+use App\Http\Requests\Comment;
 use App\Models\Category;
-use App\Models\Comment;
 use App\Models\Post;
 use App\Services\AppService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
 
 class HomeController extends Controller
 {
@@ -54,7 +52,7 @@ class HomeController extends Controller
             'comments' => $data['comments'],
         ]);
     }
-    public function comment($post,\App\Http\Requests\Comment $comment)
+    public function comment($post,Comment $comment)
     {
         $this->appService->comment($post,$comment->all());
        return redirect()->back()->with('password','کامنت شما ثبت و پس از تایید به نمایش در خواهد امد.');
