@@ -68,7 +68,7 @@ class MenuController extends Controller
      */
     public function destroy(Menu $menu)
     {
-        Menu::find($menu->id)->delete($menu);
+        $this->menuService->deleteMenu($menu);
         return redirect('admin/menu');
     }
 }

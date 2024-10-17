@@ -3,64 +3,28 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Menu;
+use App\Models\Setting;
+use App\RestfulApi\Facade\Response;
+use App\Services\Admin\SettingService;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct(private SettingService $settingService)
+    {
+
+    }
     public function index()
     {
-        //
+        $result = $this->settingService->showSetting();
+        return Response::withData($result->data)->build()->response();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function update(\App\Http\Requests\Api\Admin\Setting\Setting $update, Setting $setting)
     {
-        //
+        $this->settingService->setSetting($update,$setting);
+        return Response::withMessage('Setting is set.')->build()->response();
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Menu $menu)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Menu $menu)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Menu $menu)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Menu $menu)
-    {
-        //
-    }
 }

@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use App\RestfulApi\Facade\Response;
 use App\Services\Admin\MenuService;
-use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
@@ -57,6 +56,7 @@ class MenuController extends Controller
      */
     public function destroy(Menu $menu)
     {
-        //
+        $this->menuService->deleteMenu($menu);
+        return Response::withMessage('Menu deleted successfully.')->build()->response();
     }
 }

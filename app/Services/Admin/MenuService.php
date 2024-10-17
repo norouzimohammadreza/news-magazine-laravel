@@ -37,5 +37,11 @@ class MenuService
         ]);
         return new ServiceResult(true);
     }
+    public function deleteMenu(Menu $menu) : ServiceResult
+    {
+        $menu->delete();
+        return new ServiceResult(true);
+
+    }
 
 }

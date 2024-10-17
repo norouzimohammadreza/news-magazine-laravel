@@ -4,18 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
+use App\Services\Admin\SettingService;
 
 
 class SettingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    public function __construct(private SettingService $settingService)
+    {
+    }
+
     public function index()
     {
-        $setting = Setting::first();
+       $result = $this->settingService->showSetting();
         return view('admin.setting.index',[
-            'setting' => $setting
+            'setting' => $result->data
         ]);
     }
 
@@ -34,27 +37,9 @@ class SettingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(update $update, Setting $setting)
+    public function update(\App\Http\Requests\Api\Admin\Setting\Setting $update, Setting $setting)
     {
-
-        if ($update->hasFile('logo') && $update->file('logo')->isValid()) {
-            $logoFormat = $update->file('logo')->extension();
-            $logo = 'logo' . '.' . $logoFormat;
-            $update->file('logo')->move(public_path('setting'), $logo);
-        }
-        if ($update->hasFile('icon') && $update->file('icon')->isValid()) {
-            $iconFormat = $update->file('icon')->extension();
-            $icon = 'icon'.'.'.$iconFormat;
-            $update->file('icon')->move(public_path('setting'), $icon);
-        }
-        Setting::first()->update([
-            'title' => $update->title,
-            'description' => $update->description,
-            'keyword' => $update->keyword,
-            'logo' =>$update->hasFile('logo')?$logo:$setting->logo,
-            'icon' =>$update->hasFile('icon')?$icon:$setting->icon
-
-        ]);
+        $this->settingService->setSetting($update,$setting);
         return redirect('admin/setting');
     }
 

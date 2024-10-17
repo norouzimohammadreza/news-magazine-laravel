@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\Api\Admin\Post\Store;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Admin\Post\Update;
 use App\Models\Post;
 use App\RestfulApi\Facade\Response;
 use App\Services\Admin\PostServices;
@@ -42,7 +43,7 @@ class PostController extends Controller
         $result = $this->postServices->getPost($post);
         return Response::withData($result->data)->build()->response();
     }
-    public function update(Request $request, Post $post)
+    public function update(Update $request, Post $post)
     {
         $this->postServices->updatePost($request,$post);
         return Response::withMessage('Post updated successfully')->build()->response();

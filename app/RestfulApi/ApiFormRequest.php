@@ -10,8 +10,11 @@ class ApiFormRequest extends FormRequest
 {
     protected function failedValidation(Validator $validator)
     {
-        if (request()->expectsJson())
+
+        if (request()->expectsJson()) {
             throw new HttpResponseException(response()->json($validator->errors(), 422));
-            parent::failedValidation($validator);
+        }
+
+             parent::failedValidation($validator);
     }
 }
