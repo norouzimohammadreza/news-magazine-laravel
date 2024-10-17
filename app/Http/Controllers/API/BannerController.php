@@ -7,6 +7,7 @@ use App\Http\ApiRequests\Api\Admin\Banner\Update;
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\Post;
+use App\RestfulApi\Facade\Response;
 use App\Services\Admin\BannerService;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,7 @@ class BannerController extends Controller
     public function index()
     {
        $result = $this->bannerService->ListsBanners();
-        return response()->json($result->data);
+        return Response::withData($result->data)->build()->response();
     }
 
     /**
@@ -31,7 +32,9 @@ class BannerController extends Controller
     public function store(Store $request)
     {
         $this->bannerService->createBanner($request);
-        return response()->json('Banner created successfully', 200);
+        return Response::withMessage('Banner created successfully')->build()->response();
+
+
     }
 
     /**
@@ -40,7 +43,8 @@ class BannerController extends Controller
     public function show(Banner $banner)
     {
         $result = $this->bannerService->showBanner($banner);
-        return response()->json($result);
+        return Response::withData($result->data)->build()->response();
+
     }
 
     /**
@@ -49,14 +53,15 @@ class BannerController extends Controller
     public function update(Update $request, Banner $banner)
     {
         $this->bannerService->updateBanner($request, $banner);
-        return response()->json('Banner updated successfully', 200);
+        return Response::withMessage('Banner updated successfully')->build()->response();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Banner $banner)
     {
-        //
+        $this->bannerService->deleteBanner($banner);
+        return Response::withMessage('Banner deleted successfully')->build()->response();
     }
 }

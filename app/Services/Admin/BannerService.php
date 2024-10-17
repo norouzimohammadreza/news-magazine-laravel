@@ -43,5 +43,12 @@ class BannerService
         ]);
         return new ServiceResult(true);
     }
+    public function deleteBanner(Banner $banner):ServiceResult
+    {
+        Banner::find($banner->id)->delete();
+        Storage::delete('banners/'.$banner->image);
+        return new ServiceResult(true);
+
+    }
 
 }
