@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\Post\PublishedPostScope;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -33,4 +35,8 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+    protected static function booted():void{
+        static::addGlobalScope(new PublishedPostScope());
+    }
+
 }

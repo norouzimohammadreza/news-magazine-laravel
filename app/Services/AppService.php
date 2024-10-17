@@ -23,13 +23,11 @@ class AppService
     public function mainPage(): ServiceResult
     {
         $topSelectedPosts = Post::withCount('comment')
-            ->where('published_at', '<', now())
             ->orderBy('published_at', 'DESC')
             ->limit(3)
             ->get();
 
         $breakingNews = Post::where('breaking_news', 1)
-            ->where('published_at', '<', now())
             ->orderBy('published_at', 'DESC')
             ->first();
         $latestPosts = Post::withCount('comment')

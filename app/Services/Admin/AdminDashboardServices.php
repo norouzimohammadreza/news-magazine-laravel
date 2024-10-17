@@ -15,17 +15,16 @@ class AdminDashboardServices
     {
         try {
             $categoriesCount = Category::all()->count();
-            $adminsCount = User::where('is_admin', 1)->count();
-            $usersCount = User::where('is_admin', 0)->count();
-            $postsCount = Post::all()->where('published_at', '<', now())->count();
+            $adminsCount = User::AdminUser()->count();
+            $usersCount = User::NotAdminUser()->count();
+            $postsCount = Post::count();
             $views = Post::sum('view');
             $commentsCount = Comment::count();
-            $unseenComments = Comment::where('status', '=', 'unseen')->count();
+            $unseenComments = Comment::UnseenComments()->count();
             $approvedComments = Comment::where('status', '=', 'approved')->count();
             //for tables
-            $mostViewsPosts = Post::where('published_at', '<', now())->orderByDesc('view')->limit(3)->get();
+            $mostViewsPosts = Post::orderByDesc('view')->limit(3)->get();
             $mostCommentsPosts = Post::withCount('comment')
-                ->where('published_at', '<', now())
                 ->orderBy('comment_count', 'DESC')->limit(3)->get();
             $mostCommentsUsers = User::withCount('comment')->orderBy('comment_count', 'DESC')->limit(3)->get();
         } catch (\Throwable $th) {
