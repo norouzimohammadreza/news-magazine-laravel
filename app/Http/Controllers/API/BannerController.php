@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Admin\Banner\Store;
 use App\Http\Requests\Api\Admin\Banner\Update;
-use App\Http\Controllers\Controller;
 use App\Models\Banner;
-use App\Models\Post;
 use App\RestfulApi\Facade\Response;
 use App\Services\Admin\BannerService;
-use Illuminate\Http\Request;
 
 class BannerController extends Controller
 {
@@ -22,7 +20,7 @@ class BannerController extends Controller
      */
     public function index()
     {
-       $result = $this->bannerService->ListsBanners();
+        $result = $this->bannerService->ListsBanners();
         return Response::withData($result->data)->build()->response();
     }
 

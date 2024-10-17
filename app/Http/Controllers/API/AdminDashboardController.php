@@ -13,10 +13,11 @@ class AdminDashboardController extends Controller
     {
 
     }
+
     public function index()
     {
         $result = $this->adminDashboardServices->getDashboardData();
-        if (!$result->success){
+        if (!$result->success) {
             return Response::withStatus(500)->withData($result->data)->withMessage('wrong')->build()->response();
         }
         return Response::withStatus(200)->withData($result->data)->build()->response();

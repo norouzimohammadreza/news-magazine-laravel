@@ -9,7 +9,8 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable,HasApiTokens;
+    use HasFactory, Notifiable, HasApiTokens;
+
     protected $fillable = [
         'name',
         'email',
@@ -17,10 +18,12 @@ class User extends Authenticatable
         'verify_token',
         'forgot_token'
     ];
+
     public function post()
     {
-        return  $this->hasMany(Post::class);
+        return $this->hasMany(Post::class);
     }
+
     public function comment()
     {
         return $this->hasMany(Comment::class);

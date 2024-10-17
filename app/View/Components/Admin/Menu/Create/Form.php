@@ -13,6 +13,7 @@ class Form extends Component
      */
 
     public $menus;
+
     public function __construct($menus)
     {
         $this->menus = $menus;

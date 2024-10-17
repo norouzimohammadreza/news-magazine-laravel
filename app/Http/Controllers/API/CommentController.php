@@ -4,12 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\API\Admin\Comment\CommentDetailsApiResource;
-use App\Http\Resources\API\Admin\Comment\CommentListApiResource;
 use App\Models\Comment;
 use App\RestfulApi\Facade\Response;
 use App\Services\Admin\CommentService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class CommentController extends Controller
 {
@@ -23,6 +20,7 @@ class CommentController extends Controller
         $result = $this->commentService->getComments();
         return Response::withData($result->data)->build()->response();
     }
+
     public function change(Comment $comment)
     {
         $this->commentService->change($comment);

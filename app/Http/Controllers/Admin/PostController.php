@@ -17,19 +17,22 @@ class PostController extends Controller
     public function __construct(private PostServices $postServices)
     {
     }
+
     public function index()
     {
         $result = $this->postServices->getPosts();
         $posts = $result->data->all();
-        return view('admin.post.index',[
-            'posts'=>$posts
+        return view('admin.post.index', [
+            'posts' => $posts
         ]);
     }
+
     public function isSelected(Post $post)
     {
         $this->postServices->isSelected($post);
         return redirect()->back();
     }
+
     public function breakingNews(Post $post)
     {
         $this->postServices->breakingNews($post);
@@ -39,8 +42,8 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.post.create',[
-            'categories'=> $categories
+        return view('admin.post.create', [
+            'categories' => $categories
         ]);
     }
 
@@ -54,15 +57,15 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
-        return view('admin.post.edit',[
-            'post'=>$post,
-            'categories'=> $categories
+        return view('admin.post.edit', [
+            'post' => $post,
+            'categories' => $categories
         ]);
     }
 
     public function update(Update $update, Post $post)
     {
-        $this->postServices->updatePost($update,$post);
+        $this->postServices->updatePost($update, $post);
         return redirect('admin/post');
     }
 

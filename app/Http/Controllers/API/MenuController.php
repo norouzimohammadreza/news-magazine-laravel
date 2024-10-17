@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Admin\Menu\Store;
 use App\Http\Requests\Api\Admin\Menu\Update;
-use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use App\RestfulApi\Facade\Response;
 use App\Services\Admin\MenuService;
@@ -17,9 +17,10 @@ class MenuController extends Controller
     public function __construct(private MenuService $menuService)
     {
     }
+
     public function index()
     {
-        $result =$this->menuService->getListsMenus();
+        $result = $this->menuService->getListsMenus();
         return Response::withData($result->data)->build()->response();
     }
 

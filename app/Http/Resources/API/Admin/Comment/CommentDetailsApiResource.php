@@ -15,10 +15,10 @@ class CommentDetailsApiResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-        'body'=> $this->body,
-        'user'=> $this->user->name,
-        'post'=> $this->post->title,
-        'status'=>$this->status
-    ];
+            'body' => $this->body,
+            'user' => $this->user->name,
+            'post' => $this->post->title,
+            'status' => $this->status
+        ];
     }
 }

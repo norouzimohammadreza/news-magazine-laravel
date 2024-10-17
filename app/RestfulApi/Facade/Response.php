@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Facade;
 
 class Response extends Facade
 {
-    public static function getFacadeAccessor(){
+    public static function getFacadeAccessor()
+    {
         return 'ApiResponse';
     }
 

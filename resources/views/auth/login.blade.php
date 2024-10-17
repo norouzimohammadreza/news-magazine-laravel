@@ -1,14 +1,19 @@
 <x-auth.master>
+
     <x-slot name="title">Login</x-slot>
 
-
     <form method="post" action="{{route('login.store')}}" class="login100-form validate-form">
+
         @csrf
-    <span class="login100-form-title">
+
+        <span class="login100-form-title">
         Member Login
-    </span>
-            <x-auth.show-errors/>
-       <x-auth.email/>
+        </span>
+
+        <x-auth.show-errors/>
+
+        <x-auth.email/>
+
         <x-auth.password/>
 
         <div class="container-login100-form-btn">
@@ -24,6 +29,8 @@
                 Create your Account
                 <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
             </a>
-    </div>
+        </div>
+
     </form>
+
 </x-auth.master>

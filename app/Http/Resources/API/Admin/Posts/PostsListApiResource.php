@@ -16,13 +16,13 @@ class PostsListApiResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'=>$this->id,
-            'title'=>$this->title,
-            'summary'=>$this->summary,
-            'view'=>$this->view,
-            'arthur'=>$this->user->name,
-            'published'=> $this->published_at,
-            'comments' => Comment::where('post_id',$this->id)->count()
+            'id' => $this->id,
+            'title' => $this->title,
+            'summary' => $this->summary,
+            'view' => $this->view,
+            'arthur' => $this->user->name,
+            'published' => $this->published_at,
+            'comments' => Comment::where('post_id', $this->id)->count()
         ];
     }
 }

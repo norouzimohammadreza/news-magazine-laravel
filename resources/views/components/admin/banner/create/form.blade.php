@@ -9,7 +9,7 @@
 
     <div class="form-group">
         <label for="image">Image</label>
-        <input type="file" id="image" name="image" class="form-control-file"  autofocus>
+        <input type="file" id="image" name="image" class="form-control-file" autofocus>
         <p class="text-danger">@error('image') {{ $message }} @enderror</p>
     </div>
     <x-admin.ui.submit-button>

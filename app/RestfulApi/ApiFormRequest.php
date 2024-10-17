@@ -15,6 +15,6 @@ class ApiFormRequest extends FormRequest
             throw new HttpResponseException(response()->json($validator->errors(), 422));
         }
 
-             parent::failedValidation($validator);
+        parent::failedValidation($validator);
     }
 }

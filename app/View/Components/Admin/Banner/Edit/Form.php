@@ -12,9 +12,10 @@ class Form extends Component
      * Create a new component instance.
      */
     public $banner;
+
     public function __construct($banner)
     {
-        $this->banner=$banner;
+        $this->banner = $banner;
     }
 
     /**

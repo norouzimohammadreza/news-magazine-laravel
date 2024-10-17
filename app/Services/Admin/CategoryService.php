@@ -9,17 +9,18 @@ use Illuminate\Contracts\Debug\ExceptionHandler;
 
 class CategoryService
 {
-    public function showCategries() : ServiceResult
+    public function showCategries(): ServiceResult
     {
         try {
             $categories = Category::all();
-        }catch (\Throwable $th){
+        } catch (\Throwable $th) {
             app()[ExceptionHandler::class]->report($th);
-            return new ServiceResult(false,$th->getMessage());
+            return new ServiceResult(false, $th->getMessage());
         }
-        return new ServiceResult(true,CategoriesListApiResource::collection($categories));
+        return new ServiceResult(true, CategoriesListApiResource::collection($categories));
     }
-    public function addCategory(array $request) : ServiceResult
+
+    public function addCategory(array $request): ServiceResult
     {
         try {
             $category = Category::create($request);
@@ -32,27 +33,32 @@ class CategoryService
 
 
     }
-    public function showCategory(Category $category) : ServiceResult
+
+    public function showCategory(Category $category): ServiceResult
     {
-        try{
+        try {
             return new ServiceResult(true, new CategoriesListApiResource($category));
 
-    } catch (\Throwable $th) {
-    app()[ExceptionHandler::class]->report($th);
-    return new ServiceResult(false, $th->getMessage());
-}
+        } catch (\Throwable $th) {
+            app()[ExceptionHandler::class]->report($th);
+            return new ServiceResult(false, $th->getMessage());
+        }
     }
-    public function updateCategory(array $request, Category $category) : ServiceResult{
-        try{
+
+    public function updateCategory(array $request, Category $category): ServiceResult
+    {
+        try {
             $category->update($request);
         } catch (\Throwable $th) {
             app()[ExceptionHandler::class]->report($th);
             return new ServiceResult(false, $th->getMessage());
+        }
+        return new ServiceResult(true, $category);
     }
-    return new ServiceResult(true, $category);
-}
-    public function deleteCategory(Category $category) : ServiceResult{
-        try{
+
+    public function deleteCategory(Category $category): ServiceResult
+    {
+        try {
             $category->delete($category);
         } catch (\Throwable $th) {
             app()[ExceptionHandler::class]->report($th);

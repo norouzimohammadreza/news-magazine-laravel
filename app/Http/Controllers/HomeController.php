@@ -13,12 +13,14 @@ class HomeController extends Controller
     public function __construct(private AppService $appService)
     {
     }
-    public function index(){
 
-       $result = $this->appService->mainPage();
-       $data = $result->data;
+    public function index()
+    {
 
-        return view('app.index',[
+        $result = $this->appService->mainPage();
+        $data = $result->data;
+
+        return view('app.index', [
             'categories' => $this->appService->categories,
             'topSelectedPosts' => $data['topSelectedPosts'],
             'breakingNews' => $data['breakingNews'],
@@ -28,23 +30,25 @@ class HomeController extends Controller
             'banner' => $this->appService->banner
         ]);
     }
+
     public function category(Category $category)
     {
         $result = $this->appService->categoryPage($category);
-        return view('app.category',[
-             'categories' => $this->appService->categories,
-             'mostComments' => $this->appService->mostComments,
-             'banner' => $this->appService->banner,
-             'posts' => $result->data,
-             'category' => Category::find($category->id)->title
-         ]);
+        return view('app.category', [
+            'categories' => $this->appService->categories,
+            'mostComments' => $this->appService->mostComments,
+            'banner' => $this->appService->banner,
+            'posts' => $result->data,
+            'category' => Category::find($category->id)->title
+        ]);
 
     }
+
     public function post(Post $post)
     {
         $result = $this->appService->showPost($post);
         $data = $result->data;
-        return view('app.post',[
+        return view('app.post', [
             'categories' => $this->appService->categories,
             'mostComments' => $this->appService->mostComments,
             'banner' => $this->appService->banner,
@@ -52,9 +56,10 @@ class HomeController extends Controller
             'comments' => $data['comments'],
         ]);
     }
-    public function comment($post,Comment $comment)
+
+    public function comment($post, Comment $comment)
     {
-        $this->appService->comment($post,$comment->all());
-       return redirect()->back()->with('password','کامنت شما ثبت و پس از تایید به نمایش در خواهد امد.');
+        $this->appService->comment($post, $comment->all());
+        return redirect()->back()->with('password', 'کامنت شما ثبت و پس از تایید به نمایش در خواهد امد.');
     }
 }

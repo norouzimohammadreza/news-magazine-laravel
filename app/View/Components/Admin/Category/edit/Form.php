@@ -13,9 +13,10 @@ class Form extends Component
      * Create a new component instance.
      */
     public $category;
+
     public function __construct($category)
     {
-        $this->category=$category;
+        $this->category = $category;
     }
 
     /**

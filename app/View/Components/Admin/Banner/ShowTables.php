@@ -12,9 +12,10 @@ class ShowTables extends Component
      * Create a new component instance.
      */
     public $banners;
+
     public function __construct($banners)
     {
-        $this->banners=$banners;
+        $this->banners = $banners;
     }
 
     /**

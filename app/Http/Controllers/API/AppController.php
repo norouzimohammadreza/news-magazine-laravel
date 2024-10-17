@@ -15,24 +15,28 @@ class AppController extends Controller
     {
     }
 
-    public function index(){
+    public function index()
+    {
 
-       $result = $this->appService->mainPage();
-       return Response::withData($result->data)->build()->response();
+        $result = $this->appService->mainPage();
+        return Response::withData($result->data)->build()->response();
     }
+
     public function category(Category $category)
     {
         $result = $this->appService->categoryPage($category);
         return Response::withData($result->data)->build()->response();
     }
+
     public function post(Post $post)
     {
         $result = $this->appService->showPost($post);
         return Response::withData($result->data)->build()->response();
     }
-    public function comment($post,\App\Http\Requests\Api\Admin\App\Comment $comment)
+
+    public function comment($post, \App\Http\Requests\Api\Admin\App\Comment $comment)
     {
-        $this->appService->comment($post,$comment->all());
+        $this->appService->comment($post, $comment->all());
         return Response::withMessage('Comment created successfully.')->build()->response();
 
 

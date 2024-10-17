@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Admin\User\StoreRequest;
 use App\Http\Requests\Api\Admin\User\UpdateRequest;
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\RestfulApi\Facade\Response;
 use App\Services\Admin\UserService;
@@ -18,6 +18,7 @@ class UserController extends Controller
     public function __construct(private UserService $userService)
     {
     }
+
     public function index()
     {
         $result = $this->userService->getList();;
@@ -36,7 +37,7 @@ class UserController extends Controller
 
     public function store(StoreRequest $request)
     {
-         $this->userService->createUser($request->all());
+        $this->userService->createUser($request->all());
         return Response::withMessage('User created')->withStatus(200)->build()->response();
     }
 

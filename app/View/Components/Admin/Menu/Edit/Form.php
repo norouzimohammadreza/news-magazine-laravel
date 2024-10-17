@@ -11,8 +11,9 @@ class Form extends Component
     /**
      * Create a new component instance.
      */
-    public $menu,$menus;
-    public function __construct($menu,$menus)
+    public $menu, $menus;
+
+    public function __construct($menu, $menus)
     {
         $this->menu = $menu;
         $this->menus = $menus;

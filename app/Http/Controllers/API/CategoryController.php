@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Admin\Category\StoreRequest;
 use App\Http\Requests\Api\Admin\Category\UpdateRequest;
-use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\RestfulApi\Facade\Response;
 use App\Services\Admin\CategoryService;
@@ -18,7 +18,7 @@ class CategoryController extends Controller
     public function index()
     {
         $result = $this->categoryService->showCategries();
-        if (!$result->success){
+        if (!$result->success) {
             return Response::withStatus(500)->withData($result->data)->withMessage('wrong')->build()->response();
         }
         return Response::withStatus(200)->withData($result->data)->build()->response();
@@ -30,7 +30,7 @@ class CategoryController extends Controller
     public function store(StoreRequest $request)
     {
         $result = $this->categoryService->addCategory($request->all());
-        if (!$result->success){
+        if (!$result->success) {
             return Response::withStatus(500)->withData($result->data)->withMessage('wrong')->build()->response();
         }
         return Response::withStatus(200)->withData($result->data)->withMessage('Category created successfully')->build()->response();
@@ -42,7 +42,7 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         $result = $this->categoryService->showCategory($category);
-        if (!$result->success){
+        if (!$result->success) {
             return Response::withStatus(500)->withData($result->data)->withMessage('wrong')->build()->response();
         }
         return Response::withStatus(200)->withData($result->data)->build()->response();
@@ -53,8 +53,8 @@ class CategoryController extends Controller
      */
     public function update(UpdateRequest $request, Category $category)
     {
-       $result = $this->categoryService->updateCategory($request->all(),$category);
-        if (!$result->success){
+        $result = $this->categoryService->updateCategory($request->all(), $category);
+        if (!$result->success) {
             return Response::withStatus(500)->withData($result->data)->withMessage('wrong')->build()->response();
         }
         return Response::withStatus(200)->withData('Category updated successfully')->build()->response();
@@ -66,7 +66,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $result = $this->categoryService->deleteCategory($category);
-        if (!$result->success){
+        if (!$result->success) {
             return Response::withStatus(500)->withData($result->data)->withMessage('wrong')->build()->response();
         }
         return Response::withStatus(200)->withData('Category deleted successfully')->build()->response();

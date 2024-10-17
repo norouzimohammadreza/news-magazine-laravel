@@ -15,15 +15,17 @@ class CategoryController extends Controller
     public function __construct(private CategoryService $categoryService)
     {
     }
+
     public function index()
     {
 
         $result = $this->categoryService->showCategries();
         $result = $result->data->all();
-        return view('admin.category.index',[
-           'categories' => $result
+        return view('admin.category.index', [
+            'categories' => $result
         ]);
     }
+
     public function show(Request $request)
     {
         dd('hi1');
@@ -51,8 +53,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('admin.category.edit',[
-            'category'=>$category
+        return view('admin.category.edit', [
+            'category' => $category
         ]);
     }
 
@@ -61,7 +63,7 @@ class CategoryController extends Controller
      */
     public function update(UpdateRequest $update, Category $category)
     {
-        $this->categoryService->updateCategory($update->all(),$category);
+        $this->categoryService->updateCategory($update->all(), $category);
         return redirect('admin/category');
     }
 

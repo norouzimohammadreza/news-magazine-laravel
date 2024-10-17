@@ -12,9 +12,10 @@ class ShowUsers extends Component
      * Create a new component instance.0
      */
     public $users;
+
     public function __construct($users)
     {
-        $this->users=$users;
+        $this->users = $users;
     }
 
     /**

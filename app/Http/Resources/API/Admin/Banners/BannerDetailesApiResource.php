@@ -15,9 +15,9 @@ class BannerDetailesApiResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-          'id' => $this->id,
-          'url' => $this->url,
-          'image'=>$this->image
+            'id' => $this->id,
+            'url' => $this->url,
+            'image' => $this->image
         ];
     }
 }

@@ -7,7 +7,6 @@ use App\Http\Requests\Api\Admin\Menu\Store;
 use App\Http\Requests\Api\Admin\Menu\Update;
 use App\Models\Menu;
 use App\Services\Admin\MenuService;
-use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
@@ -18,7 +17,7 @@ class MenuController extends Controller
     public function index()
     {
         $result = $this->menuService->getListsMenus();
-        return view('admin.menu.index',[
+        return view('admin.menu.index', [
             'menus' => $result->data
         ]);
     }
@@ -27,8 +26,9 @@ class MenuController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    { $menus = Menu::all();
-        return view('admin.menu.create',[
+    {
+        $menus = Menu::all();
+        return view('admin.menu.create', [
             'menus' => $menus
         ]);
     }
@@ -40,16 +40,16 @@ class MenuController extends Controller
     {
         //dd($store->all());
         $this->menuService->createMenu($store);
-       return redirect('admin/menu');
+        return redirect('admin/menu');
     }
 
 
     public function edit(Menu $menu)
     {
         $menus = Menu::all();
-        return view('admin.menu.edit',[
-            'menu'=>$menu,
-            'menus'=>$menus
+        return view('admin.menu.edit', [
+            'menu' => $menu,
+            'menus' => $menus
         ]);
     }
 
@@ -58,7 +58,7 @@ class MenuController extends Controller
      */
     public function update(Update $update, Menu $menu)
     {
-        $this->menuService->updateMenu($update,$menu);
+        $this->menuService->updateMenu($update, $menu);
         return redirect('admin/menu');
 
     }

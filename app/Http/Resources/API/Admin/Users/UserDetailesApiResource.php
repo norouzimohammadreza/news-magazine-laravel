@@ -18,7 +18,7 @@ class UserDetailesApiResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'permission'=> ($this->is_admin)==1? 'Admin':'User'
+            'permission' => ($this->is_admin) == 1 ? 'Admin' : 'User'
         ];
     }
 }

@@ -12,6 +12,7 @@ class TbodyMenusTable extends Component
      * Create a new component instance.
      */
     public $menus;
+
     public function __construct($menus)
     {
         $this->menus = $menus;

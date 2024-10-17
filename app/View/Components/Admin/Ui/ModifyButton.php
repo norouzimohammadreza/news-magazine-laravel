@@ -11,7 +11,7 @@ class ModifyButton extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public string $url,public string $name)
+    public function __construct(public string $url, public string $name)
     {
         //
     }

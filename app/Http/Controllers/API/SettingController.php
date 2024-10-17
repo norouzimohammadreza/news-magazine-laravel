@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use App\RestfulApi\Facade\Response;
 use App\Services\Admin\SettingService;
-use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
@@ -14,6 +13,7 @@ class SettingController extends Controller
     {
 
     }
+
     public function index()
     {
         $result = $this->settingService->showSetting();
@@ -22,7 +22,7 @@ class SettingController extends Controller
 
     public function update(\App\Http\Requests\Api\Admin\Setting\Setting $update, Setting $setting)
     {
-        $this->settingService->setSetting($update,$setting);
+        $this->settingService->setSetting($update, $setting);
         return Response::withMessage('Setting is set.')->build()->response();
 
     }

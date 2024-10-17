@@ -12,23 +12,24 @@ class AdminDashboardController extends Controller
     {
 
     }
+
     public function index()
     {
         //for components
-    $result = $this->adminDashboardServices->getDashboardData();
-    $result = $result->data;
-       return view('admin.index',[
-          'categoriesCount' => $result['categoriesCount'],
-           'adminsCount' => $result['adminsCount'],
-           'usersCount'=>$result['usersCount'],
-           'views' => $result['views'],
-           'postsCount' => $result['postsCount'],
-           'commentsCount'=> $result['commentsCount'],
-           'unseenComments'=>$result['unseenComments'],
-           'approvedComments'=>$result['approvedComments'],
-           'mostViewsPosts'=> $result['mostViewsPosts'],
-           'mostCommentsPosts'=> $result['mostCommentsPosts'],
-           'mostCommentsUsers'=>$result['mostCommentsUsers'],
-       ]);
+        $result = $this->adminDashboardServices->getDashboardData();
+        $result = $result->data;
+        return view('admin.index', [
+            'categoriesCount' => $result['categoriesCount'],
+            'adminsCount' => $result['adminsCount'],
+            'usersCount' => $result['usersCount'],
+            'views' => $result['views'],
+            'postsCount' => $result['postsCount'],
+            'commentsCount' => $result['commentsCount'],
+            'unseenComments' => $result['unseenComments'],
+            'approvedComments' => $result['approvedComments'],
+            'mostViewsPosts' => $result['mostViewsPosts'],
+            'mostCommentsPosts' => $result['mostCommentsPosts'],
+            'mostCommentsUsers' => $result['mostCommentsUsers'],
+        ]);
     }
 }

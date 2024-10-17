@@ -12,9 +12,10 @@ class NameInput extends Component
      * Create a new component instance.
      */
     public $user;
+
     public function __construct($user)
     {
-        $this->user=$user;
+        $this->user = $user;
     }
 
     /**

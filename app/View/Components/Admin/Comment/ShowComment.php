@@ -12,9 +12,10 @@ class ShowComment extends Component
      * Create a new component instance.
      */
     public $comments;
+
     public function __construct($comments)
     {
-        $this->comments=$comments;
+        $this->comments = $comments;
     }
 
     /**

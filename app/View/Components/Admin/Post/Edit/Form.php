@@ -11,11 +11,12 @@ class Form extends Component
     /**
      * Create a new component instance.
      */
-    public $categories,$post;
-    public function __construct($categories,$post)
+    public $categories, $post;
+
+    public function __construct($categories, $post)
     {
-        $this->categories=$categories;
-        $this->post= $post;
+        $this->categories = $categories;
+        $this->post = $post;
     }
 
     /**

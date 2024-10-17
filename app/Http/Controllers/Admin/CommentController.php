@@ -12,15 +12,18 @@ class CommentController extends Controller
     public function __construct(private CommentService $commentService)
     {
     }
+
     public function index()
     {
         $result = $this->commentService->getComments();
         $comments = $result->data;
-        return view('admin.comment.index',[
-            'comments'=>$comments
+        return view('admin.comment.index', [
+            'comments' => $comments
         ]);
     }
-    public function change(Comment $comment) {
+
+    public function change(Comment $comment)
+    {
 
         $this->commentService->change($comment);
         return redirect()->back();

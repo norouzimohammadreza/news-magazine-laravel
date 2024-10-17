@@ -1,10 +1,13 @@
 <x-admin.layout.master>
+
     <x-slot name="title">Post Management</x-slot>
+
     <x-admin.dashboard-title>
         <x-slot name="title">Posts</x-slot>
         <x-slot name="goto">{{route('post.create')}}</x-slot>
         <x-slot name="create">create</x-slot>
     </x-admin.dashboard-title>
+
     <div class="table-responsive">
         <table class="table table-striped table-sm">
             <caption>List of posts</caption>
@@ -22,7 +25,7 @@
             </tr>
             </thead>
 
-<x-admin.post.show-posts :posts="$posts"/>
+            <x-admin.post.show-posts :posts="$posts"/>
 
         </table>
     </div>

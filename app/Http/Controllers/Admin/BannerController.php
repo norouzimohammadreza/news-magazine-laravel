@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
 use App\Http\Requests\Api\Admin\Menu\Store;
 use App\Http\Requests\Api\Admin\Menu\Update;
 use App\Models\Banner;
@@ -18,11 +17,12 @@ class BannerController extends Controller
     public function __construct(private BannerService $bannerService)
     {
     }
+
     public function index()
     {
         $result = $this->bannerService->ListsBanners();
-        return view('admin.banner.index',[
-            'banners'=> $result->data
+        return view('admin.banner.index', [
+            'banners' => $result->data
         ]);
     }
 
@@ -39,13 +39,14 @@ class BannerController extends Controller
 
     public function edit(Banner $banner)
     {
-        return view('admin.banner.edit',[
-            'banner'=>$banner
+        return view('admin.banner.edit', [
+            'banner' => $banner
         ]);
     }
+
     public function update(Update $update, Banner $banner)
     {
-        $this->bannerService->updateBanner($update,$banner);
+        $this->bannerService->updateBanner($update, $banner);
         return redirect('admin/banner');
     }
 

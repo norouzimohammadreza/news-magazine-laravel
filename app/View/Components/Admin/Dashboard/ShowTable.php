@@ -11,9 +11,9 @@ class ShowTable extends Component
     /**
      * Create a new component instance.
      */
-    public $mostViewsPosts,$mostCommentsPosts,$mostCommentsUsers;
+    public $mostViewsPosts, $mostCommentsPosts, $mostCommentsUsers;
 
-    public function __construct($mostViewsPosts,$mostCommentsPosts,$mostCommentsUsers)
+    public function __construct($mostViewsPosts, $mostCommentsPosts, $mostCommentsUsers)
     {
         $this->mostViewsPosts = $mostViewsPosts;
         $this->mostCommentsPosts = $mostCommentsPosts;

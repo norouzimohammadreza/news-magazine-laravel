@@ -12,6 +12,7 @@ class ShowCategories extends Component
      * Create a new component instance.
      */
     public $categories;
+
     public function __construct($categories)
     {
         $this->categories = $categories;

@@ -11,16 +11,16 @@ class IsAdmin
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->check() and !$request->is('/')){
+        if (!auth()->check() and !$request->is('/')) {
 
-        return redirect('/');
-    }
+            return redirect('/');
+        }
         $user = auth()->user();
-        if ($user->is_admin == 0 and !$request->is('/')){
+        if ($user->is_admin == 0 and !$request->is('/')) {
 
             return redirect('/');
         }

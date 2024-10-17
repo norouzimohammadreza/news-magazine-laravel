@@ -12,9 +12,10 @@ class ShowPosts extends Component
      * Create a new component instance.
      */
     public $posts;
+
     public function __construct($posts)
     {
-        $this->posts=$posts;
+        $this->posts = $posts;
     }
 
     /**
