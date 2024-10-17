@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Menu;
+namespace App\Http\Requests\Api\Auth;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\RestfulApi\ApiFormRequest;
 
-class store extends FormRequest
+class Login extends ApiFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,8 @@ class store extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|min:3|max:50',
-            'url' => 'required|url',
-            'parent_id' => 'required',
+            'email' => 'required|email|exists:users',
+            'password' => 'required',
         ];
     }
 }

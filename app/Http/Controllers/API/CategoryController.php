@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Admin\Category\StoreRequest;
 use App\Http\Requests\Api\Admin\Category\UpdateRequest;
-use App\Http\Resources\API\Admin\Categories\CategoriesListApiResource;
-use App\Http\Resources\API\Admin\Categories\CategoryDetailesApiResource;
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\RestfulApi\Facade\Response;
 use App\Services\Admin\CategoryService;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {

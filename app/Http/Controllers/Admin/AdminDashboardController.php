@@ -3,12 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Comment;
-use App\Models\Post;
-use App\Models\User;
 use App\Services\Admin\AdminDashboardServices;
-use Illuminate\Support\Facades\DB;
+
 
 class AdminDashboardController extends Controller
 {

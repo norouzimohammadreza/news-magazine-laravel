@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Setting;
+namespace App\Http\Requests\Api\Admin\Post;
 
-use App\View\Components\Admin\Category\title;
-use Illuminate\Foundation\Http\FormRequest;
+use App\RestfulApi\ApiFormRequest;
 
-class update extends FormRequest
+class Update extends ApiFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +22,12 @@ class update extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|min:5|max:50',
-            'description' => 'required|min:10|max:150',
-            'keyword' => 'required|min:5|max:100',
-            'logo' => 'file|image|max:512',
-            'icon' => 'file|image|max:512'
+            'title' => 'required|min:5|max:100',
+            'summary' => 'required',
+            'body' => 'required',
+            'published_at' => 'required',
+            'image' => 'image|max:512',
+            'category_id' => 'required',
         ];
     }
 }

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\API;
 
 
-use App\Http\ApiRequests\Api\Auth\ForgotPassword;
-use App\Http\ApiRequests\Api\Auth\Login;
-use App\Http\ApiRequests\Api\Auth\Register;
+use App\Http\Requests\Api\Admin\Auth\ForgotPassword;
+use App\Http\Requests\Api\Admin\Auth\Login;
+use App\Http\Requests\Api\Admin\Auth\Register;
 use App\Http\Controllers\Controller;
-use App\Http\ApiRequests\Api\Auth\PasswordConfirmation;
+use App\Http\Requests\Api\Admin\Auth\PasswordConfirmation;
 use App\RestfulApi\Facade\Response;
 use App\Services\AuthService;
 

@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Banner\store;
-use App\Http\Requests\Admin\Banner\update;
+
+use App\Http\Requests\Api\Admin\Menu\Store;
+use App\Http\Requests\Api\Admin\Menu\Update;
 use App\Models\Banner;
 use App\Services\Admin\BannerService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+
 
 class BannerController extends Controller
 {
@@ -31,7 +31,7 @@ class BannerController extends Controller
         return view('admin.banner.create');
     }
 
-    public function store(store $store)
+    public function store(Store $store)
     {
         $this->bannerService->createBanner($store);
         return redirect('admin/banner');
@@ -43,7 +43,7 @@ class BannerController extends Controller
             'banner'=>$banner
         ]);
     }
-    public function update(update $update, Banner $banner)
+    public function update(Update $update, Banner $banner)
     {
         $this->bannerService->updateBanner($update,$banner);
         return redirect('admin/banner');

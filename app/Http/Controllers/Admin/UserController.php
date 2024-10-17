@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\User\store;
-use App\Http\Requests\Admin\User\update;
-use App\Http\Requests\Admin\User\updateUser;
+use App\Http\Requests\Api\Admin\User\StoreRequest;
+use App\Http\Requests\Api\Admin\User\UpdateRequest;
 use App\Models\User;
 use App\Services\Admin\UserService;
-use Illuminate\Http\Request;
+
 
 class UserController extends Controller
 {
@@ -35,7 +34,7 @@ class UserController extends Controller
     {
         return view('admin.user.create');
     }
-    public function store(store $store)
+    public function store(StoreRequest $store)
     {
         $this->userService->createUser($store->all());
         return redirect('admin/user');
@@ -46,7 +45,7 @@ class UserController extends Controller
             'user' => $user
         ]);
     }
-    public function update(update $update, User $user)
+    public function update(UpdateRequest $update, User $user)
     {
         $this->userService->updateUser($update->all(),$user);
         return redirect('admin/user');

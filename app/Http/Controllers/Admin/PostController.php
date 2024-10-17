@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Post\store;
-use App\Http\Requests\Admin\Post\update;
+use App\Http\Requests\Api\Admin\Post\Store;
+use App\Http\Requests\Api\Admin\Post\Update;
 use App\Models\Category;
 use App\Models\Post;
 use App\Services\Admin\PostServices;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -46,7 +44,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function store(store $store)
+    public function store(Store $store)
     {
         $this->postServices->createPost($store->all());
         return redirect('admin/post');
@@ -62,7 +60,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function update(update $update, Post $post)
+    public function update(Update $update, Post $post)
     {
         $this->postServices->updatePost($update,$post);
         return redirect('admin/post');

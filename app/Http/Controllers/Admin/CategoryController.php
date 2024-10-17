@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Category\store;
-use App\Http\Requests\Admin\Category\update;
+use App\Http\Requests\Api\Admin\Category\StoreRequest;
+use App\Http\Requests\Api\Admin\Category\UpdateRequest;
 use App\Models\Category;
 use App\Services\Admin\CategoryService;
 use Illuminate\Http\Request;
@@ -40,7 +40,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(store $store)
+    public function store(StoreRequest $store)
     {
         $this->categoryService->addCategory($store->all());
         return redirect('admin/category');
@@ -59,7 +59,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(update $update, Category $category)
+    public function update(UpdateRequest $update, Category $category)
     {
         $this->categoryService->updateCategory($update->all(),$category);
         return redirect('admin/category');

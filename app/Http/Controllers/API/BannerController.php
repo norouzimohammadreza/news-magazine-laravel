@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\ApiRequests\Api\Admin\Banner\Store;
-use App\Http\ApiRequests\Api\Admin\Banner\Update;
+use App\Http\Requests\Api\Admin\Banner\Store;
+use App\Http\Requests\Api\Admin\Banner\Update;
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\Post;

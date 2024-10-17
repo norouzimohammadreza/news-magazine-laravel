@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Menu\store;
+use App\Http\Requests\Api\Admin\Menu\Store;
+use App\Http\Requests\Api\Admin\Menu\Update;
 use App\Models\Menu;
 use App\Services\Admin\MenuService;
 use Illuminate\Http\Request;
@@ -35,15 +36,10 @@ class MenuController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(store $store)
+    public function store(Store $store)
     {
         //dd($store->all());
-       Menu::create([
-           'title'=> $store->title,
-           'url'=> $store->url,
-           'parent_id'=> ($store->parent_id==0)?null:$store->parent_id
-
-       ]);
+        $this->menuService->createMenu($store);
        return redirect('admin/menu');
     }
 
@@ -60,9 +56,11 @@ class MenuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Menu $menu)
+    public function update(Update $update, Menu $menu)
     {
-        dd($request->all());
+        $this->menuService->updateMenu($update,$menu);
+        return redirect('admin/menu');
+
     }
 
     /**

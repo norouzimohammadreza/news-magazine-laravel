@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Services\Admin\CommentService;
-use Illuminate\Http\Request;
+
 
 class CommentController extends Controller
 {

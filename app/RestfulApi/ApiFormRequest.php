@@ -8,8 +8,10 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 
 class ApiFormRequest extends FormRequest
 {
-protected function failedValidation(Validator $validator)
-{
-    throw new HttpResponseException(response()->json($validator->errors(), 422));
-}
+    protected function failedValidation(Validator $validator)
+    {
+        if (request()->expectsJson())
+            throw new HttpResponseException(response()->json($validator->errors(), 422));
+            parent::failedValidation($validator);
+    }
 }

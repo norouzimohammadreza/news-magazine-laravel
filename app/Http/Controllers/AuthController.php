@@ -4,17 +4,14 @@ namespace App\Http\Controllers;
 
 
 
-use App\Http\Requests\Auth\ForgotPassword;
-use App\Http\Requests\Auth\PasswordConfirmation;
-use App\Http\Requests\Auth\Register;
+use App\Http\Requests\Api\Auth\ForgotPassword;
+use App\Http\Requests\Api\Auth\PasswordConfirmation;
+use App\Http\Requests\Api\Auth\Register;
 use App\Models\User;
-use App\Http\Requests\Auth\Login;
+use App\Http\Requests\Api\Auth\Login;
 use App\Services\AuthService;
-use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
+
 
 
 class AuthController extends Controller

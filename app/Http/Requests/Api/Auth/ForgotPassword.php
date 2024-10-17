@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Api\Auth;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\RestfulApi\ApiFormRequest;
 
-class ForgotPassword extends FormRequest
+class ForgotPassword extends ApiFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,6 +23,7 @@ class ForgotPassword extends FormRequest
     {
         return [
             'email' => 'required|email|exists:users',
+
         ];
     }
 }

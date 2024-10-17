@@ -29,6 +29,6 @@ class apiRequestMakeCommand extends GeneratorCommand
     }
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace . '\Http\ApiRequests';
+        return $rootNamespace . '\Http\Requests';
     }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Admin\User\StoreRequest;
 use App\Http\Requests\Api\Admin\User\UpdateRequest;
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\RestfulApi\Facade\Response;
 use App\Services\Admin\UserService;

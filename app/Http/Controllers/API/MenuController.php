@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\ApiRequests\Api\Admin\Menu\Store;
+use App\Http\Requests\Api\Admin\Menu\Store;
+use App\Http\Requests\Api\Admin\Menu\Update;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use App\RestfulApi\Facade\Response;
@@ -38,15 +39,17 @@ class MenuController extends Controller
      */
     public function show(Menu $menu)
     {
-        //
+        $result = $this->menuService->showMenu($menu);
+        return Response::withData($result->data)->build()->response();
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Menu $menu)
+    public function update(Update $update, Menu $menu)
     {
-        //
+        $this->menuService->updateMenu($update, $menu);
+        return Response::withMessage('Menu updated successfully.')->build()->response();
     }
 
     /**

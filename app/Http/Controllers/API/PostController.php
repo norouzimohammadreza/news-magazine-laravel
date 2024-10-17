@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\ApiRequests\Api\Admin\Post\Store;
+use App\Http\Requests\Api\Admin\Post\Store;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\RestfulApi\Facade\Response;

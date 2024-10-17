@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Banner;
+namespace App\Http\Requests\Api\Admin\Menu;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\RestfulApi\ApiFormRequest;
 
-class store extends FormRequest
+class Update extends ApiFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,8 @@ class store extends FormRequest
     public function rules(): array
     {
         return [
-            'url'=>'required|url',
-            'image'=>'required|image|max:512'
+            'title' => 'required|min:3|max:50',
+            'url' => 'required|url'
         ];
     }
 }
