@@ -5,16 +5,20 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Menu\store;
 use App\Models\Menu;
+use App\Services\Admin\MenuService;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
+    public function __construct(private MenuService $menuService)
+    {
+    }
 
     public function index()
     {
-        $menus = Menu::all();
+        $result = $this->menuService->getListsMenus();
         return view('admin.menu.index',[
-            'menus' => $menus
+            'menus' => $result->data
         ]);
     }
 

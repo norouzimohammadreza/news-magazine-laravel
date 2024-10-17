@@ -35,6 +35,8 @@ Route::middleware(['auth:sanctum',IsAdmin::class])->prefix('admin')->group(funct
     Route::apiResource('/', AdminDashboardController::class);
     Route::apiResource('/users',UserController::class);
     Route::apiResource('/banners',\App\Http\Controllers\API\BannerController::class);
+    Route::apiResource('/menus',\App\Http\Controllers\API\MenuController::class);
+    Route::resource('/setting',\App\Http\Controllers\API\SettingController::class);
     Route::get('/users/admin/{user}',[UserController::class,'isAdmin']);
     Route::apiResource('/categories',CategoryController::class);
     Route::apiResource('/posts',PostController::class);
