@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\ApiRequests\Api\Admin\Banner\Store;
+use App\Http\ApiRequests\Api\Admin\Banner\Update;
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
+use App\Models\Post;
 use App\Services\Admin\BannerService;
 use Illuminate\Http\Request;
 
@@ -35,17 +37,19 @@ class BannerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Banner $banner)
     {
-        //
+        $result = $this->bannerService->showBanner($banner);
+        return response()->json($result);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Update $request, Banner $banner)
     {
-        //
+        $this->bannerService->updateBanner($request, $banner);
+        return response()->json('Banner updated successfully', 200);
     }
 
     /**

@@ -26,54 +26,29 @@ class BannerController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('admin.banner.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(store $store)
     {
         $this->bannerService->createBanner($store);
         return redirect('admin/banner');
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Banner $banner)
     {
         return view('admin.banner.edit',[
             'banner'=>$banner
         ]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(update $update, Banner $banner)
     {
-        if($update->hasFile('image')){
-            Storage::delete('banners/'.$banner->image);
-            $imageName= time() .'.'. $update->file('image')->extension();
-            $update->file('image')->storeAs(('banners'),$imageName);
-        }
-        Banner::where('id',$banner->id)->update([
-            'url'=>$update->url,
-            'image'=> ($update->hasFile('image'))?$imageName:$banner->image
-        ]);
+        $this->bannerService->updateBanner($update,$banner);
         return redirect('admin/banner');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Banner $banner)
     {
         Banner::find($banner->id)->delete();
