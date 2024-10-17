@@ -1,19 +1,21 @@
 <?php
 
-namespace App\View\Components\Admin\Dashboard;
+namespace App\View\Components\Admin\Category\edit;
 
+use App\View\Components\Admin\Dashboard\category;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class user extends Component
+class Input extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public $category;
+    public function __construct($category)
     {
-        //
+        $this->category= $category;
     }
 
     /**
@@ -21,6 +23,6 @@ class user extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.admin.dashboard.user');
+        return view('components.admin.category.edit.input');
     }
 }

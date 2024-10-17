@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class comment extends Component
+class Category extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class comment extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.admin.dashboard.comment');
+        return view('components.admin.dashboard.category');
     }
 }
