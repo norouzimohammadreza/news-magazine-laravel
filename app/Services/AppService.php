@@ -68,12 +68,12 @@ class AppService
         ]);
     }
 
-    public function comment($post, array $request)
+    public function comment(Post $post, array $request)
     {
 
         Comment::create([
             'body' => $request['body'],
-            'post_id' => $post,
+            'post_id' => $post->id,
             'user_id' => Auth::user()->id
         ]);
         return new ServiceResult(true);
