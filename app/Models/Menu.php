@@ -13,7 +13,7 @@ class Menu extends Model
     protected $fillable = [
         'title',
         'url',
-        'parent_id'
+        'parent_id',
     ];
 
     public function submenu()

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Admin\Category\StoreRequest;
-use App\Http\Requests\Api\Admin\Category\UpdateRequest;
+use App\Http\Requests\Api\Admin\Category\CategoryStoreRequest;
+use App\Http\Requests\Api\Admin\Category\CategoryUpdateRequest;
 use App\Models\Category;
 use App\RestfulApi\Facade\Response;
 use App\Services\Admin\CategoryService;
@@ -25,9 +25,9 @@ class CategoryController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * BannerStoreRequest a newly created resource in storage.
      */
-    public function store(StoreRequest $request)
+    public function store(CategoryStoreRequest $request)
     {
         $result = $this->categoryService->addCategory($request->all());
         if (!$result->success) {
@@ -49,9 +49,9 @@ class CategoryController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * BannerUpdateRequest the specified resource in storage.
      */
-    public function update(UpdateRequest $request, Category $category)
+    public function update(CategoryUpdateRequest $request, Category $category)
     {
         $result = $this->categoryService->updateCategory($request->all(), $category);
         if (!$result->success) {

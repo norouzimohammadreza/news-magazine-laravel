@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Admin\Menu\Store;
-use App\Http\Requests\Api\Admin\Menu\Update;
+use App\Http\Requests\Api\Admin\Menu\MenuStoreRequest;
+use App\Http\Requests\Api\Admin\Menu\MenuUpdateRequest;
 use App\Models\Menu;
 use App\RestfulApi\Facade\Response;
 use App\Services\Admin\MenuService;
@@ -25,9 +25,9 @@ class MenuController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * BannerStoreRequest a newly created resource in storage.
      */
-    public function store(Store $request)
+    public function store(MenuStoreRequest $request)
     {
         $this->menuService->createMenu($request);
         return Response::withMessage('Menu created successfully.')->build()->response();
@@ -44,9 +44,9 @@ class MenuController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * BannerUpdateRequest the specified resource in storage.
      */
-    public function update(Update $update, Menu $menu)
+    public function update(MenuUpdateRequest $update, Menu $menu)
     {
         $this->menuService->updateMenu($update, $menu);
         return Response::withMessage('Menu updated successfully.')->build()->response();

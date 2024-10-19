@@ -2,7 +2,7 @@
 
     <x-slot name="title">Set Setting</x-slot>
 
-    <x-admin.modify-title :name="'Set Web Setting'"/>
+    <x-admin.modify-title :name="'Set Web SettingRequest'"/>
 
     <section class="row my-3">
         <section class="col-12">

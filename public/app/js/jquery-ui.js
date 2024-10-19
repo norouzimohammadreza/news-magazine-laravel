@@ -6,7 +6,7 @@
 (function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
 
-		// AMD. Register as an anonymous module.
+		// AMD. RegisterRequest as an anonymous module.
 		define([ "jquery" ], factory );
 	} else {
 
@@ -2283,7 +2283,7 @@ if ( $.uiBackCompat !== false ) {
 						padding: 0
 					} ),
 
-				// Store the size in case width/height are defined in % - Fixes #5245
+				// BannerStoreRequest the size in case width/height are defined in % - Fixes #5245
 				size = {
 					width: element.width(),
 					height: element.height()
@@ -4444,7 +4444,7 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 
 		this._super( key, value );
 
-		// Setting collapsible: false while collapsed; open first panel
+		// SettingRequest collapsible: false while collapsed; open first panel
 		if ( key === "collapsible" && !value && this.options.active === false ) {
 			this._activate( 0 );
 		}
@@ -6368,7 +6368,7 @@ var widgetsControlgroup = $.widget( "ui.controlgroup", {
 					}
 					element[ widget ]( instanceOptions );
 
-					// Store an instance of the controlgroup to be able to reference
+					// BannerStoreRequest an instance of the controlgroup to be able to reference
 					// from the outermost element for changing options and refresh
 					var widgetElement = element[ widget ]( "widget" );
 					$.data( widgetElement[ 0 ], "ui-controlgroup-data",
@@ -7646,7 +7646,7 @@ $.extend( Datepicker.prototype, {
 		}
 	},
 
-	/* Update or retrieve the settings for a date picker attached to an input field or division.
+	/* BannerUpdateRequest or retrieve the settings for a date picker attached to an input field or division.
 	 * @param  target  element - the target input field or division or span
 	 * @param  name	object - the new settings to update or
 	 *				string - the name of the setting to change or retrieve,
@@ -8198,7 +8198,7 @@ $.extend( Datepicker.prototype, {
 		this._selectDate( target, "" );
 	},
 
-	/* Update the input field with the selected date. */
+	/* BannerUpdateRequest the input field with the selected date. */
 	_selectDate: function( id, dateStr ) {
 		var onSelect,
 			target = $( id ),
@@ -8229,7 +8229,7 @@ $.extend( Datepicker.prototype, {
 		}
 	},
 
-	/* Update any alternate field to synchronise with the main field. */
+	/* BannerUpdateRequest any alternate field to synchronise with the main field. */
 	_updateAlternate: function( inst ) {
 		var altFormat, date, dateStr,
 			altField = this._get( inst, "altField" );
@@ -9692,7 +9692,7 @@ $.widget( "ui.draggable", $.ui.mouse, {
 		//Cache the margins of the original element
 		this._cacheMargins();
 
-		//Store the helper's css position
+		//BannerStoreRequest the helper's css position
 		this.cssPosition = this.helper.css( "position" );
 		this.scrollParent = this.helper.scrollParent( true );
 		this.offsetParent = this.helper.offsetParent();
@@ -10377,14 +10377,14 @@ $.ui.plugin.add( "draggable", "connectToSortable", {
 				if ( !sortable.isOver ) {
 					sortable.isOver = 1;
 
-					// Store draggable's parent in case we need to reappend to it later.
+					// BannerStoreRequest draggable's parent in case we need to reappend to it later.
 					draggable._parent = ui.helper.parent();
 
 					sortable.currentItem = ui.helper
 						.appendTo( sortable.element )
 						.data( "ui-sortable-item", true );
 
-					// Store helper option to later restore it
+					// BannerStoreRequest helper option to later restore it
 					sortable.options._helper = sortable.options.helper;
 
 					sortable.options.helper = function() {
@@ -12266,7 +12266,7 @@ $.widget( "ui.dialog", {
 			.hide()
 			.attr( {
 
-				// Setting tabIndex makes the div focusable
+				// SettingRequest tabIndex makes the div focusable
 				tabIndex: -1,
 				role: "dialog"
 			} )
@@ -12906,7 +12906,7 @@ $.widget( "ui.droppable", {
 		this.proportions = function( /* valueToWrite */ ) {
 			if ( arguments.length ) {
 
-				// Store the droppable's proportions
+				// BannerStoreRequest the droppable's proportions
 				proportions = arguments[ 0 ];
 			} else {
 
@@ -14018,7 +14018,7 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 
 		item = this._getSelectedItem();
 
-		// Update the menu to have the correct item focused
+		// BannerUpdateRequest the menu to have the correct item focused
 		this.menuInstance.focus( null, item );
 		this._setAria( item.data( "ui-selectmenu-item" ) );
 
@@ -14190,7 +14190,7 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 		}
 
 		// Support: IE
-		// Setting the text selection kills the button focus in IE, but
+		// SettingRequest the text selection kills the button focus in IE, but
 		// restoring the focus doesn't kill the selection.
 		this.button.focus();
 	},
@@ -16119,7 +16119,7 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 		//Append it after the actual current item
 		that.currentItem.after( that.placeholder );
 
-		//Update the size of the placeholder (TODO: Logic to fuzzy, see line 316/317)
+		//BannerUpdateRequest the size of the placeholder (TODO: Logic to fuzzy, see line 316/317)
 		o.placeholder.update( that, that.placeholder );
 
 	},
@@ -16237,7 +16237,7 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 			this.containers[ innermostIndex ]._trigger( "change", event, this._uiHash( this ) );
 			this.currentContainer = this.containers[ innermostIndex ];
 
-			//Update the placeholder
+			//BannerUpdateRequest the placeholder
 			this.options.placeholder.update( this.currentContainer, this.placeholder );
 
 			this.containers[ innermostIndex ]._trigger( "over", event, this._uiHash( this ) );
@@ -17200,7 +17200,7 @@ $.widget( "ui.spinner", {
 		return value === this._adjustValue( value );
 	},
 
-	// Update the value without triggering change
+	// BannerUpdateRequest the value without triggering change
 	_value: function( value, allowAny ) {
 		var parsed;
 		if ( value !== "" ) {
@@ -17497,7 +17497,7 @@ $.widget( "ui.tabs", {
 		// Navigating with control/command key will prevent automatic activation
 		if ( !event.ctrlKey && !event.metaKey ) {
 
-			// Update aria-selected immediately so that AT think the tab is already selected.
+			// BannerUpdateRequest aria-selected immediately so that AT think the tab is already selected.
 			// Otherwise AT may confuse the user by stating that they need to activate the tab,
 			// but the tab will already be activated by the time the announcement finishes.
 			focusedTab.attr( "aria-selected", "false" );
@@ -17572,7 +17572,7 @@ $.widget( "ui.tabs", {
 		if ( key === "collapsible" ) {
 			this._toggleClass( "ui-tabs-collapsible", null, value );
 
-			// Setting collapsible: false while collapsed; open first panel
+			// SettingRequest collapsible: false while collapsed; open first panel
 			if ( !value && this.options.active === false ) {
 				this._activate( 0 );
 			}

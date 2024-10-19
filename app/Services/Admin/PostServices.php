@@ -8,6 +8,7 @@ use App\Enums\PostSelectedEnum;
 use App\Http\Resources\API\Admin\Posts\PostDetailsApiResource;
 use App\Http\Resources\API\Admin\Posts\PostsListApiResource;
 use App\Models\Post;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PostServices
@@ -19,18 +20,18 @@ class PostServices
         return new ServiceResult(true, PostsListApiResource::collection($posts));
     }
 
-    public function createPost(array $store): ServiceResult
+    public function createPost(Request $request): ServiceResult
     {
-        $realTimeStamp = substr($store['published_at'], 0, 10);
-        $imageName = time() . '.' . $store['image']->extension();
-        $store['image']->storeAs(('posts'), $imageName);
+        $realTimeStamp = substr($request['published_at'], 0, 10);
+        $imageName = time() . '.' . $request['image']->extension();
+        $request['image']->storeAs(('posts'), $imageName);
         //dd($store->all());
         Post::create([
-            'title' => $store['title'],
-            'summary' => $store['summary'],
-            'body' => $store['body'],
+            'title' => $request['title'],
+            'summary' => $request['summary'],
+            'body' => $request['body'],
             'published_at' => date('Y-m-d H:i:s', (int)$realTimeStamp),
-            'category_id' => $store['category_id'],
+            'category_id' => $request['category_id'],
             'image' => $imageName,
             'user_id' => auth()->user()->id,
         ]);
@@ -42,21 +43,21 @@ class PostServices
         return new ServiceResult(true, new PostDetailsApiResource($post));
     }
 
-    public function updatePost(mixed $update, Post $post): ServiceResult
+    public function updatePost(Request $request, Post $post): ServiceResult
     {
-        $realTimeStamp = substr($update['published_at'], 0, 10);
-        if ($update->hasFile('image')) {
+        $realTimeStamp = substr($request['published_at'], 0, 10);
+        if ($request->hasFile('image')) {
             Storage::delete('posts/' . $post->image);
-            $imageName = time() . '.' . $update->file('image')->extension();
-            $update->file('image')->storeAs(('posts'), $imageName);
+            $imageName = time() . '.' . $request->file('image')->extension();
+            $request->file('image')->storeAs(('posts'), $imageName);
         }
         Post::where('id', $post->id)->update([
-            'title' => $update->title,
-            'summary' => $update->summary,
-            'body' => $update->body,
+            'title' => $request->title,
+            'summary' => $request->summary,
+            'body' => $request->body,
             'published_at' => date('Y-m-d H:i:s', (int)$realTimeStamp),
-            'category_id' => $update->category_id,
-            'image' => $update->hasFile('image') ? $imageName : $post->image
+            'category_id' => $request->category_id,
+            'image' => $request->hasFile('image') ? $imageName : $post->image
         ]);
         return new ServiceResult(true);
     }

@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Admin\User;
+namespace App\Http\Requests\Api\Admin\Post;
 
 use App\RestfulApi\ApiFormRequest;
 
-
-class StoreRequest extends ApiFormRequest
+class PostUpdateRequest extends ApiFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +22,12 @@ class StoreRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:5|max:50|unique:users',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-            'is_admin'=>'required'
+            'title' => 'required|min:5|max:100',
+            'summary' => 'required',
+            'body' => 'required',
+            'published_at' => 'required',
+            'image' => 'image|max:512',
+            'category_id' => 'required',
         ];
     }
 }

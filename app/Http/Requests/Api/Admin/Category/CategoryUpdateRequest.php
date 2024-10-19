@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Api\Auth;
+namespace App\Http\Requests\Api\Admin\Category;
 
 use App\RestfulApi\ApiFormRequest;
 
-class ForgotPassword extends ApiFormRequest
+
+class CategoryUpdateRequest extends ApiFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +23,7 @@ class ForgotPassword extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|exists:users',
-
+            'title' => 'min:3|max:50'
         ];
     }
 }

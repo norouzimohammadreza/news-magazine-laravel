@@ -8,7 +8,7 @@ use Illuminate\Support\ServiceProvider;
 class RestfulApiServiceProvider extends ServiceProvider
 {
     /**
-     * Register services.
+     * RegisterRequest services.
      */
     public function register(): void
     {

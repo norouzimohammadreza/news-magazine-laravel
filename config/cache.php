@@ -6,7 +6,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Cache Store
+    | Default Cache BannerStoreRequest
     |--------------------------------------------------------------------------
     |
     | This option controls the default cache store that will be used by the

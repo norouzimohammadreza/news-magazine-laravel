@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Admin\User\StoreRequest;
-use App\Http\Requests\Api\Admin\User\UpdateRequest;
+use App\Http\Requests\Api\Admin\User\UserStoreRequest;
+use App\Http\Requests\Api\Admin\User\UserUpdateRequest;
 use App\Models\User;
 use App\RestfulApi\Facade\Response;
 use App\Services\Admin\UserService;
@@ -26,7 +26,7 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * BannerStoreRequest a newly created resource in storage.
      */
     public function isAdmin(User $user)
     {
@@ -35,7 +35,7 @@ class UserController extends Controller
 
     }
 
-    public function store(StoreRequest $request)
+    public function store(UserStoreRequest $request)
     {
         $this->userService->createUser($request->all());
         return Response::withMessage('User created')->withStatus(200)->build()->response();
@@ -53,9 +53,9 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * BannerUpdateRequest the specified resource in storage.
      */
-    public function update(UpdateRequest $request, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
         $this->userService->updateUser($request->all(), $user);
         return Response::withMessage('User updated')->withStatus(200)->build()->response();

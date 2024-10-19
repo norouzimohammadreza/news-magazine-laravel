@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api\Admin\Post;
 
 use App\RestfulApi\ApiFormRequest;
 
-class Update extends ApiFormRequest
+class PostStoreRequest extends ApiFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class Update extends ApiFormRequest
             'summary' => 'required',
             'body' => 'required',
             'published_at' => 'required',
-            'image' => 'image|max:512',
+            'image' => 'required|image|max:512',
             'category_id' => 'required',
         ];
     }

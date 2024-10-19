@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Admin\Menu;
+namespace App\Http\Requests\Api\Auth;
 
 use App\RestfulApi\ApiFormRequest;
 
-class Update extends ApiFormRequest
+class ForgotPasswordRequest extends ApiFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,8 @@ class Update extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|min:3|max:50',
-            'url' => 'required|url'
+            'email' => 'required|email|exists:users',
+
         ];
     }
 }

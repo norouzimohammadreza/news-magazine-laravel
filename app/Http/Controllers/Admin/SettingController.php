@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Admin\Setting\SettingRequest;
 use App\Models\Setting;
 use App\Services\Admin\SettingService;
 
@@ -29,18 +30,17 @@ class SettingController extends Controller
 
     public function edit(Setting $setting)
     {
-        $setting = Setting::first();
         return view('admin.setting.edit', [
             'setting' => $setting
         ]);
     }
 
     /**
-     * Update the specified resource in storage.
+     * BannerUpdateRequest the specified resource in storage.
      */
-    public function update(\App\Http\Requests\Api\Admin\Setting\Setting $update, Setting $setting)
+    public function update(SettingRequest $settingRequest, Setting $setting)
     {
-        $this->settingService->setSetting($update, $setting);
+        $this->settingService->setSetting($settingRequest, $setting);
         return redirect('admin/setting');
     }
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Auth;
+namespace App\Http\Requests\Api\Admin\User;
 
 use App\RestfulApi\ApiFormRequest;
 
-class PasswordConfirmation extends ApiFormRequest
+class UserUpdateRequest extends ApiFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,9 @@ class PasswordConfirmation extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'password' => 'required|min:6|max:48|confirmed',
-            'password_confirmation' => 'required|min:6|max:48|same:password',
+            'name' => 'min:5|max:50|unique:users,id',
+            'email' => 'email|unique:users',
+            'password' => 'min:6',
         ];
     }
 }

@@ -15,11 +15,13 @@ class CommentController extends Controller
 
     public function index()
     {
+
         $result = $this->commentService->getComments();
         $comments = $result->data;
         return view('admin.comment.index', [
             'comments' => $comments
         ]);
+
     }
 
     public function change(Comment $comment)
@@ -27,6 +29,7 @@ class CommentController extends Controller
 
         $this->commentService->change($comment);
         return redirect()->back();
+
     }
 
 }

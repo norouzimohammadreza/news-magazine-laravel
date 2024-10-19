@@ -11,20 +11,27 @@ class CommentService
 {
     public function getComments(): ServiceResult
     {
+
         $comments = Comment::paginate(6);
         return new ServiceResult(true, CommentListApiResource::collection($comments));
+
     }
 
     public function change(Comment $comment): ServiceResult
     {
+
         if ($comment->status_id == CommentStatusEnum::unseen->value || $comment->status_id == CommentStatusEnum::seen->value) {
+
             $comment->status_id = CommentStatusEnum::approved->value;
             $comment->save();
             return new ServiceResult(true);
+
         }
+
         $comment->status_id = CommentStatusEnum::seen->value;
         $comment->save();
         return new ServiceResult(true);
+
     }
 
 }

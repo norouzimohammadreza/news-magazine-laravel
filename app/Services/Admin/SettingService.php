@@ -4,6 +4,7 @@ namespace App\Services\Admin;
 
 use App\Base\ServiceResult;
 use App\Models\Setting;
+use Illuminate\Http\Request;
 
 class SettingService
 {
@@ -14,24 +15,24 @@ class SettingService
 
     }
 
-    public function setSetting($update, Setting $setting): ServiceResult
+    public function setSetting(Request $request, Setting $setting): ServiceResult
     {
-        if ($update->hasFile('logo') && $update->file('logo')->isValid()) {
-            $logoFormat = $update->file('logo')->extension();
+        if ($request->hasFile('logo') && $request->file('logo')->isValid()) {
+            $logoFormat = $request->file('logo')->extension();
             $logo = 'logo' . '.' . $logoFormat;
-            $update->file('logo')->move(public_path('setting'), $logo);
+            $request->file('logo')->move(public_path('setting'), $logo);
         }
-        if ($update->hasFile('icon') && $update->file('icon')->isValid()) {
-            $iconFormat = $update->file('icon')->extension();
+        if ($request->hasFile('icon') && $request->file('icon')->isValid()) {
+            $iconFormat = $request->file('icon')->extension();
             $icon = 'icon' . '.' . $iconFormat;
-            $update->file('icon')->move(public_path('setting'), $icon);
+            $request->file('icon')->move(public_path('setting'), $icon);
         }
         $setting->update([
-            'title' => $update->title,
-            'description' => $update->description,
-            'keyword' => $update->keyword,
-            'logo' => $update->hasFile('logo') ? $logo : $setting->logo,
-            'icon' => $update->hasFile('icon') ? $icon : $setting->icon
+            'title' => $request->title,
+            'description' => $request->description,
+            'keyword' => $request->keyword,
+            'logo' => $request->hasFile('logo') ? $logo : $setting->logo,
+            'icon' => $request->hasFile('icon') ? $icon : $setting->icon
         ]);
         return new ServiceResult(true);
     }

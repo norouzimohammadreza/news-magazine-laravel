@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Admin\User;
+namespace App\Http\Requests\Api\App;
 
 use App\RestfulApi\ApiFormRequest;
 
-class UpdateRequest extends ApiFormRequest
+class AddCommentRequest extends ApiFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,7 @@ class UpdateRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'name' => 'min:5|max:50|unique:users,id',
-            'email' => 'email|unique:users',
-            'password' => 'min:6',
+            'body' => 'required|min:5'
         ];
     }
 }

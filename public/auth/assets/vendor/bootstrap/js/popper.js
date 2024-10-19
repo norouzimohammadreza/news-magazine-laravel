@@ -1240,7 +1240,7 @@ function computeStyle(data, options) {
     'x-placement': data.placement
   };
 
-  // Update `data` attributes, styles and arrowStyles
+  // BannerUpdateRequest `data` attributes, styles and arrowStyles
   data.attributes = _extends({}, attributes, data.attributes);
   data.styles = _extends({}, styles, data.styles);
   data.arrowStyles = _extends({}, data.offsets.arrow, data.arrowStyles);

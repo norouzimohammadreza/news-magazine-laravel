@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 
-use App\Http\Requests\Api\Auth\ForgotPassword;
-use App\Http\Requests\Api\Auth\Login;
-use App\Http\Requests\Api\Auth\PasswordConfirmation;
-use App\Http\Requests\Api\Auth\Register;
+use App\Http\Requests\Api\Auth\ForgotPasswordRequest;
+use App\Http\Requests\Api\Auth\LoginRequest;
+use App\Http\Requests\Api\Auth\PasswordConfirmationRequest;
+use App\Http\Requests\Api\Auth\RegisterRequest;
 use App\Models\User;
 use App\Services\AuthService;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +24,7 @@ class AuthController extends Controller
 
     }
 
-    public function registerStore(Register $register)
+    public function registerStore(RegisterRequest $register)
     {
         $this->authService->Register($register->all());
         return redirect('login')->with('verifyMessage', 'Please check your email to verify your account');
@@ -37,7 +37,7 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function loginStore(Login $login)
+    public function loginStore(LoginRequest $login)
     {
         $result = $this->authService->login($login->all());
         if (isset($result->data['passwordCheck'])) {
@@ -73,7 +73,7 @@ class AuthController extends Controller
         return view('auth.reset-password');
     }
 
-    public function forgotPassword(ForgotPassword $forgotPassword)
+    public function forgotPassword(ForgotPasswordRequest $forgotPassword)
     {
         $result = $this->authService->forgetPassword($forgotPassword->all());
         if (isset($result->data['userActive'])) {
@@ -99,7 +99,7 @@ class AuthController extends Controller
         return view('auth.new-password', compact('token'));
     }
 
-    public function confirmPassword(PasswordConfirmation $confirmation, $token)
+    public function confirmPassword(PasswordConfirmationRequest $confirmation, $token)
     {
         $result = $this->authService->confirmPassword($confirmation->all(), $token);
         if (isset($result->data['tokenExpired'])) {

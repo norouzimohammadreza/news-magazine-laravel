@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Admin\Category;
+namespace App\Http\Requests\Api\Admin\Banner;
 
 use App\RestfulApi\ApiFormRequest;
 
-
-class StoreRequest extends ApiFormRequest
+class BannerStoreRequest extends ApiFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +22,8 @@ class StoreRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|min:3|max:50'
+            'url'=>'required|url',
+            'image'=>'required|image|max:512'
         ];
     }
 }

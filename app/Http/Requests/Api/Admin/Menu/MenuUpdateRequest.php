@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Auth;
+namespace App\Http\Requests\Api\Admin\Menu;
 
 use App\RestfulApi\ApiFormRequest;
 
-class Register extends ApiFormRequest
+class MenuUpdateRequest extends ApiFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,9 @@ class Register extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:5|max:50|unique:users',
-            'email' => 'required|email|max:100|unique:users',
-            'password' => 'required|min:6|max:48|confirmed',
-            'password_confirmation' => 'required|min:6|max:48|same:password',
+            'title' => 'required|min:3|max:50',
+            'url' => 'required|url',
+            'parent_id' => '',
         ];
     }
 }

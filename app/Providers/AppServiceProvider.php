@@ -10,7 +10,7 @@ use Laravel\Sanctum\Sanctum;
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * RegisterRequest any application services.
      */
     public function register(): void
     {

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api\Admin\Menu;
 
 use App\RestfulApi\ApiFormRequest;
 
-class Store extends ApiFormRequest
+class MenuStoreRequest extends ApiFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,8 @@ class Store extends ApiFormRequest
     {
         return [
             'title' => 'required|min:3|max:50',
-            'url' => 'required|url'
+            'url' => 'required|url',
+            'parent_id'=> '',
         ];
     }
 }

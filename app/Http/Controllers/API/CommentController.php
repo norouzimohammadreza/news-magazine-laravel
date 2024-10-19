@@ -24,7 +24,7 @@ class CommentController extends Controller
     public function change(Comment $comment)
     {
         $this->commentService->change($comment);
-        return Response::withMessage('Comment visibility is changed successfully.')->build()->response();
+        return Response::withMessage('AddCommentRequest visibility is changed successfully.')->build()->response();
     }
 
     public function show(Comment $comment)
@@ -35,6 +35,6 @@ class CommentController extends Controller
     public function destroy(Comment $comment)
     {
         $comment->delete();
-        return Response::withMessage('Comment deleted successfully.')->build()->response();
+        return Response::withMessage('AddCommentRequest deleted successfully.')->build()->response();
     }
 }

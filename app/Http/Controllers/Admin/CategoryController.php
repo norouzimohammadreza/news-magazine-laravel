@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Admin\Category\StoreRequest;
-use App\Http\Requests\Api\Admin\Category\UpdateRequest;
+use App\Http\Requests\Api\Admin\Category\CategoryStoreRequest;
+use App\Http\Requests\Api\Admin\Category\CategoryUpdateRequest;
 use App\Models\Category;
 use App\Services\Admin\CategoryService;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -24,28 +23,25 @@ class CategoryController extends Controller
         return view('admin.category.index', [
             'categories' => $categories
         ]);
+
     }
 
-    public function show(Request $request)
-    {
-        dd('hi1');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
+
         return view('admin.category.create');
+
     }
 
     /**
-     * Store a newly created resource in storage.
+     * BannerStoreRequest a newly created resource in storage.
      */
-    public function store(StoreRequest $store)
+    public function store(CategoryStoreRequest $categoryStoreRequest)
     {
-        $this->categoryService->addCategory($store->all());
+
+        $this->categoryService->addCategory($categoryStoreRequest->validated());
         return redirect('admin/category');
+
     }
 
     /**
@@ -53,18 +49,22 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+
         return view('admin.category.edit', [
             'category' => $category
         ]);
+
     }
 
     /**
-     * Update the specified resource in storage.
+     * BannerUpdateRequest the specified resource in storage.
      */
-    public function update(UpdateRequest $update, Category $category)
+    public function update(CategoryUpdateRequest $categoryUpdateRequest, Category $category)
     {
-        $this->categoryService->updateCategory($update->all(), $category);
+
+        $this->categoryService->updateCategory($categoryUpdateRequest->validated(), $category);
         return redirect('admin/category');
+
     }
 
     /**
@@ -72,7 +72,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+
         $this->categoryService->deleteCategory($category);
         return redirect('admin/category');
+
     }
 }

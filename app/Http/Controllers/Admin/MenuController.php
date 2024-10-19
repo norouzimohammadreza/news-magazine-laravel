@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Admin\Menu\Store;
-use App\Http\Requests\Api\Admin\Menu\Update;
+use App\Http\Requests\Api\Admin\Menu\MenuStoreRequest;
+use App\Http\Requests\Api\Admin\Menu\MenuUpdateRequest;
 use App\Models\Menu;
 use App\Services\Admin\MenuService;
 
@@ -16,11 +16,13 @@ class MenuController extends Controller
 
     public function index()
     {
+
         $result = $this->menuService->getListsMenus();
         $menus = $result->data;
         return view('admin.menu.index', [
             'menus' => $menus
         ]);
+
     }
 
     /**
@@ -28,38 +30,44 @@ class MenuController extends Controller
      */
     public function create()
     {
-        $menus = Menu::all();
+
+        $menus = Menu::get();
         return view('admin.menu.create', [
             'menus' => $menus
         ]);
+
     }
 
     /**
-     * Store a newly created resource in storage.
+     * BannerStoreRequest a newly created resource in storage.
      */
-    public function store(Store $store)
+    public function store(MenuStoreRequest $menuStoreRequest)
     {
-        //dd($store->all());
-        $this->menuService->createMenu($store);
+
+        $this->menuService->createMenu($menuStoreRequest->validated());
         return redirect('admin/menu');
+
     }
 
 
     public function edit(Menu $menu)
     {
-        $menus = Menu::all();
+
+        $menus = Menu::get();
         return view('admin.menu.edit', [
             'menu' => $menu,
             'menus' => $menus
         ]);
+
     }
 
     /**
-     * Update the specified resource in storage.
+     * BannerUpdateRequest the specified resource in storage.
      */
-    public function update(Update $update, Menu $menu)
+    public function update(MenuUpdateRequest $menuUpdateRequest, Menu $menu)
     {
-        $this->menuService->updateMenu($update, $menu);
+
+        $this->menuService->updateMenu($menuUpdateRequest->validated(), $menu);
         return redirect('admin/menu');
 
     }
@@ -69,7 +77,9 @@ class MenuController extends Controller
      */
     public function destroy(Menu $menu)
     {
+
         $this->menuService->deleteMenu($menu);
         return redirect('admin/menu');
+
     }
 }

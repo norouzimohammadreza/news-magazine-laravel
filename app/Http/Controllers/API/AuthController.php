@@ -38,7 +38,7 @@ class AuthController extends Controller
                 return Response::withMessage('This account is not verified yet')->build()->response();
             }
         }
-        return Response::withData($result->data)->withMessage('Login successful')->build()->response();
+        return Response::withData($result->data)->withMessage('LoginRequest successful')->build()->response();
 
     }
 

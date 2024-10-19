@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Admin\Post\Store;
-use App\Http\Requests\Api\Admin\Post\Update;
+use App\Http\Requests\Api\Admin\Post\PostStoreRequest;
+use App\Http\Requests\Api\Admin\Post\PostUpdateRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Services\Admin\PostServices;
@@ -47,9 +47,9 @@ class PostController extends Controller
         ]);
     }
 
-    public function store(Store $store)
+    public function store(PostStoreRequest $postStoreRequest)
     {
-        $this->postServices->createPost($store->all());
+        $this->postServices->createPost($postStoreRequest);
         return redirect('admin/post');
 
     }
@@ -63,9 +63,9 @@ class PostController extends Controller
         ]);
     }
 
-    public function update(Update $update, Post $post)
+    public function update(PostUpdateRequest $postUpdateRequest, Post $post)
     {
-        $this->postServices->updatePost($update, $post);
+        $this->postServices->updatePost($postUpdateRequest, $post);
         return redirect('admin/post');
     }
 

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api\Admin\Setting;
 
 use App\RestfulApi\ApiFormRequest;
 
-class Setting extends ApiFormRequest
+class SettingRequest extends ApiFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

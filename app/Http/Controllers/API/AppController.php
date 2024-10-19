@@ -37,7 +37,7 @@ class AppController extends Controller
     public function comment($post, \App\Http\Requests\Api\Admin\App\Comment $comment)
     {
         $this->appService->comment($post, $comment->all());
-        return Response::withMessage('Comment created successfully.')->build()->response();
+        return Response::withMessage('AddCommentRequest created successfully.')->build()->response();
 
 
     }

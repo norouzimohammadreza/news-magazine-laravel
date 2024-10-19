@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Api\App;
+namespace App\Http\Requests\Api\Admin\Category;
 
 use App\RestfulApi\ApiFormRequest;
 
-class Comment extends ApiFormRequest
+
+class CategoryStoreRequest extends ApiFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +23,7 @@ class Comment extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'body' => 'required|min:5'
+            'title' => 'required|min:3|max:50'
         ];
     }
 }
