@@ -19,10 +19,10 @@ class CategoryController extends Controller
     public function index()
     {
 
-        $result = $this->categoryService->showCategries();
-        $result = $result->data->all();
+        $result = $this->categoryService->showCategories();
+        $categories = $result->data;
         return view('admin.category.index', [
-            'categories' => $result
+            'categories' => $categories
         ]);
     }
 

@@ -11,7 +11,7 @@ class CommentService
 {
     public function getComments(): ServiceResult
     {
-        $comments = Comment::paginate(5);
+        $comments = Comment::paginate(6);
         return new ServiceResult(true, CommentListApiResource::collection($comments));
     }
 

@@ -23,6 +23,7 @@
             <x-admin.banner.show-tables :banners="$banners"/>
 
         </table>
+        {{$banners->links()}}
     </div>
 
 </x-admin.layout.master>

@@ -17,8 +17,9 @@ class MenuController extends Controller
     public function index()
     {
         $result = $this->menuService->getListsMenus();
+        $menus = $result->data;
         return view('admin.menu.index', [
-            'menus' => $result->data
+            'menus' => $menus
         ]);
     }
 

@@ -26,7 +26,7 @@ class SettingService
             $icon = 'icon' . '.' . $iconFormat;
             $update->file('icon')->move(public_path('setting'), $icon);
         }
-        Setting::first()->update([
+        $setting->update([
             'title' => $update->title,
             'description' => $update->description,
             'keyword' => $update->keyword,

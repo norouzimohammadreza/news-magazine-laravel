@@ -17,6 +17,7 @@
             <x-admin.menu.tbody-menus-table :menus="$menus"/>
 
         </table>
+        {{$menus->links()}}
     </section>
 
 

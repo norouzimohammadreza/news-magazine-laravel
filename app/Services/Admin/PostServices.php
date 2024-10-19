@@ -3,6 +3,8 @@
 namespace App\Services\Admin;
 
 use App\Base\ServiceResult;
+use App\Enums\PostBreakingNewsEnum;
+use App\Enums\PostSelectedEnum;
 use App\Http\Resources\API\Admin\Posts\PostDetailsApiResource;
 use App\Http\Resources\API\Admin\Posts\PostsListApiResource;
 use App\Models\Post;
@@ -13,7 +15,7 @@ class PostServices
 
     public function getPosts(): ServiceResult
     {
-        $posts = Post::all();
+        $posts = Post::paginate(2);
         return new ServiceResult(true, PostsListApiResource::collection($posts));
     }
 
@@ -68,21 +70,21 @@ class PostServices
 
     public function isSelected(Post $post): serviceResult
     {
-        if ($post->selected) {
-            $post->selected = 0;
+        if ($post->selected == PostSelectedEnum::isSelected->value) {
+            $post->selected = PostSelectedEnum::notSelected->value;
         } else {
-            $post->selected = 1;
+            $post->selected = PostSelectedEnum::isSelected->value;
         }
-        $post->update();
+        $post->save();
         return new ServiceResult(true);
     }
 
     public function breakingNews(Post $post): ServiceResult
     {
-        if ($post->breaking_news) {
-            $post->breaking_news = 0;
+        if ($post->breaking_news == PostBreakingNewsEnum::isBreakingNews->value) {
+            $post->breaking_news = PostBreakingNewsEnum::notBreakingNews->value;
         } else {
-            $post->breaking_news = 1;
+            $post->breaking_news = PostBreakingNewsEnum::isBreakingNews->value;
         }
         $post->update();
         return new ServiceResult(true);

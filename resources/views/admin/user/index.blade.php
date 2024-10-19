@@ -17,6 +17,7 @@
             <x-admin.user.show-users :users="$users"/>
 
         </table>
+        {{$users->links()}}
     </section>
 
 </x-admin.layout.master>

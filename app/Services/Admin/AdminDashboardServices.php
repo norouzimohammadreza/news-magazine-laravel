@@ -14,7 +14,7 @@ class AdminDashboardServices
     public function getDashboardData(): ServiceResult
     {
         try {
-            $categoriesCount = Category::all()->count();
+            $categoriesCount = Category::count();
             $adminsCount = User::AdminUser()->count();
             $usersCount = User::NotAdminUser()->count();
             $postsCount = Post::count();

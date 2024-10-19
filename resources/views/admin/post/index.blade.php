@@ -28,6 +28,7 @@
             <x-admin.post.show-posts :posts="$posts"/>
 
         </table>
+        {{$posts->links()}}
     </div>
 
 </x-admin.layout.master>

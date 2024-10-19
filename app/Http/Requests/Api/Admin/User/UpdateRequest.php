@@ -22,7 +22,7 @@ class UpdateRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'name' => 'min:5|max:50|unique:users',
+            'name' => 'min:5|max:50|unique:users,id',
             'email' => 'email|unique:users',
             'password' => 'min:6',
         ];

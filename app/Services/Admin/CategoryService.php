@@ -10,10 +10,10 @@ use Illuminate\Contracts\Debug\ExceptionHandler;
 class CategoryService
 {
 
-    public function showCategries(): ServiceResult
+    public function showCategories(): ServiceResult
     {
         try {
-            $categories = Category::all();
+            $categories = Category::paginate(2);
         } catch (\Throwable $th) {
             app()[ExceptionHandler::class]->report($th);
             return new ServiceResult(false, $th->getMessage());

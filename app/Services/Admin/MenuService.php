@@ -11,7 +11,7 @@ class MenuService
 {
     public function getListsMenus() : ServiceResult
     {
-        $menus = Menu::all();
+        $menus = Menu::paginate(2);
         return new ServiceResult(true,MenusListApiResources::collection($menus));
     }
     public function createMenu($store) : ServiceResult

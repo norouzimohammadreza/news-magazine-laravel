@@ -17,7 +17,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $result = $this->categoryService->showCategries();
+        $result = $this->categoryService->showCategories();
         if (!$result->success) {
             return Response::withStatus(500)->withData($result->data)->withMessage('wrong')->build()->response();
         }

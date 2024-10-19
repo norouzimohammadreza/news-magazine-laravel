@@ -3,6 +3,7 @@
 namespace App\Services\Admin;
 
 use App\Base\ServiceResult;
+use App\Enums\UserPermissionEnum;
 use App\Http\Resources\API\Admin\Users\UserDetailesApiResource;
 use App\Http\Resources\API\Admin\Users\UsersListApiResource;
 use App\Models\User;
@@ -12,20 +13,21 @@ class UserService
 {
     public function getList(): ServiceResult
     {
-        $users = User::all();
+        $users = User::paginate(4);
         return new ServiceResult(true, UsersListApiResource::collection($users));
     }
 
     public function isAdmin(User $user): ServiceResult
     {
-        if ($user->is_admin) {
-            $user->is_admin = 0;
-        } else {
-            $user->is_admin = 1;
+        if ($user->id == auth()->user()->id) {
+            return new ServiceResult(true);
         }
-        User::where('id', '=', $user->id)->update([
-            'is_admin' => $user->is_admin
-        ]);
+        if ($user->is_admin == UserPermissionEnum::admin->value) {
+            $user->is_admin = UserPermissionEnum::user->value;
+        } else {
+            $user->is_admin = UserPermissionEnum::admin->value;
+        }
+        $user->save();
         return new ServiceResult(true);
 
     }
@@ -33,8 +35,8 @@ class UserService
     public function createUser(array $request): ServiceResult
     {
         $request['password'] = Hash::make($request['password']);
-        $user = User::create($request);
-        return new ServiceResult(true, $request);
+        User::create($request);
+        return new ServiceResult(true);
     }
 
     public function deleteUser(User $user): ServiceResult
@@ -45,10 +47,13 @@ class UserService
 
     public function updateUser(array $request, User $user): ServiceResult
     {
-        if (isset($request['password'])) {
-            $request['password'] = Hash::make($request['password']);
+        if ($user->id == auth()->user()->id) {
+            return new ServiceResult(true);
         }
-        $user->find($user->id)->update($request);
+
+        $user->name = $request['name'];
+        $user->is_admin = $request['is_admin'];
+        $user->save();
         return new ServiceResult(true, $user);
     }
 

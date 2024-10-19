@@ -2,7 +2,7 @@
     <section class="col-12">
         <form method="post" action="{{route('user.update',[$user])}}" >
             @csrf
-            @method('PUT')
+            @method('PATCH')
             <x-admin.user.edit.name-input :user="$user"/>
             <x-admin.user.edit.permission-input :user="$user"/>
             <x-admin.ui.submit-button>

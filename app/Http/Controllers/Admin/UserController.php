@@ -21,8 +21,9 @@ class UserController extends Controller
     public function index()
     {
         $result = $this->userService->getList();
+        $users = $result->data;
         return view('admin.user.index', [
-            'users' => $result->data->all()
+            'users' => $users,
         ]);
     }
 

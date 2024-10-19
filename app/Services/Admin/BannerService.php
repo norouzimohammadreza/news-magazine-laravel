@@ -14,7 +14,7 @@ class BannerService
 
     public function ListsBanners(): ServiceResult
     {
-        $banners = Banner::all();
+        $banners = Banner::paginate(1);
         return new ServiceResult(true, BannersListApiResources::collection($banners));
     }
 
@@ -41,7 +41,7 @@ class BannerService
             $imageName = time() . '.' . $update->file('image')->extension();
             $update->file('image')->storeAs(('banners'), $imageName);
         }
-        Banner::where('id', $banner->id)->update([
+        $banner->update([
             'url' => $update->url,
             'image' => ($update->hasFile('image')) ? $imageName : $banner->image
         ]);
@@ -50,7 +50,7 @@ class BannerService
 
     public function deleteBanner(Banner $banner): ServiceResult
     {
-        Banner::find($banner->id)->delete();
+        $banner->delete();
         Storage::delete('banners/' . $banner->image);
         return new ServiceResult(true);
 
