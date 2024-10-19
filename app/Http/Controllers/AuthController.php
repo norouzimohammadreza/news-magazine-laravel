@@ -24,9 +24,9 @@ class AuthController extends Controller
 
     }
 
-    public function registerStore(RegisterRequest $register)
+    public function registerStore(RegisterRequest $registerRequest)
     {
-        $this->authService->Register($register->all());
+        $this->authService->Register($registerRequest->validated());
         return redirect('login')->with('verifyMessage', 'Please check your email to verify your account');
 
 
@@ -37,9 +37,9 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function loginStore(LoginRequest $login)
+    public function loginStore(LoginRequest $loginRequest)
     {
-        $result = $this->authService->login($login->all());
+        $result = $this->authService->login($loginRequest->validated());
         if (isset($result->data['passwordCheck'])) {
             if (!$result->data['passwordCheck']) {
                 return redirect()->back()->with('error', 'Password is wrong.');
@@ -73,9 +73,9 @@ class AuthController extends Controller
         return view('auth.reset-password');
     }
 
-    public function forgotPassword(ForgotPasswordRequest $forgotPassword)
+    public function forgotPassword(ForgotPasswordRequest $forgotPasswordRequest)
     {
-        $result = $this->authService->forgetPassword($forgotPassword->all());
+        $result = $this->authService->forgetPassword($forgotPasswordRequest->validated());
         if (isset($result->data['userActive'])) {
             if (!$result->data['userActive']) {
                 return redirect()->back()->with('error', 'This account is not verified yet');
@@ -99,9 +99,9 @@ class AuthController extends Controller
         return view('auth.new-password', compact('token'));
     }
 
-    public function confirmPassword(PasswordConfirmationRequest $confirmation, $token)
+    public function confirmPassword(PasswordConfirmationRequest $confirmationRequest, $token)
     {
-        $result = $this->authService->confirmPassword($confirmation->all(), $token);
+        $result = $this->authService->confirmPassword($confirmationRequest->validated(), $token);
         if (isset($result->data['tokenExpired'])) {
             if ($result->data['tokenExpired']) {
                 return redirect()->back()->with('error', 'This token is expired yet');

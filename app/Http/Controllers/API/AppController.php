@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\App\AddCommentRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\RestfulApi\Facade\Response;
 use App\Services\AppService;
-use Illuminate\Http\Request;
 
 class AppController extends Controller
 {
@@ -34,9 +34,9 @@ class AppController extends Controller
         return Response::withData($result->data)->build()->response();
     }
 
-    public function comment($post, \App\Http\Requests\Api\Admin\App\Comment $comment)
+    public function comment($post,AddCommentRequest  $addCommentRequest)
     {
-        $this->appService->comment($post, $comment->all());
+        $this->appService->comment($post, $addCommentRequest->validated());
         return Response::withMessage('AddCommentRequest created successfully.')->build()->response();
 
 

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\API;
 
 
-use App\Http\Requests\Api\Admin\Auth\ForgotPassword;
-use App\Http\Requests\Api\Admin\Auth\Login;
-use App\Http\Requests\Api\Admin\Auth\Register;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Admin\Auth\PasswordConfirmation;
+use App\Http\Requests\Api\Auth\ForgotPasswordRequest;
+use App\Http\Requests\Api\Auth\LoginRequest;
+use App\Http\Requests\Api\Auth\PasswordConfirmationRequest;
+use App\Http\Requests\Api\Auth\RegisterRequest;
 use App\RestfulApi\Facade\Response;
 use App\Services\AuthService;
 
@@ -18,15 +18,15 @@ class AuthController extends Controller
     {
     }
 
-    public function Register(Register $register)
+    public function Register(RegisterRequest $registerRequest)
     {
-        $result = $this->authService->Register($register->all());
+        $this->authService->Register($registerRequest->validated());
         return Response::withMessage('User created successfully')->build()->response();
     }
 
-    public function login(Login $login)
+    public function login(LoginRequest $loginRequest)
     {
-        $result = $this->authService->login($login->all());
+        $result = $this->authService->login($loginRequest->validated());
 
         if (isset($result->data['passwordCheck'])) {
             if (!$result->data['passwordCheck']) {
@@ -54,9 +54,9 @@ class AuthController extends Controller
         return Response::withMessage('User logout successfully.')->build()->response();
     }
 
-    public function forgotPassword(ForgotPassword $forgotPassword)
+    public function forgotPassword(ForgotPasswordRequest $forgotPasswordRequest)
     {
-        $result = $this->authService->forgetPassword($forgotPassword->all());
+        $result = $this->authService->forgetPassword($forgotPasswordRequest->validated());
         if (isset($result->data['userActive'])) {
             if (!$result->data['userActive']) {
                 return Response::withMessage('This account is not verified yet')->build()->response();
@@ -71,9 +71,9 @@ class AuthController extends Controller
 
     }
 
-    public function confirmPassword(PasswordConfirmation $confirmation, $token)
+    public function confirmPassword(PasswordConfirmationRequest $passwordConfirmationRequest, $token)
     {
-        $result = $this->authService->confirmPassword($confirmation->all(), $token);
+        $result = $this->authService->confirmPassword($passwordConfirmationRequest->validated(), $token);
         if (isset($result->data['tokenExpired'])) {
             if ($result->data['tokenExpired']) {
                 return Response::withMessage('This token is expired yet')->build()->response();

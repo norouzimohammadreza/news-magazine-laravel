@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Api\App\AddCommentRequest;
 use App\Http\Requests\Comment;
 use App\Models\Category;
 use App\Models\Post;
@@ -58,9 +59,9 @@ class HomeController extends Controller
         ]);
     }
 
-    public function comment($post, Comment $comment)
+    public function comment($post, AddCommentRequest $addCommentRequest)
     {
-        $this->appService->comment($post, $comment->all());
+        $this->appService->comment($post, $addCommentRequest->validated());
         return redirect()->back()->with('password', 'کامنت شما ثبت و پس از تایید به نمایش در خواهد امد.');
     }
 }

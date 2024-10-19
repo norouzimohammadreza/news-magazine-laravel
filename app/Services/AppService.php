@@ -46,7 +46,7 @@ class AppService
     {
         $posts = Post::withCount('comment')
             ->where('category_id', $category->id)->get();
-        return new ServiceResult(200, [
+        return new ServiceResult(true, [
             'posts' => $posts,
             'categories' => $this->setCategories()->data,
             'mostComments' => $this->setMostComments()->data,
@@ -68,11 +68,11 @@ class AppService
         ]);
     }
 
-    public function comment($post, array $comment)
+    public function comment($post, array $request)
     {
 
         Comment::create([
-            'body' => $comment['body'],
+            'body' => $request['body'],
             'post_id' => $post,
             'user_id' => Auth::user()->id
         ]);

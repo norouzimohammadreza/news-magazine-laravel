@@ -11,13 +11,13 @@ use Illuminate\Support\Str;
 
 class AuthService
 {
-    public function Register(array $register): ServiceResult
+    public function Register(array $request): ServiceResult
     {
         $verify_token = Str::random(55);
         $user = User::create([
-            'name' => $register['name'],
-            'email' => $register['email'],
-            'password' => Hash::make($register['password']),
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
             'verify_token' => $verify_token
         ]);
         $user->createToken('auth_token')->plainTextToken;
@@ -26,10 +26,10 @@ class AuthService
 
     }
 
-    public function Login(array $login): ServiceResult
+    public function Login(array $request): ServiceResult
     {
-        $user = User::where('email', $login['email'])->first();
-        if (!Hash::check($login['password'], $user->password)) {
+        $user = User::where('email', $request['email'])->first();
+        if (!Hash::check($request['password'], $user->password)) {
             return new ServiceResult(false, [
                 'passwordCheck' => false
             ]);
@@ -74,9 +74,9 @@ please click on the link below to verify account
         return new ServiceResult(true);
     }
 
-    public function forgetPassword(array $forgotPassword): ServiceResult
+    public function forgetPassword(array $request): ServiceResult
     {
-        $user = User::where('email', $forgotPassword['email'])->first();
+        $user = User::where('email', $request['email'])->first();
         if (!$user->forget_token_expire == null && $user->forget_token_expire < now()) {
             return new ServiceResult(false, [
                 'tokenExpired' => true
@@ -90,7 +90,7 @@ please click on the link below to verify account
         $user->forget_token = Str::random(55);
         $user->forget_token_expire = now()->addMinutes(60);
         $user->save();
-        $this->sendForgotPassword($user->forget_token, $forgotPassword['email']);
+        $this->sendForgotPassword($user->forget_token, $request['email']);
         return new ServiceResult(true);
     }
 
@@ -106,7 +106,7 @@ please click on the link below to verify account
         return new ServiceResult(true);
     }
 
-    public function confirmPassword(array $confirmation, string $token): ServiceResult
+    public function confirmPassword(array $request, string $token): ServiceResult
     {
         $user = User::where('forget_token', $token)->first();
         if (!$user->forget_token_expire == null && $user->forget_token_expire < now()) {
@@ -114,7 +114,7 @@ please click on the link below to verify account
                 'tokenExpired' => true
             ]);
         }
-        $user->password = Hash::make($confirmation['password']);
+        $user->password = Hash::make($request['password']);
         $user->save();
         return new ServiceResult(true);
 
