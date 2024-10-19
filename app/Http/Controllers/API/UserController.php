@@ -21,8 +21,10 @@ class UserController extends Controller
 
     public function index()
     {
+
         $result = $this->userService->getList();;
         return Response::withData($result)->withStatus(200)->build()->response();
+
     }
 
     /**
@@ -30,15 +32,18 @@ class UserController extends Controller
      */
     public function isAdmin(User $user)
     {
+
         $result = $this->userService->isAdmin($user);
         return Response::withData($result->data)->withStatus(200)->build()->response();
 
     }
 
-    public function store(UserStoreRequest $request)
+    public function store(UserStoreRequest $userStoreRequest)
     {
-        $this->userService->createUser($request->all());
+
+        $this->userService->createUser($userStoreRequest->validated());
         return Response::withMessage('User created')->withStatus(200)->build()->response();
+
     }
 
     /**
@@ -46,19 +51,21 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+
         $result = $this->userService->showUser($user);
         return Response::withData($result->data)->withStatus(200)->build()->response();
-
 
     }
 
     /**
      * BannerUpdateRequest the specified resource in storage.
      */
-    public function update(UserUpdateRequest $request, User $user)
+    public function update(UserUpdateRequest $userUpdateRequest, User $user)
     {
-        $this->userService->updateUser($request->all(), $user);
+
+        $this->userService->updateUser($userUpdateRequest->validated(), $user);
         return Response::withMessage('User updated')->withStatus(200)->build()->response();
+
     }
 
 
@@ -67,7 +74,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+
         $this->userService->deleteUser($user);
         return Response::withMessage('User deleted')->withStatus(200)->build()->response();
+
     }
 }

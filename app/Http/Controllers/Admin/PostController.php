@@ -20,35 +20,44 @@ class PostController extends Controller
 
     public function index()
     {
+
         $result = $this->postServices->getPosts();
         $posts = $result->data;
         return view('admin.post.index', [
             'posts' => $posts
         ]);
+
     }
 
     public function isSelected(Post $post)
     {
+
         $this->postServices->isSelected($post);
         return redirect()->back();
+
     }
 
     public function breakingNews(Post $post)
     {
+
         $this->postServices->breakingNews($post);
         return redirect()->back();
+
     }
 
     public function create()
     {
+
         $categories = Category::all();
         return view('admin.post.create', [
             'categories' => $categories
         ]);
+
     }
 
     public function store(PostStoreRequest $postStoreRequest)
     {
+
         $this->postServices->createPost($postStoreRequest);
         return redirect('admin/post');
 
@@ -56,22 +65,28 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
+
         $categories = Category::all();
         return view('admin.post.edit', [
             'post' => $post,
             'categories' => $categories
         ]);
+
     }
 
     public function update(PostUpdateRequest $postUpdateRequest, Post $post)
     {
+
         $this->postServices->updatePost($postUpdateRequest, $post);
         return redirect('admin/post');
+
     }
 
     public function destroy(Post $post)
     {
+
         $this->postServices->deletePost($post);
         return redirect('admin/post');
+
     }
 }

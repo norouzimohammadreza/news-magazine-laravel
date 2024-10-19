@@ -17,24 +17,32 @@ class CommentController extends Controller
 
     public function index()
     {
+
         $result = $this->commentService->getComments();
         return Response::withData($result->data)->build()->response();
+
     }
 
     public function change(Comment $comment)
     {
+
         $this->commentService->change($comment);
         return Response::withMessage('AddCommentRequest visibility is changed successfully.')->build()->response();
+
     }
 
     public function show(Comment $comment)
     {
+
         return Response::withData(new CommentDetailsApiResource($comment))->build()->response();
+
     }
 
     public function destroy(Comment $comment)
     {
+
         $comment->delete();
         return Response::withMessage('AddCommentRequest deleted successfully.')->build()->response();
+
     }
 }

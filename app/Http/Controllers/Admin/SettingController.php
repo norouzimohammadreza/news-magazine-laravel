@@ -17,11 +17,13 @@ class SettingController extends Controller
 
     public function index()
     {
+
         $result = $this->settingService->showSetting();
         $setting = $result->data;
         return view('admin.setting.index', [
             'setting' => $setting
         ]);
+
     }
 
     /**
@@ -30,9 +32,11 @@ class SettingController extends Controller
 
     public function edit(Setting $setting)
     {
+
         return view('admin.setting.edit', [
             'setting' => $setting
         ]);
+
     }
 
     /**
@@ -40,8 +44,10 @@ class SettingController extends Controller
      */
     public function update(SettingRequest $settingRequest, Setting $setting)
     {
+
         $this->settingService->setSetting($settingRequest, $setting);
         return redirect('admin/setting');
+
     }
 
 }

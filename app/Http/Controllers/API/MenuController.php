@@ -20,16 +20,19 @@ class MenuController extends Controller
 
     public function index()
     {
+
         $result = $this->menuService->getListsMenus();
         return Response::withData($result->data)->build()->response();
+
     }
 
     /**
      * BannerStoreRequest a newly created resource in storage.
      */
-    public function store(MenuStoreRequest $request)
+    public function store(MenuStoreRequest $menuStoreRequest)
     {
-        $this->menuService->createMenu($request);
+
+        $this->menuService->createMenu($menuStoreRequest->validated());
         return Response::withMessage('Menu created successfully.')->build()->response();
 
     }
@@ -39,17 +42,21 @@ class MenuController extends Controller
      */
     public function show(Menu $menu)
     {
+
         $result = $this->menuService->showMenu($menu);
         return Response::withData($result->data)->build()->response();
+
     }
 
     /**
      * BannerUpdateRequest the specified resource in storage.
      */
-    public function update(MenuUpdateRequest $update, Menu $menu)
+    public function update(MenuUpdateRequest $menuUpdateRequest, Menu $menu)
     {
-        $this->menuService->updateMenu($update, $menu);
+
+        $this->menuService->updateMenu($menuUpdateRequest->validated(), $menu);
         return Response::withMessage('Menu updated successfully.')->build()->response();
+
     }
 
     /**
@@ -57,7 +64,10 @@ class MenuController extends Controller
      */
     public function destroy(Menu $menu)
     {
+
         $this->menuService->deleteMenu($menu);
         return Response::withMessage('Menu deleted successfully.')->build()->response();
+
     }
+
 }

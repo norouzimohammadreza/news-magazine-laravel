@@ -19,38 +19,48 @@ class PostController extends Controller
 
     public function index()
     {
+
         $result = $this->postServices->getPosts();
         return Response::withData($result->data)->build()->response();
+
     }
 
     public function isSelected(Post $post)
     {
+
         $this->postServices->isSelected($post);
         return Response::withMessage('Post selected state is changed.')->build()->response();
+
     }
 
     public function breakingNews(Post $post)
     {
+
         $this->postServices->breakingNews($post);
         return Response::withData('Post breaking news state is changed.')->build()->response();
+
     }
 
-    public function store(PostStoreRequest $request)
+    public function store(PostStoreRequest $postStoreRequest)
     {
-        $this->postServices->createPost($request->all());
+
+        $this->postServices->createPost($postStoreRequest);
         return Response::withMessage('Post created successfully')->build()->response();
 
     }
 
     public function show(Post $post)
     {
+
         $result = $this->postServices->getPost($post);
         return Response::withData($result->data)->build()->response();
+
     }
 
-    public function update(PostUpdateRequest $request, Post $post)
+    public function update(PostUpdateRequest $postUpdateRequest, Post $post)
     {
-        $this->postServices->updatePost($request, $post);
+
+        $this->postServices->updatePost($postUpdateRequest, $post);
         return Response::withMessage('Post updated successfully')->build()->response();
 
     }

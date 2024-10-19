@@ -17,23 +17,21 @@ class CategoryController extends Controller
 
     public function index()
     {
+
         $result = $this->categoryService->showCategories();
-        if (!$result->success) {
-            return Response::withStatus(500)->withData($result->data)->withMessage('wrong')->build()->response();
-        }
         return Response::withStatus(200)->withData($result->data)->build()->response();
+
     }
 
     /**
      * BannerStoreRequest a newly created resource in storage.
      */
-    public function store(CategoryStoreRequest $request)
+    public function store(CategoryStoreRequest $categoryStoreRequest)
     {
-        $result = $this->categoryService->addCategory($request->all());
-        if (!$result->success) {
-            return Response::withStatus(500)->withData($result->data)->withMessage('wrong')->build()->response();
-        }
-        return Response::withStatus(200)->withData($result->data)->withMessage('Category created successfully')->build()->response();
+
+        $this->categoryService->addCategory($categoryStoreRequest->validated());
+        return Response::withStatus(200)->withMessage('Category created successfully')->build()->response();
+
     }
 
     /**
@@ -41,23 +39,21 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
+
         $result = $this->categoryService->showCategory($category);
-        if (!$result->success) {
-            return Response::withStatus(500)->withData($result->data)->withMessage('wrong')->build()->response();
-        }
         return Response::withStatus(200)->withData($result->data)->build()->response();
+
     }
 
     /**
      * BannerUpdateRequest the specified resource in storage.
      */
-    public function update(CategoryUpdateRequest $request, Category $category)
+    public function update(CategoryUpdateRequest $categoryUpdateRequest, Category $category)
     {
-        $result = $this->categoryService->updateCategory($request->all(), $category);
-        if (!$result->success) {
-            return Response::withStatus(500)->withData($result->data)->withMessage('wrong')->build()->response();
-        }
-        return Response::withStatus(200)->withData('Category updated successfully')->build()->response();
+
+        $this->categoryService->updateCategory($categoryUpdateRequest->validated(), $category);
+        return Response::withStatus(200)->withMessage('Category updated successfully')->build()->response();
+
     }
 
     /**
@@ -65,10 +61,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $result = $this->categoryService->deleteCategory($category);
-        if (!$result->success) {
-            return Response::withStatus(500)->withData($result->data)->withMessage('wrong')->build()->response();
-        }
+
+        $this->categoryService->deleteCategory($category);
         return Response::withStatus(200)->withData('Category deleted successfully')->build()->response();
+
     }
+
 }

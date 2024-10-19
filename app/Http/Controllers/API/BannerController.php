@@ -32,7 +32,7 @@ class BannerController extends Controller
     public function store(BannerStoreRequest $bannerStoreRequest)
     {
 
-        $this->bannerService->createBanner($bannerStoreRequest->validated());
+        $this->bannerService->createBanner($bannerStoreRequest);
         return Response::withMessage('Banner created successfully')->build()->response();
 
     }
@@ -54,7 +54,7 @@ class BannerController extends Controller
     public function update(BannerUpdateRequest $bannerUpdateRequest, Banner $banner)
     {
 
-        $this->bannerService->updateBanner($bannerUpdateRequest->validated(), $banner);
+        $this->bannerService->updateBanner($bannerUpdateRequest, $banner);
         return Response::withMessage('Banner updated successfully')->build()->response();
 
     }
