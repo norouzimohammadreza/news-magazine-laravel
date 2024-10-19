@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class PostServices
 {
+
     public function getPosts(): ServiceResult
     {
         $posts = Post::all();
@@ -86,5 +87,6 @@ class PostServices
         $post->update();
         return new ServiceResult(true);
     }
+
 
 }

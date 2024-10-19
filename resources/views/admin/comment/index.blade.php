@@ -23,6 +23,7 @@
             <x-admin.comment.show-comment :comments="$comments"/>
 
         </table>
+        {{$comments->links()}}
     </section>
 
 </x-admin.layout.master>

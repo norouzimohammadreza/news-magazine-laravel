@@ -21,9 +21,9 @@ return new class extends Migration {
             $table->unsignedBigInteger('user_id')->index();
             $table->unsignedBigInteger('category_id')->index();
             $table->integer('view')->default(0);
-            $table->boolean('status')->default('0');
-            $table->boolean('selected')->default('0');
-            $table->boolean('breaking_news')->default('0');
+            $table->boolean('status')->default(0);
+            $table->boolean('selected')->default(0);
+            $table->boolean('breaking_news')->default(0);
             $table->timestamp('published_at');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

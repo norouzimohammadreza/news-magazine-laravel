@@ -11,14 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AppService
 {
-    public $mostComments, $banner, $categories;
-
-    public function __construct()
-    {
-        $this->mostComments = Post::withCount('comment')->orderBy('comment_count', 'DESC')->limit(3)->get();
-        $this->banner = Banner::first();
-        $this->categories = Category::all();
-    }
+    private $mostComments, $banner, $categories;
 
     public function mainPage(): ServiceResult
     {
@@ -38,11 +31,14 @@ class AppService
             ->orderBy('view', 'DESC')
             ->limit(3)
             ->get();
-        return new ServiceResult(200, [
+        return new ServiceResult(true, [
             'topSelectedPosts' => $topSelectedPosts,
             'breakingNews' => $breakingNews,
             'latestPosts' => $latestPosts,
             'popularPosts' => $popularPosts,
+            'categories' => $this->setCategories()->data,
+            'mostComments' => $this->setMostComments()->data,
+            'banner' => $this->setBanner()->data,
         ]);
     }
 
@@ -50,18 +46,25 @@ class AppService
     {
         $posts = Post::withCount('comment')
             ->where('category_id', $category->id)->get();
-        return new ServiceResult(200, $posts);
+        return new ServiceResult(200, [
+            'posts' => $posts,
+            'categories' => $this->setCategories()->data,
+            'mostComments' => $this->setMostComments()->data,
+            'banner' => $this->setBanner()->data,
+        ]);
     }
 
     public function showPost(Post $post): ServiceResult
     {
-        $article = Post::where('id', $post->id)->first();
-        $article->view += 1;
-        $article->save();
-        $comments = Comment::where('post_id', $post->id)->where('status', 'approved')->get();
+        $post->view += 1;
+        $post->save();
+        $comments = Comment::ApprovedComments()->where('post_id', $post->id)->get();
         return new ServiceResult(true, [
-            'article' => $article,
-            'comments' => $comments
+            'post' => $post,
+            'comments' => $comments,
+            'categories' => $this->setCategories()->data,
+            'mostComments' => $this->setMostComments()->data,
+            'banner' => $this->setBanner()->data,
         ]);
     }
 
@@ -76,5 +79,23 @@ class AppService
         return new ServiceResult(true);
     }
 
+    public function setMostComments(): ServiceResult
+    {
+        $this->mostComments = Post::withCount('comment')->orderBy('comment_count', 'DESC')->limit(3)->get();
+        return new ServiceResult(true, $this->mostComments);
+    }
+
+    public function setCategories(): ServiceResult
+    {
+        $this->categories = Category::all();
+        return new ServiceResult(true, $this->categories);
+
+    }
+
+    public function setBanner(): ServiceResult
+    {
+        $this->banner = Banner::first();
+        return new ServiceResult(true, $this->banner);
+    }
 
 }

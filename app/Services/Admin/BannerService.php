@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class BannerService
 {
+
     public function ListsBanners(): ServiceResult
     {
         $banners = Banner::all();
@@ -54,5 +55,6 @@ class BannerService
         return new ServiceResult(true);
 
     }
+
 
 }

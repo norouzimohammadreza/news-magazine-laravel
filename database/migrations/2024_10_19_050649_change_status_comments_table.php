@@ -1,12 +1,12 @@
 <?php
 
+use App\Enums\CommentStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
-use App\Enums\CommentStatusEnum;
-return new class extends Migration
-{
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -14,11 +14,16 @@ return new class extends Migration
     {
         Schema::table('comments', function (Blueprint $table) {
             $table->unsignedTinyInteger('status_id')->default(CommentStatusEnum::unseen->value)->after('status');
-            $this->changeStatus();
             $table->softDeletes();
+
+        });
+        $this->changeStatus();
+        Schema::table('comments', function (Blueprint $table) {
             $table->dropColumn('status');
         });
+
     }
+
     public function changeStatus(): void
     {
         DB::table('comments')->update([

@@ -21,7 +21,7 @@ class AdminDashboardServices
             $views = Post::sum('view');
             $commentsCount = Comment::count();
             $unseenComments = Comment::UnseenComments()->count();
-            $approvedComments = Comment::where('status', '=', 'approved')->count();
+            $approvedComments = Comment::ApprovedComments()->count();
             //for tables
             $mostViewsPosts = Post::orderByDesc('view')->limit(3)->get();
             $mostCommentsPosts = Post::withCount('comment')

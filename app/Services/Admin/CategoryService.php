@@ -9,6 +9,7 @@ use Illuminate\Contracts\Debug\ExceptionHandler;
 
 class CategoryService
 {
+
     public function showCategries(): ServiceResult
     {
         try {
@@ -66,4 +67,5 @@ class CategoryService
         }
         return new ServiceResult(true);
     }
+
 }

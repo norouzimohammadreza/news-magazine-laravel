@@ -21,24 +21,25 @@ class HomeController extends Controller
         $data = $result->data;
 
         return view('app.index', [
-            'categories' => $this->appService->categories,
+            'banner' => $data['banner'],
+            'categories' => $data['categories'],
+            'mostComments' => $data['mostComments'],
             'topSelectedPosts' => $data['topSelectedPosts'],
             'breakingNews' => $data['breakingNews'],
             'latestPosts' => $data['latestPosts'],
             'popularPosts' => $data['popularPosts'],
-            'mostComments' => $this->appService->mostComments,
-            'banner' => $this->appService->banner
         ]);
     }
 
     public function category(Category $category)
     {
         $result = $this->appService->categoryPage($category);
+        $data = $result->data;
         return view('app.category', [
-            'categories' => $this->appService->categories,
-            'mostComments' => $this->appService->mostComments,
-            'banner' => $this->appService->banner,
-            'posts' => $result->data,
+            'banner' => $data['banner'],
+            'categories' => $data['categories'],
+            'mostComments' => $data['mostComments'],
+            'posts' => $data['posts'],
             'category' => Category::find($category->id)->title
         ]);
 
@@ -49,10 +50,10 @@ class HomeController extends Controller
         $result = $this->appService->showPost($post);
         $data = $result->data;
         return view('app.post', [
-            'categories' => $this->appService->categories,
-            'mostComments' => $this->appService->mostComments,
-            'banner' => $this->appService->banner,
-            'post' => $data['article'],
+            'banner' => $data['banner'],
+            'categories' => $data['categories'],
+            'mostComments' => $data['mostComments'],
+            'post' => $data['post'],
             'comments' => $data['comments'],
         ]);
     }
