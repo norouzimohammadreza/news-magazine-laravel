@@ -11,7 +11,7 @@ enum CommentStatusEnum : int
 
     public function translation():string
     {
-        return trans('comment_status',$this->name);
+        return trans('comment_status.'. $this->name);
     }
 
 }

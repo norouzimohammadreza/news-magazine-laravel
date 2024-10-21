@@ -2,15 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Scopes\Post\PublishedPostScope;
 
-use App\Models\Scopes\Post\StatusPostScope;
+use App\Models\Scopes\Post\PostScopes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory,PostScopes;
 
     protected $fillable = [
         'title',
@@ -36,9 +35,6 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
-    protected static function booted():void{
-        static::addGlobalScope(new PublishedPostScope());
-        static::addGlobalScope(new StatusPostScope());
-    }
+
 
 }

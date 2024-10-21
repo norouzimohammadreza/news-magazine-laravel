@@ -37,7 +37,17 @@ return new class extends Migration {
     {
         Schema::table('comments', function (Blueprint $table) {
             $table->enum('status', ['approved', 'unseen', 'seen'])->default('unseen');
+        });
+        $this->changeStatusDown();
+        Schema::table('comments', function (Blueprint $table) {
             $table->dropColumn('status_id');
         });
+    }
+
+    public function changeStatusDown(): void
+    {
+        DB::table('comments')->update([
+            'status' => DB::raw('CASE status WHEN ' . CommentStatusEnum::unseen->value . ' THEN "unseen"  WHEN ' . CommentStatusEnum::approved->value . ' THEN "approved" WHEN ' . CommentStatusEnum::seen->value . ' THEN "seen" END')]);
+
     }
 };

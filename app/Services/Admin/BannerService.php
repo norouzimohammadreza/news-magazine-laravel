@@ -25,7 +25,7 @@ class BannerService
     {
 
         $imageName = time() . '.' . $request->file('image')->extension();
-        $request->file('image')->storeAs(('banners'), $imageName);
+        $request->file('image')->storeAs('banners', $imageName);
 
         Banner::create([
             'url' => $request->url,
