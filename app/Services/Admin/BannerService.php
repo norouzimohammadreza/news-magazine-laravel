@@ -26,11 +26,21 @@ class BannerService
     public function createBanner(BannerStoreRequest $bannerStoreRequest): ServiceResult
     {
 
+<<<<<<< HEAD
         $imageName = time() . '.' . $bannerStoreRequest->file('image')->extension();
         $bannerStoreRequest->file('image')->storeAs('banners', $imageName);
         $bannerStoreRequest = $bannerStoreRequest->validated();
         $bannerStoreRequest['image'] = $imageName;
         Banner::create($bannerStoreRequest);
+=======
+        $imageName = time() . '.' . $request->file('image')->extension();
+        $request->file('image')->storeAs('banners', $imageName);
+
+        Banner::create([
+            'url' => $request->url,
+            'image' => $imageName
+        ]);
+>>>>>>> 958240fad480454e571f1ec94d7e71ac1d916531
 
         return new ServiceResult(true);
 
