@@ -44,7 +44,7 @@ class MenuController extends Controller
     public function store(MenuStoreRequest $menuStoreRequest)
     {
 
-        $this->menuService->createMenu($menuStoreRequest->validated());
+        $this->menuService->createMenu($menuStoreRequest);
         return redirect('admin/menu');
 
     }
@@ -67,7 +67,7 @@ class MenuController extends Controller
     public function update(MenuUpdateRequest $menuUpdateRequest, Menu $menu)
     {
 
-        $this->menuService->updateMenu($menuUpdateRequest->validated(), $menu);
+        $this->menuService->updateMenu($menuUpdateRequest, $menu);
         return redirect('admin/menu');
 
     }

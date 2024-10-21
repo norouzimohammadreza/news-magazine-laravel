@@ -3,6 +3,8 @@
 namespace App\Services\Admin;
 
 use App\Base\ServiceResult;
+use App\Http\Requests\Api\Admin\Menu\MenuStoreRequest;
+use App\Http\Requests\Api\Admin\Menu\MenuUpdateRequest;
 use App\Http\Resources\API\Admin\Menus\MenuDetailesApiResources;
 use App\Http\Resources\API\Admin\Menus\MenusListApiResources;
 use App\Models\Menu;
@@ -14,13 +16,13 @@ class MenuService
         $menus = Menu::paginate(2);
         return new ServiceResult(true,MenusListApiResources::collection($menus));
     }
-    public function createMenu(array $request) : ServiceResult
+    public function createMenu(MenuStoreRequest $menuStoreRequest) : ServiceResult
     {
 
         Menu::create([
-            'title'=> $request['title'],
-            'url'=> $request['url'],
-            'parent_id'=> ($request['parent_id']==0)?null:$request['parent_id'],
+            'title'=> $menuStoreRequest['title'],
+            'url'=> $menuStoreRequest['url'],
+            'parent_id'=> ($menuStoreRequest['parent_id']==0)?null:$menuStoreRequest['parent_id'],
 
         ]);
         return new ServiceResult(true);
@@ -29,12 +31,12 @@ class MenuService
     {
         return new ServiceResult(true,new MenuDetailesApiResources($menu));
     }
-    public function updateMenu(array $request,Menu $menu) : ServiceResult
+    public function updateMenu(MenuUpdateRequest $menuUpdateRequest,Menu $menu) : ServiceResult
     {
         $menu->update([
-            'title'=> $request['title'],
-            'url'=> $request['url'],
-            'parent_id'=> ($request['parent_id']==0)?null:$request['parent_id'],
+            'title'=> $menuUpdateRequest['title'],
+            'url'=> $menuUpdateRequest['url'],
+            'parent_id'=> ($menuUpdateRequest['parent_id']==0)?null:$menuUpdateRequest['parent_id'],
         ]);
         return new ServiceResult(true);
     }

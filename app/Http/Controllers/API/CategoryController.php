@@ -29,7 +29,7 @@ class CategoryController extends Controller
     public function store(CategoryStoreRequest $categoryStoreRequest)
     {
 
-        $this->categoryService->addCategory($categoryStoreRequest->validated());
+        $this->categoryService->addCategory($categoryStoreRequest);
         return Response::withStatus(200)->withMessage('Category created successfully')->build()->response();
 
     }
@@ -51,7 +51,7 @@ class CategoryController extends Controller
     public function update(CategoryUpdateRequest $categoryUpdateRequest, Category $category)
     {
 
-        $this->categoryService->updateCategory($categoryUpdateRequest->validated(), $category);
+        $this->categoryService->updateCategory($categoryUpdateRequest, $category);
         return Response::withStatus(200)->withMessage('Category updated successfully')->build()->response();
 
     }

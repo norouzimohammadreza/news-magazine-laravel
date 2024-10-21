@@ -3,6 +3,8 @@
 namespace App\Services\Admin;
 
 use App\Base\ServiceResult;
+use App\Http\Requests\Api\Admin\Category\CategoryStoreRequest;
+use App\Http\Requests\Api\Admin\Category\CategoryUpdateRequest;
 use App\Http\Resources\API\Admin\Categories\CategoriesListApiResource;
 use App\Models\Category;
 
@@ -17,10 +19,10 @@ class CategoryService
 
     }
 
-    public function addCategory(array $request): ServiceResult
+    public function addCategory(CategoryStoreRequest $categoryStoreRequest): ServiceResult
     {
 
-        Category::create($request);
+        Category::create($categoryStoreRequest->validated());
         return new ServiceResult(true);
 
     }
@@ -32,10 +34,10 @@ class CategoryService
 
     }
 
-    public function updateCategory(array $request, Category $category): ServiceResult
+    public function updateCategory(CategoryUpdateRequest $categoryUpdateRequest, Category $category): ServiceResult
     {
 
-        $category->update($request);
+        $category->update($categoryUpdateRequest->validated());
         return new ServiceResult(true, $category);
 
     }

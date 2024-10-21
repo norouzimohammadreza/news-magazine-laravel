@@ -39,7 +39,7 @@ class CategoryController extends Controller
     public function store(CategoryStoreRequest $categoryStoreRequest)
     {
 
-        $this->categoryService->addCategory($categoryStoreRequest->validated());
+        $this->categoryService->addCategory($categoryStoreRequest);
         return redirect('admin/category');
 
     }
@@ -62,7 +62,7 @@ class CategoryController extends Controller
     public function update(CategoryUpdateRequest $categoryUpdateRequest, Category $category)
     {
 
-        $this->categoryService->updateCategory($categoryUpdateRequest->validated(), $category);
+        $this->categoryService->updateCategory($categoryUpdateRequest, $category);
         return redirect('admin/category');
 
     }

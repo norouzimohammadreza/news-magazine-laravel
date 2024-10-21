@@ -41,7 +41,7 @@ class UserController extends Controller
     public function store(UserStoreRequest $userStoreRequest)
     {
 
-        $this->userService->createUser($userStoreRequest->validated());
+        $this->userService->createUser($userStoreRequest);
         return Response::withMessage('User created')->withStatus(200)->build()->response();
 
     }
@@ -63,7 +63,7 @@ class UserController extends Controller
     public function update(UserUpdateRequest $userUpdateRequest, User $user)
     {
 
-        $this->userService->updateUser($userUpdateRequest->validated(), $user);
+        $this->userService->updateUser($userUpdateRequest, $user);
         return Response::withMessage('User updated')->withStatus(200)->build()->response();
 
     }

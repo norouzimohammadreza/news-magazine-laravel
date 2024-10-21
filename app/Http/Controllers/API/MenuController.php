@@ -32,7 +32,7 @@ class MenuController extends Controller
     public function store(MenuStoreRequest $menuStoreRequest)
     {
 
-        $this->menuService->createMenu($menuStoreRequest->validated());
+        $this->menuService->createMenu($menuStoreRequest);
         return Response::withMessage('Menu created successfully.')->build()->response();
 
     }
@@ -54,7 +54,7 @@ class MenuController extends Controller
     public function update(MenuUpdateRequest $menuUpdateRequest, Menu $menu)
     {
 
-        $this->menuService->updateMenu($menuUpdateRequest->validated(), $menu);
+        $this->menuService->updateMenu($menuUpdateRequest, $menu);
         return Response::withMessage('Menu updated successfully.')->build()->response();
 
     }

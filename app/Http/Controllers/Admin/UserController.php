@@ -44,10 +44,10 @@ class UserController extends Controller
 
     }
 
-    public function store(UserStoreRequest $store)
+    public function store(UserStoreRequest $userStoreRequest)
     {
 
-        $this->userService->createUser($store->all());
+        $this->userService->createUser($userStoreRequest);
         return redirect('admin/user');
 
     }
@@ -61,10 +61,10 @@ class UserController extends Controller
 
     }
 
-    public function update(UserUpdateRequest $update, User $user)
+    public function update(UserUpdateRequest $userUpdateRequest, User $user)
     {
 
-        $this->userService->updateUser($update->all(), $user);
+        $this->userService->updateUser($userUpdateRequest, $user);
         return redirect('admin/user');
 
     }
