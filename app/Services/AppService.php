@@ -15,7 +15,8 @@ class AppService
 
     public function mainPage(): ServiceResult
     {
-        $topSelectedPosts = Post::withCount('comment')
+
+        $topSelectedPosts = Post::withCount('approvedComments')
             ->orderBy('published_at', 'DESC')
             ->limit(3)
             ->get();
@@ -23,11 +24,11 @@ class AppService
         $breakingNews = Post::where('breaking_news', 1)
             ->orderBy('published_at', 'DESC')
             ->first();
-        $latestPosts = Post::withCount('comment')
+        $latestPosts = Post::withCount('approvedComments')
             ->orderBy('published_at', 'DESC')
             ->limit(4)
             ->get();
-        $popularPosts = Post::withCount('comment')
+        $popularPosts = Post::withCount('approvedComments')
             ->orderBy('view', 'DESC')
             ->limit(3)
             ->get();
@@ -44,7 +45,7 @@ class AppService
 
     public function categoryPage(Category $category): ServiceResult
     {
-        $posts = Post::withCount('comment')
+        $posts = Post::withCount('approvedComments')
             ->where('category_id', $category->id)->get();
         return new ServiceResult(true, [
             'posts' => $posts,
@@ -70,7 +71,6 @@ class AppService
 
     public function comment(Post $post, array $request)
     {
-
         Comment::create([
             'body' => $request['body'],
             'post_id' => $post->id,
@@ -81,7 +81,7 @@ class AppService
 
     public function setMostComments(): ServiceResult
     {
-        $this->mostComments = Post::withCount('comment')->orderBy('comment_count', 'DESC')->limit(3)->get();
+        $this->mostComments = Post::withCount('approvedComments')->orderBy('approved_comments_count', 'DESC')->limit(3)->get();
         return new ServiceResult(true, $this->mostComments);
     }
 

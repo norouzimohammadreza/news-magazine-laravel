@@ -35,6 +35,10 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+    public function approvedComments()
+    {
+        return $this->hasMany(Comment::class)->ApprovedComments();
+    }
 
 
 }

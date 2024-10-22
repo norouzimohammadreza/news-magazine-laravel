@@ -77,7 +77,7 @@ please click on the link below to verify account
     public function forgetPassword(array $request): ServiceResult
     {
         $user = User::where('email', $request['email'])->first();
-        if (!$user->forget_token_expire == null && $user->forget_token_expire < now()) {
+        if (!$user->forget_token_expire == null && $user->forget_token_expire > now()) {
             return new ServiceResult(false, [
                 'tokenExpired' => true
             ]);

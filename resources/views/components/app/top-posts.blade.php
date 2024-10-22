@@ -44,7 +44,7 @@
                         <ul class="meta">
                             <li><span class="lnr lnr-user"> {{$topSelectedPosts[1]->user->name}}</span></li>
                             <li><span class="lnr lnr-calendar-full"> {{$topSelectedPosts[1]->published_at}}</span></li>
-                            <li><span class="lnr lnr-bubble"> {{$topSelectedPosts[1]->comment_count}}</span></li>
+                            <li><span class="lnr lnr-bubble"> {{$topSelectedPosts[1]->approved_comments_count}}</span></li>
                         </ul>
                     </div>
                 </div>
