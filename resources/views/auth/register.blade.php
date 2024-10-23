@@ -1,13 +1,13 @@
 <x-auth.master>
 
-    <x-slot name="title">Register</x-slot>
+    <x-slot name="title">{{__('auth_page.register')}}</x-slot>
 
     <form method="post" action="{{route('register.store')}}" class="login100-form validate-form">
 
         @csrf
 
         <span class="login100-form-title">
-        Register
+        {{__('auth_page.member_register')}}
     </span>
 
         <x-auth.show-errors/>
@@ -22,7 +22,7 @@
 
         <div class="container-login100-form-btn">
             <button type="submit" class="login100-form-btn">
-                Register
+                {{__('auth_page.register')}}
             </button>
         </div>
 
@@ -30,7 +30,7 @@
 
         <div class="text-center p-t-136">
             <a class="txt2" href="{{route('login')}}">
-                Login your Account
+                {{__('auth_page.login_your_account')}}
                 <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
             </a>
         </div>

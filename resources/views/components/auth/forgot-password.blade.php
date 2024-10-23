@@ -1,8 +1,8 @@
 <div class="text-center p-t-12">
         <span class="txt1">
-            Forgot
+            {{__('auth_page.forget')}}
         </span>
     <a class="txt2" href="{{route('resetPassword')}}">
-        Email / Password?
+        {{__('auth_page.email_password')}}
     </a>
 </div>

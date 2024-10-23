@@ -20,7 +20,7 @@ Route::middleware(LangMiddleware::class)->group(function () {
     Route::get('category/{category}', [HomeController::class, 'category'])->name('category');
     Route::get('post/{post}', [HomeController::class, 'post'])->name('post');
     Route::post('comment/{post}', [HomeController::class, 'comment'])->name('comment');
-    Route::get('lang/{lang}', [HomeController::class, 'changeLang'])->name('lang');
+    Route::get('lang/{lang}', [HomeController::class, 'changeLang'])->name('change-lang');
     Route::get('lang', [HomeController::class, 'lang'])->name('lang');
 
     Route::middleware(Auth::class)->group(function () {

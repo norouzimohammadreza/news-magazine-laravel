@@ -1,13 +1,13 @@
 <x-auth.master>
 
-    <x-slot name="title">Reset Password</x-slot>
+    <x-slot name="title">{{__('auth_page.reset_password')}}</x-slot>
 
     <form method="post" action="{{route('forgotPassword')}}" class="login100-form validate-form">
 
         @csrf
 
         <span class="login100-form-title">
-        Forgot Password
+        {{__('auth_page.forgot_password')}}
         </span>
 
         <x-auth.show-errors/>
@@ -16,13 +16,13 @@
 
         <div class="container-login100-form-btn">
             <button type="submit" class="login100-form-btn">
-                Send
+                {{__('auth_page.send')}}
             </button>
         </div>
 
         <div class="text-center p-t-136">
             <a class="txt2" href="<?= url('register'); ?>">
-                Create your Account
+                {{__('auth_page.create_your_account')}}
             </a>
         </div>
 

@@ -7,7 +7,9 @@ use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Post;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AppService
 {
@@ -100,12 +102,9 @@ class AppService
 
     public function setLanguage(string $lang): ServiceResult
     {
-        if ($lang == 'en') {
-            $_SESSION['lang'] = 'en';
-        } else {
-            $_SESSION['lang'] = 'fa';
-        }
-        return new ServiceResult(true, $_SESSION['lang']);
+        App::setLocale($lang);
+        Session::put('lang', $lang);
+        return new ServiceResult(true);
 
     }
 
