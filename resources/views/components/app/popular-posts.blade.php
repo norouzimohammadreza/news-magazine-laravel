@@ -1,5 +1,5 @@
 <div class="popular-post-wrap">
-    <h4 class="title">اخبار پربازدید</h4>
+    <h4 class="title">{{__('main.popular_news')}}</h4>
     @foreach($popularPosts as $post)
     <div class="feature-post relative">
         <div class="feature-img relative mb-10">

@@ -1,16 +1,16 @@
 <div class="row">
     <div class="col-lg-6 col-md-6 single-footer-widget">
-        <h4>اخبار پربازدید</h4>
+        <h4>{{__('main.popular_news')}}</h4>
         <ul>
-            <li><a href="#">عنوان خبر</a></li>
+            <li><a href="#">{{__('main.news_title')}}</a></li>
         </ul>
     </div>
     <div class="col-lg-6 col-md-6 single-footer-widget">
-        <h4>مرتبط با ما</h4>
+        <h4>{{__('main.Related_to_us')}}</h4>
         <ul>
-            <li><a href="#">درباره ما</a></li>
-            <li><a href="#">تماس با ما</a></li>
-            <li><a href="#">سوالات متداول</a></li>
+            <li><a href="#">{{__('main.about_us')}}</a></li>
+            <li><a href="#">{{__('main.contact_us')}}</a></li>
+            <li><a href="#">{{__('main.faq')}}</a></li>
         </ul>
     </div>
 </div>

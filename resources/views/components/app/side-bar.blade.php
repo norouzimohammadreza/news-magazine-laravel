@@ -7,7 +7,7 @@
         </div>
         <!-- end ads -->
         <div class="single-sidebar-widget most-popular-widget">
-            <h6 class="title">پر بحث ترین ها</h6>
+            <h6 class="title">{{__('main.the_most_controversial')}}</h6>
             @foreach($mostComments as $post)
             <div class="single-list flex-row d-flex">
                 <div class="thumb">
@@ -19,7 +19,7 @@
                     </a>
                     <ul class="meta">
                         <li><span class="lnr lnr-calendar-full"> {{$post->published_at}}</span></li>
-                        <li><span class="lnr lnr-bubble"> {{$post->comment_count}}</span></li>
+                        <li><span class="lnr lnr-bubble"> {{$post->approved_comments_count}}</span></li>
                     </ul>
                 </div>
             </div>

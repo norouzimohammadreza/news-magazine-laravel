@@ -1,5 +1,5 @@
 <div class="latest-post-wrap">
-    <h4 class="cat-title">آخرین اخبار</h4>
+    <h4 class="cat-title">{{__('main.latest_news')}}</h4>
 @foreach($latestPosts as $post)
     <div class="single-latest-post row align-items-center">
         <div class="col-lg-5 post-left">
@@ -18,7 +18,7 @@
             <ul class="meta">
                 <li><span class="lnr lnr-user"> {{$post->user->name}}</span></li>
                 <li><span class="lnr lnr-calendar-full"> {{$post->published_at}}</span></li>
-                <li><span class="lnr lnr-bubble"> {{$post->comment_count}}</span></li>
+                <li><span class="lnr lnr-bubble"> {{$post->approved_comments_count}}</span></li>
             </ul>
             <p class="excert">{{substr($post->summary,0,150)}}</p>
         </div>
