@@ -12,4 +12,6 @@ return [
     'about_us' => 'about us',
     'contact_us' => 'contact us',
     'faq' => 'faq',
+    'home_title' => 'News Website',
+    'empty_post' => 'There are no posts in this category.',
 ];

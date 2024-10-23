@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-lg-8 post-list">
                         <div class="latest-post-wrap">
-                            <h4 class="cat-title">آخرین اخبار</h4>
+                            <h4 class="cat-title">{{__('main.latest_news')}}</h4>
 
                             <x-app.posts-category :posts="$posts"/>
 
@@ -16,7 +16,7 @@
 
                                 <div class="single-latest-post row align-items-center">
                                     <div class="col-lg-5 post-left">
-                                        <p>پستی در این دسته بندی وجود ندارد.</p>
+                                        <p>{{__('main.empty_post')}}</p>
                                     </div>
                                 </div>
 

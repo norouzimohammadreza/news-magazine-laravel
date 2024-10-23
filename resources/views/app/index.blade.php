@@ -1,6 +1,6 @@
 <x-app.master :categories="$categories">
 
-    <x-slot name="title">News Website</x-slot>
+    <x-slot name="title">{{__('main.home_title')}}</x-slot>
 
     <div class="site-main-container">
 
