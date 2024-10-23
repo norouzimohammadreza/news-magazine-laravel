@@ -76,7 +76,7 @@
 
             <div class="col-lg-12">
                 <div class="news-tracker-wrap">
-                    <h6><span>خبر فوری :</span>
+                    <h6><span>{{__('main.breaking_news')}} :</span>
                         <a href="">{{$breakingNews->title}}</a></h6>
                 </div>
             </div>

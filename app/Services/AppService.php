@@ -98,4 +98,15 @@ class AppService
         return new ServiceResult(true, $this->banner);
     }
 
+    public function setLanguage(string $lang): ServiceResult
+    {
+        if ($lang == 'en') {
+            $_SESSION['lang'] = 'en';
+        } else {
+            $_SESSION['lang'] = 'fa';
+        }
+        return new ServiceResult(true, $_SESSION['lang']);
+
+    }
+
 }

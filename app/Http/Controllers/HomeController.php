@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Api\App\AddCommentRequest;
-use App\Http\Requests\Comment;
 use App\Models\Category;
 use App\Models\Post;
 use App\Services\AppService;
+use Illuminate\Support\Facades\App;
 
 
 class HomeController extends Controller
@@ -63,5 +63,14 @@ class HomeController extends Controller
     {
         $this->appService->comment($post, $addCommentRequest->validated());
         return redirect()->back()->with('password', 'کامنت شما ثبت و پس از تایید به نمایش در خواهد امد.');
+    }
+    public function changeLang($lang)
+    {
+       $this->appService->setLanguage($lang);
+        return redirect('/');
+    }
+    public function lang()
+    {
+        dd(App::currentLocale());
     }
 }
