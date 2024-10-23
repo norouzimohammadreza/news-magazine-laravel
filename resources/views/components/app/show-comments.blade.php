@@ -3,7 +3,7 @@
 <div class="comment-sec-area">
     <div class="container">
         <div class="row flex-column">
-            <h6>نظرات</h6>
+            <h6>{{__('main.comments')}}</h6>
             <div class="comment-list">
                 @foreach($comments as $comment )
                 <div class="single-comment justify-content-between d-flex">

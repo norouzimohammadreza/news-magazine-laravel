@@ -9,12 +9,12 @@
             <small class="form-text text-black">{{$message}}</small>
         </div>
         @enderror
-    <h4>درج نظر جدید</h4>
+    <h4>{{__('main.new_comment')}}</h4>
     <form method="POST" action="{{route('comment',$post)}}">
         @csrf
         <div class="form-group">
-            <textarea class="form-control mb-10" rows="5" name="body" placeholder="متن نظر"></textarea>
+            <textarea class="form-control mb-10" rows="5" name="body" placeholder="{{__('main.text')}}"></textarea>
         </div>
-        <input type="submit" class="primary-btn text-uppercase" value="ارسال">
+        <input type="submit" class="primary-btn text-uppercase" value="{{__('auth_page.send')}}">
     </form>
 </div>

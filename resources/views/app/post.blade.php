@@ -53,7 +53,7 @@
 
                             @guest()
                                 <div class="mb-2 alert alert-danger">
-                                    <small class="form-text text-black">لطفا در سایت لاگین کنید.</small>
+                                    <small class="form-text text-black">{{__('main.login_warning')}}</small>
                                 </div>
                             @endguest
 

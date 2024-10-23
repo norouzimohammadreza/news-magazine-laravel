@@ -14,4 +14,8 @@ return [
     'faq' => 'faq',
     'home_title' => 'News Website',
     'empty_post' => 'There are no posts in this category.',
+    'login_warning' => 'Please login to the site.',
+    'comments' => 'comments',
+    'new_comment' => 'Add a new comment',
+    'text' => 'comment text',
 ];
