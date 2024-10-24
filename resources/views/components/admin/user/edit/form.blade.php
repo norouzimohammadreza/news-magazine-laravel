@@ -6,7 +6,7 @@
             <x-admin.user.edit.name-input :user="$user"/>
             <x-admin.user.edit.permission-input :user="$user"/>
             <x-admin.ui.submit-button>
-                <x-slot name="button">Update</x-slot>
+                <x-slot name="button">{{__('dashboard.update')}}</x-slot>
             </x-admin.ui.submit-button>
         </form>
 

@@ -1,8 +1,8 @@
 <x-admin.layout.master>
 
-    <x-slot name="title">Edit User</x-slot>
+    <x-slot name="title">{{__('user.edit')}}</x-slot>
 
-    <x-admin.modify-title :name="'Edit User'" />
+    <x-admin.modify-title :name="__('user.edit')" />
 
     <x-admin.user.edit.form :user="$user"/>
 

@@ -1,8 +1,8 @@
 <x-admin.layout.master>
 
-    <x-slot name="title">Create User</x-slot>
+    <x-slot name="title">{{__('user.create')}}</x-slot>
 
-    <x-admin.modify-title :name="'Create User'"/>
+    <x-admin.modify-title :name="__('user.create')"/>
 
     <x-admin.user.create.form/>
 
