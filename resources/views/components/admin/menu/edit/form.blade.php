@@ -2,17 +2,17 @@
     @csrf
     @method('PUT')
     <div class="form-group">
-        <label for="title">Name</label>
+        <label for="title">{{__('dashboard.title')}}</label>
         <input type="text" class="form-control" id="title" name="title" value="{{$menu->title}}" >
     </div>
 
     <div class="form-group">
-        <label for="url">url</label>
+        <label for="url">{{__('validation.attributes.url')}}</label>
         <input type="text" class="form-control" id="url" name="url" value="{{$menu->url}}" >
     </div>
 
     <div class="form-group">
-        <label for="parent_id">parent ID</label>
+        <label for="parent_id">{{__('menu.parent')}}</label>
         <select name="parent_id" id="parent_id" class="form-control" autofocus>
             <option value="{{0}}" {{($menu->parent_id==null)?'selected':''}}>root</option>
             @foreach($menus as $menuForMenus)
@@ -24,6 +24,6 @@
     </div>
 
     <x-admin.ui.submit-button>
-        <x-slot name="button">Update</x-slot>
+        <x-slot name="button">{{__('dashboard.update')}}</x-slot>
     </x-admin.ui.submit-button>
 </form>

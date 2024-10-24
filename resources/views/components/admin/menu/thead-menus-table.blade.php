@@ -1,9 +1,9 @@
 <thead>
 <tr>
     <th>#</th>
-    <th>name</th>
-    <th>url</th>
-    <th>parent</th>
-    <th>setting</th>
+    <th>{{__('validation.attributes.name')}}</th>
+    <th>{{__('validation.attributes.url')}}</th>
+    <th>{{__('menu.parent')}}</th>
+    <th>{{__('dashboard.setting')}}</th>
 </tr>
 </thead>

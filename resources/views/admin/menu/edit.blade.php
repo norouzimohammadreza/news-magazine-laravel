@@ -1,8 +1,8 @@
 <x-admin.layout.master>
 
-    <x-slot name="title">Edit Menu</x-slot>
+    <x-slot name="title">{{__('menu.edit_menu')}}</x-slot>
 
-    <x-admin.modify-title :name="'Edit Menu'"/>
+    <x-admin.modify-title :name="__('menu.edit_menu')"/>
 
     <section class="row my-3">
         <section class="col-12">
