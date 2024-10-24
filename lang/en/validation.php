@@ -195,6 +195,7 @@ return [
         'email' => 'email',
         'password' => 'password',
         'confirm_password' => 'confirmation password',
+        'title' => 'title'
     ],
 
 ];

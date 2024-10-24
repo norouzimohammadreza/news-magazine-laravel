@@ -4,7 +4,7 @@
             @csrf
             <x-admin.category.create.input/>
             <x-admin.ui.submit-button>
-                <x-slot name="button">Store</x-slot>
+                <x-slot name="button">{{__('dashboard.store')}}</x-slot>
             </x-admin.ui.submit-button>
         </form>
     </section>

@@ -1,8 +1,8 @@
 <x-admin.layout.master>
 
-    <x-slot name="title">Edit Category</x-slot>
+    <x-slot name="title">{{__('category.edit')}}</x-slot>
 
-    <x-admin.modify-title :name="'Edit Category'"/>
+    <x-admin.modify-title :name="__('category.edit')"/>
 
     <x-admin.category.edit.form :category="$category"/>
 

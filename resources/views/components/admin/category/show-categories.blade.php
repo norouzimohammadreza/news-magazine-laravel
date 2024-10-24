@@ -1,11 +1,11 @@
 <div class="table-responsive">
     <table class="table table-striped table-sm">
-        <caption>List of categories</caption>
+        <caption>{{__('category.list_of_categories')}}</caption>
         <thead>
         <tr>
             <th>#</th>
-            <th>name</th>
-            <th>setting</th>
+            <th>{{__('category.name')}}</th>
+            <th>{{__('category.setting')}}</th>
         </tr>
         </thead>
         <tbody >
@@ -17,7 +17,7 @@
             <td class="d-flex">
                 <x-admin.ui.modify-button class="btn btn-sm btn-primary my-0 mx-1 text-white"
                                           url="{{route('category.edit',[$category])}}"
-                                          name="Edit"/>
+                                          name="{{__('dashboard.edit')}}"/>
                 <x-admin.ui.delete-component>
                     <x-slot name="route">{{route('category.destroy',[$category])}}</x-slot>
                 </x-admin.ui.delete-component>

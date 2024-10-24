@@ -5,7 +5,7 @@
             @method('PUT')
             <x-admin.category.edit.input :category="$category"/>
             <x-admin.ui.submit-button>
-                <x-slot name="button">Update</x-slot>
+                <x-slot name="button">{{__('dashboard.update')}}</x-slot>
             </x-admin.ui.submit-button>
         </form>
     </section>
