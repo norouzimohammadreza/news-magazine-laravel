@@ -1,27 +1,27 @@
 <x-admin.layout.master>
 
-    <x-slot name="title">Post Management</x-slot>
+    <x-slot name="title">{{__('post.post_management')}}</x-slot>
 
     <x-admin.dashboard-title>
-        <x-slot name="title">Posts</x-slot>
+        <x-slot name="title">{{__('post.post_management')}}</x-slot>
         <x-slot name="goto">{{route('post.create')}}</x-slot>
-        <x-slot name="create">create</x-slot>
+        <x-slot name="create">{{__('dashboard.create')}}</x-slot>
     </x-admin.dashboard-title>
 
     <div class="table-responsive">
         <table class="table table-striped table-sm">
-            <caption>List of posts</caption>
+            <caption>{{__('post.list_of_posts')}}</caption>
             <thead>
             <tr>
                 <th>#</th>
-                <th>title</th>
-                <th>summary</th>
-                <th>view</th>
-                <th>status</th>
-                <th>Arthur</th>
-                <th>category</th>
-                <th>image</th>
-                <th>setting</th>
+                <th>{{__('validation.attributes.title')}}</th>
+                <th>{{__('validation.attributes.summary')}}</th>
+                <th>{{__('dashboard.view')}}</th>
+                <th>{{__('post.status')}}</th>
+                <th>{{__('post.author')}}</th>
+                <th>{{__('post.category')}}</th>
+                <th>{{__('validation.attributes.image')}}</th>
+                <th>{{__('dashboard.setting')}}</th>
             </tr>
             </thead>
 

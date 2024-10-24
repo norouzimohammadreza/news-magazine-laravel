@@ -1,8 +1,8 @@
 <x-admin.layout.master>
 
-    <x-slot name="title">Create Post</x-slot>
+    <x-slot name="title">{{__('post.create')}}</x-slot>
 
-    <x-admin.modify-title :name="'Create Post'"/>
+    <x-admin.modify-title :name="__('post.create')"/>
 
     <x-admin.post.ck-editor.css/>
 

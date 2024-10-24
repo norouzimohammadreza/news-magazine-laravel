@@ -5,7 +5,7 @@
         <tr>
             <th>#</th>
             <th>{{__('category.name')}}</th>
-            <th>{{__('category.setting')}}</th>
+            <th>{{__('dashboard.setting')}}</th>
         </tr>
         </thead>
         <tbody >

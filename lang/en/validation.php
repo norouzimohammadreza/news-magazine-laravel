@@ -195,7 +195,11 @@ return [
         'email' => 'email',
         'password' => 'password',
         'confirm_password' => 'confirmation password',
-        'title' => 'title'
+        'title' => 'title',
+        'summary' => 'summary',
+        'category_id' => 'category',
+        'image' => 'image',
+        'published_at' => 'published time',
     ],
 
 ];

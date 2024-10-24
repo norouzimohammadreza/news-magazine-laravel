@@ -1,10 +1,10 @@
 <x-admin.layout.master>
 
-    <x-slot name="title">Edit Post</x-slot>
+    <x-slot name="title">{{__('post.edit')}}</x-slot>
 
     <x-admin.post.ck-editor.css/>
 
-    <x-admin.modify-title :name="'Edit Post'"/>
+    <x-admin.modify-title :name="__('post.edit')"/>
 
     <section class="row my-3">
         <section class="col-12">

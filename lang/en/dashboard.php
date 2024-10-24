@@ -22,5 +22,6 @@ return [
     'store' => 'store',
     'update' => 'update',
     'dashboard' => 'Dashboard',
-    
+    'setting' => 'Setting',
+
 ];

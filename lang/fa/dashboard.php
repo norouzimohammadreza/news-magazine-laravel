@@ -23,4 +23,5 @@ return [
     'update' => 'به‌روزرسانی',
     'dashboard' => 'داشبورد',
     'list_of' => 'لیست :attributes',
+    'setting' => 'تنظیمات',
 ];

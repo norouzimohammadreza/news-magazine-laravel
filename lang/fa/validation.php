@@ -178,11 +178,9 @@ return [
     'attributes' => [
         "name" => "نام",
         "username" => "نام کاربری",
-        "email" => "پست الکترونیکی",
         "first_name" => "نام",
         "last_name" => "نام خانوادگی",
         "family" => "نام خانوادگی",
-        "password" => "رمز عبور",
         "password_confirmation" => "تاییدیه ی رمز عبور",
         "city" => "شهر",
         "province" => "استان",
@@ -223,13 +221,15 @@ return [
         "passport_no" => "شماره پاسپورت",
 		"sheba_number" => "شماره شبا",
 		"iban" => "شماره شبا",
-		"accountـnumber" => "شماره حساب"
-    ],
-    'attributes' => [
+		"accountـnumber" => "شماره حساب",
         'body' => 'متن',
-        'name' => 'نام',
         'email' => 'ایمیل',
-        'password' => 'رمز عبور',
-        'confirm_password' => 'تأیید رمز عبور',
+        'password' => 'گذرواژه',
+        'confirm_password' => 'تأیید گذرواژه',
+        'summary' => 'خلاصه',
+        'category_id' => 'دسته‌بندی',
+        'image' => 'تصویر',
+        'published_at' => 'زمان انتشار',
     ],
+
 ];
