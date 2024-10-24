@@ -201,7 +201,11 @@ return [
         'image' => 'image',
         'published_at' => 'published time',
         'url' => 'url',
-        'parent_id' => 'menubar'
+        'parent_id' => 'menubar',
+        'description' => 'description',
+        'keyword' => 'keyword',
+        'logo' => 'logo',
+        'icon' => 'icon',
     ],
 
 ];

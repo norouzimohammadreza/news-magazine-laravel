@@ -1,43 +1,43 @@
 <x-admin.layout.master>
 
-    <x-slot name="title">Web Setting</x-slot>
+    <x-slot name="title">{{__('setting.setting')}}</x-slot>
 
     <x-admin.dashboard-title>
-        <x-slot name="title">Website Setting</x-slot>
+        <x-slot name="title">{{__('setting.website')}}</x-slot>
         <x-slot name="goto">{{route('setting.edit',[$setting])}}</x-slot>
-        <x-slot name="create">set web setting</x-slot>
+        <x-slot name="create">{{__('setting.Set_web_setting')}}</x-slot>
     </x-admin.dashboard-title>
 
     <section class="table-responsive">
         <table class="table table-striped table-sm">
-            <caption>Website setting</caption>
+            <caption>{{__('setting.website')}}</caption>
 
             <thead>
             <tr>
-                <th>name</th>
-                <th>value</th>
+                <th>{{__('validation.attributes.name')}}</th>
+                <th>{{__('setting.value')}}</th>
             </tr>
             </thead>
 
             <tbody>
             <tr>
-                <td>title</td>
+                <td>{{__('validation.attributes.title')}}</td>
                 <td>{{$setting->title}}</td>
             </tr>
             <tr>
-                <td>description</td>
+                <td>{{__('validation.attributes.description')}}</td>
                 <td>{{$setting->description}}</td>
             </tr>
             <tr>
-                <td>keyword</td>
+                <td>{{__('validation.attributes.keyword')}}</td>
                 <td>{{$setting->keyword}}</td>
             </tr>
             <tr>
-                <td>Logo</td>
+                <td>{{__('validation.attributes.logo')}}</td>
                 <td><img src="{{asset('setting/'.$setting->logo)}}" alt="" width="100px" height="100px"></td>
             </tr>
             <tr>
-                <td>Icon</td>
+                <td>{{__('validation.attributes.icon')}}</td>
                 <td><img src="{{asset('setting/'.$setting->icon)}}" alt="" width="100px" height="100px"></td>
             </tr>
             </tbody>
