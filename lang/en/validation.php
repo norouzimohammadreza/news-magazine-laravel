@@ -190,7 +190,11 @@ return [
     */
 
     'attributes' => [
-        'body' => 'body'
+        'body' => 'body',
+        'name' => 'name',
+        'email' => 'email',
+        'password' => 'password',
+        'confirm_password' => 'confirmation password',
     ],
 
 ];

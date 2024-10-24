@@ -226,6 +226,10 @@ return [
 		"accountـnumber" => "شماره حساب"
     ],
     'attributes' => [
-        'body' => 'متن'
+        'body' => 'متن',
+        'name' => 'نام',
+        'email' => 'ایمیل',
+        'password' => 'رمز عبور',
+        'confirm_password' => 'تأیید رمز عبور',
     ],
 ];

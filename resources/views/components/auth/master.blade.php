@@ -17,6 +17,9 @@
 </head>
 
 <body>
+<div class="bg-primary">
+    <x-change-language-button/>
+</div>
 
 <div class="limiter">
     <div class="container-login100">
