@@ -1,8 +1,8 @@
 <x-admin.layout.master>
 
-    <x-slot name="title">Create Banner</x-slot>
+    <x-slot name="title">{{__('banner.edit')}}</x-slot>
 
-    <x-admin.modify-title :name="'Edit Banner'"/>
+    <x-admin.modify-title :name="__('banner.edit')"/>
 
     <section class="row my-3">
         <section class="col-12">

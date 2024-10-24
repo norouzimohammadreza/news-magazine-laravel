@@ -200,6 +200,7 @@ return [
         'category_id' => 'category',
         'image' => 'image',
         'published_at' => 'published time',
+        'url' => 'url'
     ],
 
 ];

@@ -1,22 +1,22 @@
 <x-admin.layout.master>
 
-    <x-slot name="title">Banners Management</x-slot>
+    <x-slot name="title">{{__('banner.banners_management')}}</x-slot>
 
     <x-admin.dashboard-title>
-        <x-slot name="title"> Banners</x-slot>
+        <x-slot name="title"> {{__('banner.banners_management')}}</x-slot>
         <x-slot name="goto">{{route('banner.create')}}</x-slot>
-        <x-slot name="create">create</x-slot>
+        <x-slot name="create">{{__('dashboard.create')}}</x-slot>
     </x-admin.dashboard-title>
 
     <div class="table-responsive">
         <table class="table table-striped table-sm">
-            <caption>List of banners</caption>
+            <caption>{{__('banner.list_of_banners')}}</caption>
             <thead>
             <tr>
                 <th>#</th>
-                <th>url</th>
-                <th>image</th>
-                <th>setting</th>
+                <th>{{__('validation.attributes.url')}}</th>
+                <th>{{__('validation.attributes.image')}}</th>
+                <th>{{__('dashboard.setting')}}</th>
             </tr>
             </thead>
 
