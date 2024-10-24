@@ -1,15 +1,15 @@
 <div class="row mt-2 col-12">
     <div class="col-4">
         <h2 class="h6 pb-0 mb-0">
-            Most viewed posts
+            {{__('dashboard.most_viewed_posts')}}
         </h2>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>title</th>
-                    <th>view</th>
+                    <th>{{__('dashboard.title')}}</th>
+                    <th>{{__('dashboard.view')}}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -29,7 +29,7 @@
     </div>
     <div class="col-4">
         <h2 class="h6 pb-0 mb-0">
-            Most commented posts
+            {{__('dashboard.most_commented_posts')}}
 
         </h2>
         <div class="table-responsive">
@@ -37,8 +37,8 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>title</th>
-                    <th>comment</th>
+                    <th>{{__('dashboard.title')}}</th>
+                    <th>{{__('dashboard.comments')}}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -55,15 +55,15 @@
     </div>
     <div class="col-4">
         <h2 class="h6 pb-0 mb-0">
-            Comments
+            {{__('dashboard.comments')}}
         </h2>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>username</th>
-                    <th>comment</th>
+                    <th>{{__('dashboard.username')}}</th>
+                    <th>{{__('dashboard.comment')}}</th>
                 </tr>
                 </thead>
                 <tbody>

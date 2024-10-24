@@ -21,7 +21,6 @@ return [
     'delete' => 'delete',
     'store' => 'store',
     'update' => 'update',
-    'name' => 'Dashboard',
-
-
+    'dashboard' => 'Dashboard',
+    
 ];

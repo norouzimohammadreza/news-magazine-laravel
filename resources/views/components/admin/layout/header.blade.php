@@ -9,7 +9,7 @@
             <i class="fas fa-user"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{route('logout')}}">logout</a>
+            <a class="dropdown-item" href="{{route('logout')}}">{{__('main.logout')}}</a>
 
         </div>
     </span>
