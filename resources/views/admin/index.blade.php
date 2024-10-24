@@ -1,6 +1,6 @@
 <x-admin.layout.master>
 
-    <x-slot name="title">Dashboard</x-slot>
+    <x-slot name="title">{{__('dashboard.name')}}</x-slot>
 
     <div class="row mt-3">
 
