@@ -17,7 +17,6 @@ class AppController extends Controller
 
     public function index()
     {
-
         $result = $this->appService->mainPage();
         return Response::withData($result->data)->build()->response();
     }
@@ -34,11 +33,9 @@ class AppController extends Controller
         return Response::withData($result->data)->build()->response();
     }
 
-    public function comment($post,AddCommentRequest  $addCommentRequest)
+    public function comment($post, AddCommentRequest $addCommentRequest)
     {
         $this->appService->comment($post, $addCommentRequest->validated());
         return Response::withMessage('AddCommentRequest created successfully.')->build()->response();
-
-
     }
 }

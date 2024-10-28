@@ -27,7 +27,7 @@ class PostServices
         $realTimeStamp = substr($postStoreRequest['published_at'], 0, 10);
         $imageName = time() . '.' . $postStoreRequest['image']->extension();
         $postStoreRequest['image']->storeAs(('posts'), $imageName);
-        //dd($store->all());
+
         Post::create([
             'title' => $postStoreRequest['title'],
             'summary' => $postStoreRequest['summary'],

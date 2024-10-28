@@ -11,9 +11,6 @@ use App\Services\Admin\BannerService;
 
 class BannerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function __construct(private BannerService $bannerService)
     {
     }
@@ -34,7 +31,7 @@ class BannerController extends Controller
     public function store(BannerStoreRequest $bannerStoreRequest)
     {
         $this->bannerService->createBanner($bannerStoreRequest);
-        return redirect('admin/banner');
+        return redirect()->route('banner.index');
     }
 
     public function edit(Banner $banner)
@@ -47,12 +44,12 @@ class BannerController extends Controller
     public function update(BannerUpdateRequest $bannerUpdateRequest, Banner $banner)
     {
         $this->bannerService->updateBanner($bannerUpdateRequest, $banner);
-        return redirect('admin/banner');
+        return redirect()->route('banner.index');
     }
 
     public function destroy(Banner $banner)
     {
         $this->bannerService->deleteBanner($banner);
-        return redirect('admin/banner');
+        return redirect()->route('banner.index');
     }
 }

@@ -27,7 +27,7 @@ class AuthController extends Controller
     public function registerStore(RegisterRequest $registerRequest)
     {
         $this->authService->Register($registerRequest->validated());
-        return redirect('login')->with('verifyMessage', 'Please check your email to verify your account');
+        return redirect()->route('login')->with('verifyMessage', 'Please check your email to verify your account');
 
 
     }
@@ -53,19 +53,19 @@ class AuthController extends Controller
 
         //do stuff
         Auth::login($result->data['user']);
-        return redirect('/');
+        return redirect()->route('home');
     }
 
     public function verifyAccount($token)
     {
         $this->authService->verifyAccount($token);
-        return redirect('login')->with('verifyMessage', 'Your account is verified');
+        return redirect()->route('login')->with('verifyMessage', 'Your account is verified');
     }
 
     public function logout()
     {
         $this->authService->logout();
-        return redirect('/');
+        return redirect()->route('home');
     }
 
     public function resetPassword()
@@ -86,7 +86,7 @@ class AuthController extends Controller
                 return redirect()->back()->with('error', 'This token is expired yet');
             }
         }
-        return redirect('reset-password')->with('verifyMessage', 'Please check your email to receive new password');
+        return redirect()->route('resetPassword')->with('verifyMessage', 'Please check your email to receive new password');
     }
 
     public function newPassword($token)
@@ -94,7 +94,7 @@ class AuthController extends Controller
         $user = User::where('forget_token', $token)->first();
 
         if ($user->forget_token_expire < now()) {
-            return redirect('reset-password')->with('error', 'Your token is Expired');
+            return redirect()->route('resetPassword')->with('error', 'Your token is Expired');
         }
         return view('auth.new-password', compact('token'));
     }
@@ -108,7 +108,7 @@ class AuthController extends Controller
             }
         }
 
-        return redirect('login')->with('verifyMessage', 'Your password has been changed');
+        return redirect()->route('login')->with('verifyMessage', 'Your password has been changed');
     }
 
 }

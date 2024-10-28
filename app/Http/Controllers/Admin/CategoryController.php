@@ -17,64 +17,40 @@ class CategoryController extends Controller
 
     public function index()
     {
-
         $result = $this->categoryService->showCategories();
         $categories = $result->data;
         return view('admin.category.index', [
             'categories' => $categories
         ]);
-
     }
 
     public function create()
     {
-
         return view('admin.category.create');
-
     }
 
-    /**
-     * BannerStoreRequest a newly created resource in storage.
-     */
     public function store(CategoryStoreRequest $categoryStoreRequest)
     {
-
         $this->categoryService->addCategory($categoryStoreRequest);
-        return redirect('admin/category');
-
+        return redirect()->route('admin.category.index');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Category $category)
     {
-
         return view('admin.category.edit', [
             'category' => $category
         ]);
-
     }
 
-    /**
-     * BannerUpdateRequest the specified resource in storage.
-     */
     public function update(CategoryUpdateRequest $categoryUpdateRequest, Category $category)
     {
-
         $this->categoryService->updateCategory($categoryUpdateRequest, $category);
-        return redirect('admin/category');
-
+        return redirect()->route('category.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Category $category)
     {
-
         $this->categoryService->deleteCategory($category);
-        return redirect('admin/category');
-
+        return redirect()->route('category.index');
     }
 }

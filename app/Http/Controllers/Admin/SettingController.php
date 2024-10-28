@@ -46,7 +46,7 @@ class SettingController extends Controller
     {
 
         $this->settingService->setSetting($settingRequest, $setting);
-        return redirect('admin/setting');
+        return redirect()->route('setting.index');
 
     }
 

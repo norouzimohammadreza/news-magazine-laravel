@@ -59,7 +59,7 @@ class PostController extends Controller
     {
 
         $this->postServices->createPost($postStoreRequest);
-        return redirect('admin/post');
+        return redirect()->route('post.index');
 
     }
 
@@ -78,7 +78,7 @@ class PostController extends Controller
     {
 
         $this->postServices->updatePost($postUpdateRequest, $post);
-        return redirect('admin/post');
+        return redirect()->route('post.index');
 
     }
 
@@ -86,7 +86,7 @@ class PostController extends Controller
     {
 
         $this->postServices->deletePost($post);
-        return redirect('admin/post');
+        return redirect()->route('post.index');
 
     }
 }
