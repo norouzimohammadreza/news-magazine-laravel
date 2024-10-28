@@ -9,7 +9,7 @@ enum PostSelectedEnum: int
 
     public function translation(): string
     {
-        return trans('post_selected', $this->name);
+        return trans('post.selected.'. $this->name);
     }
 
 }

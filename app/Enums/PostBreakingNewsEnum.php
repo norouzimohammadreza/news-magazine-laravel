@@ -8,7 +8,7 @@ enum PostBreakingNewsEnum : int
     case isBreakingNews = 1;
     public function translation():string
     {
-        return trans('post_breaking_news',$this->name);
+        return trans('post.breaking_news.'.$this->name);
     }
 
 

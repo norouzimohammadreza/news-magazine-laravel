@@ -9,6 +9,6 @@ enum PostStatusEnum: int
 
     public function translation(): string
     {
-        return trans('post_status', $this->name);
+        return trans('post.status.'. $this->name);
     }
 }

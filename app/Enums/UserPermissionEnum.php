@@ -9,7 +9,7 @@ enum UserPermissionEnum : int
 
     public function translation() :string
     {
-        return trans('user_permission',$this->name);
+        return trans('user.permission.'.$this->name);
     }
 
 }

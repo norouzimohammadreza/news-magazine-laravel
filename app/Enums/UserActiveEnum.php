@@ -8,7 +8,7 @@ enum UserActiveEnum : int
     case Active = 1;
     public function translation():string
     {
-        return trans('user_active',$this->name);
+        return trans('user.active.'.$this->name);
     }
 
 
