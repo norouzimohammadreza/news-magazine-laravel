@@ -27,6 +27,7 @@ class AuthService
         return new ServiceResult(true);
     }
 
+
     public function Login(array $request): ServiceResult
     {
         $user = User::where('email', $request['email'])->first();
@@ -78,9 +79,9 @@ please click on the link below to verify account
     public function forgetPassword(array $request): ServiceResult
     {
         $user = User::where('email', $request['email'])->first();
-        if (!$user->forget_token_expire == null && $user->forget_token_expire > now()) {
+        if (!$user->forget_token_expire == null && $user->forget_token_expire < now()) {
             return new ServiceResult(false, [
-                'tokenExpired' => true
+                'tokenExpired' => false
             ]);
         }
         if ($user->is_active == 0) {
@@ -93,6 +94,20 @@ please click on the link below to verify account
         $user->save();
         $this->sendForgotPassword($user->forget_token, $request['email']);
         return new ServiceResult(true);
+    }
+
+    public function newPassword(string $token): ServiceResult
+    {
+        $user = User::where('forget_token', $token)->first();
+        if ($user->forget_token_expire < now()) {
+            return new ServiceResult(false, [
+                'tokenExpired' => false
+            ]);
+        }
+        return new ServiceResult(true,[
+            'tokenExpired' => true
+        ]);
+
     }
 
     public function sendForgotPassword(string $token, string $email): ServiceResult

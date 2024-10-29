@@ -72,8 +72,8 @@ class AuthController extends Controller
         if (isset($result->data['userActive']) && !$result->data['userActive']) {
             return redirect()->back()->with('error', __('auth_page.account_not_verified'));
         }
-        if (isset($result->data['tokenExpired']) && $result->data['tokenExpired']) {
-            return redirect()->back()->with('error', __('auth_page.token_expired'));
+        if (isset($result->data['tokenExpired']) && !$result->data['tokenExpired']) {
+            return redirect()->back()->with('error', __('auth_page.token_not_expired'));
         }
         return redirect()->route('resetPassword')
             ->with('verifyMessage', __('auth_page.new_password'));
@@ -81,8 +81,8 @@ class AuthController extends Controller
 
     public function newPassword($token)
     {
-        $user = User::where('forget_token', $token)->first();
-        if ($user->forget_token_expire < now()) {
+        $result = $this->authService->newPassword($token);
+        if (isset($result->data['tokenExpired']) && !$result->data['tokenExpired']) {
             return redirect()->route('resetPassword')
                 ->with('error', __('auth_page.token_expired'));
         }

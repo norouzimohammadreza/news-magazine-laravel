@@ -23,6 +23,7 @@ return [
     'account_not_verified' => 'Your account is not verified yet.',
     'account_verified' => 'Your account is verified.',
     'token_expired' => 'This token is expired yet.',
+    'token_not_expired' => 'Your token is not expired yet.',
     'new_password' => 'Please check your email to receive new password.',
     'change_password' => 'Your password has been changed',
     'register_msg' => 'User created successfully.',

@@ -54,8 +54,8 @@ class AuthController extends Controller
         if (isset($result->data['userActive']) && !$result->data['userActive']) {
                 return Response::withMessage(__('auth_page.account_not_verified'))->build()->response();
         }
-        if (isset($result->data['tokenExpired']) && $result->data['tokenExpired']) {
-                return Response::withMessage(__('auth_page.token_expired'))->build()->response();
+        if (isset($result->data['tokenExpired']) && !$result->data['tokenExpired']) {
+                return Response::withMessage(__('auth_page.token_not_expired'))->build()->response();
         }
         return Response::withMessage(__('auth_page.new_password'))->build()->response();
     }
