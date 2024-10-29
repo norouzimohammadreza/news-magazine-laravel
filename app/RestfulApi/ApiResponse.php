@@ -2,11 +2,13 @@
 
 namespace App\RestfulApi;
 
+use App\Enums\ResponseStatusEnum;
+
 class ApiResponse
 {
     private ?string $message = null;
     private mixed $data = null;
-    private int $status = 200;
+    private int $status = ResponseStatusEnum::OK->value;
     private array $appends = [];
 
     public function setMessage(string $message)
