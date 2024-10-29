@@ -27,19 +27,13 @@ class AuthController extends Controller
     public function login(LoginRequest $loginRequest)
     {
         $result = $this->authService->login($loginRequest->validated());
-
-        if (isset($result->data['passwordCheck'])) {
-            if (!$result->data['passwordCheck']) {
+        if (isset($result->data['passwordCheck']) && !$result->data['passwordCheck']) {
                 return Response::withMessage('Password is wrong.')->build()->response();
-            }
         }
-        if (isset($result->data['userActive'])) {
-            if (!$result->data['userActive']) {
+        if (isset($result->data['userActive']) && !$result->data['userActive']) {
                 return Response::withMessage('This account is not verified yet')->build()->response();
-            }
         }
         return Response::withData($result->data)->withMessage('LoginRequest successful')->build()->response();
-
     }
 
     public function verifyAccount($token)
@@ -57,27 +51,20 @@ class AuthController extends Controller
     public function forgotPassword(ForgotPasswordRequest $forgotPasswordRequest)
     {
         $result = $this->authService->forgetPassword($forgotPasswordRequest->validated());
-        if (isset($result->data['userActive'])) {
-            if (!$result->data['userActive']) {
+        if (isset($result->data['userActive']) && !$result->data['userActive']) {
                 return Response::withMessage('This account is not verified yet')->build()->response();
-            }
         }
-        if (isset($result->data['tokenExpired'])) {
-            if ($result->data['tokenExpired']) {
+        if (isset($result->data['tokenExpired']) && $result->data['tokenExpired']) {
                 return Response::withMessage('This token is expired yet')->build()->response();
-            }
         }
         return Response::withMessage('Please check your email to receive new password.')->build()->response();
-
     }
 
     public function confirmPassword(PasswordConfirmationRequest $passwordConfirmationRequest, $token)
     {
         $result = $this->authService->confirmPassword($passwordConfirmationRequest->validated(), $token);
-        if (isset($result->data['tokenExpired'])) {
-            if ($result->data['tokenExpired']) {
+        if (isset($result->data['tokenExpired']) && $result->data['tokenExpired']) {
                 return Response::withMessage('This token is expired yet')->build()->response();
-            }
         }
         return Response::withMessage('User password is changed successfully.')->build()->response();
     }
