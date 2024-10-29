@@ -16,9 +16,9 @@ class MenuService
         $menus = Menu::paginate(2);
         return new ServiceResult(true,MenusListApiResources::collection($menus));
     }
-    public function createMenu(array $validatedRequest) : ServiceResult
+    public function createMenu(MenuStoreRequest $request) : ServiceResult
     {
-
+        $validatedRequest = $request->validated();
         Menu::create([
             'title'=> $validatedRequest['title'],
             'url'=> $validatedRequest['url'],
@@ -31,8 +31,9 @@ class MenuService
     {
         return new ServiceResult(true,new MenuDetailesApiResources($menu));
     }
-    public function updateMenu(array $validatedRequest,Menu $menu) : ServiceResult
+    public function updateMenu(MenuUpdateRequest $request,Menu $menu) : ServiceResult
     {
+        $validatedRequest = $request->validated();
         $menu->update([
             'title'=> $validatedRequest['title'],
             'url'=> $validatedRequest['url'],

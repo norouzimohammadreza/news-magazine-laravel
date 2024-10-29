@@ -35,9 +35,9 @@ class PostController extends Controller
         return Response::withData('Post breaking news state is changed.')->build()->response();
     }
 
-    public function store(PostStoreRequest $postStoreRequest)
+    public function store(PostStoreRequest $request)
     {
-        $this->postServices->createPost($postStoreRequest->validated());
+        $this->postServices->createPost($request);
         return Response::withMessage('Post created successfully')->build()->response();
     }
 
@@ -47,9 +47,9 @@ class PostController extends Controller
         return Response::withData($result->data)->build()->response();
     }
 
-    public function update(PostUpdateRequest $postUpdateRequest, Post $post)
+    public function update(PostUpdateRequest $request, Post $post)
     {
-        $this->postServices->updatePost($postUpdateRequest->validated(), $post);
+        $this->postServices->updatePost($request, $post);
         return Response::withMessage('Post updated successfully')->build()->response();
     }
 

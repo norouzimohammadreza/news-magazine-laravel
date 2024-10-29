@@ -20,9 +20,9 @@ class SettingController extends Controller
         return Response::withData($result->data)->build()->response();
     }
 
-    public function update(SettingRequest $settingRequest, Setting $setting)
+    public function update(SettingRequest $request, Setting $setting)
     {
-        $this->settingService->setSetting($settingRequest->validated(), $setting);
+        $this->settingService->setSetting($request, $setting);
         return Response::withMessage('SettingRequest is set.')->build()->response();
     }
 

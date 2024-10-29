@@ -28,9 +28,9 @@ class BannerController extends Controller
         return view('admin.banner.create');
     }
 
-    public function store(BannerStoreRequest $bannerStoreRequest)
+    public function store(BannerStoreRequest $request)
     {
-        $this->bannerService->createBanner($bannerStoreRequest->validated());
+        $this->bannerService->createBanner($request);
         return redirect()->route('banner.index');
     }
 
@@ -41,9 +41,9 @@ class BannerController extends Controller
         ]);
     }
 
-    public function update(BannerUpdateRequest $bannerUpdateRequest, Banner $banner)
+    public function update(BannerUpdateRequest $request, Banner $banner)
     {
-        $this->bannerService->updateBanner($bannerUpdateRequest->validated(), $banner);
+        $this->bannerService->updateBanner($request, $banner);
         return redirect()->route('banner.index');
     }
 

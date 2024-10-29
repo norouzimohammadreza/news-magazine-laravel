@@ -18,7 +18,9 @@ class CommentService
     public function change(Comment $comment): ServiceResult
     {
 
-        if ($comment->status_id == CommentStatusEnum::unseen->value || $comment->status_id == CommentStatusEnum::seen->value) {
+        if ($comment->status_id == CommentStatusEnum::unseen->value ||
+            $comment->status_id == CommentStatusEnum::seen->value) {
+
             $comment->status_id = CommentStatusEnum::approved->value;
             $comment->save();
             return new ServiceResult(true);

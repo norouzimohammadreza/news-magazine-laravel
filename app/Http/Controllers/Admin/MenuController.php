@@ -31,9 +31,9 @@ class MenuController extends Controller
         ]);
     }
 
-    public function store(MenuStoreRequest $menuStoreRequest)
+    public function store(MenuStoreRequest $request)
     {
-        $this->menuService->createMenu($menuStoreRequest->validated());
+        $this->menuService->createMenu($request);
         return redirect()->route('menu.index');
     }
 
@@ -46,9 +46,9 @@ class MenuController extends Controller
         ]);
     }
 
-    public function update(MenuUpdateRequest $menuUpdateRequest, Menu $menu)
+    public function update(MenuUpdateRequest $request, Menu $menu)
     {
-        $this->menuService->updateMenu($menuUpdateRequest->validated(), $menu);
+        $this->menuService->updateMenu($request, $menu);
         return redirect()->route('menu.index');
     }
 

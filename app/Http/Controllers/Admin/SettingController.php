@@ -42,10 +42,10 @@ class SettingController extends Controller
     /**
      * BannerUpdateRequest the specified resource in storage.
      */
-    public function update(SettingRequest $settingRequest, Setting $setting)
+    public function update(SettingRequest $request, Setting $setting)
     {
 
-        $this->settingService->setSetting($settingRequest->validated(), $setting);
+        $this->settingService->setSetting($request, $setting);
         return redirect()->route('setting.index');
 
     }

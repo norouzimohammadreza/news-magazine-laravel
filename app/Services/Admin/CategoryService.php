@@ -19,9 +19,9 @@ class CategoryService
 
     }
 
-    public function addCategory(array $validatedRequest): ServiceResult
+    public function addCategory(CategoryStoreRequest $request): ServiceResult
     {
-
+        $validatedRequest = $request->validated();
         Category::create($validatedRequest);
         return new ServiceResult(true);
 
@@ -34,9 +34,9 @@ class CategoryService
 
     }
 
-    public function updateCategory(array $validatedRequest, Category $category): ServiceResult
+    public function updateCategory(CategoryUpdateRequest $request, Category $category): ServiceResult
     {
-
+        $validatedRequest = $request->validated();
         $category->update($validatedRequest);
         return new ServiceResult(true, $category);
 

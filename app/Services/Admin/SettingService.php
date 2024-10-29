@@ -16,8 +16,9 @@ class SettingService
 
     }
 
-    public function setSetting(array $validatedRequest, Setting $setting): ServiceResult
+    public function setSetting(SettingRequest $request, Setting $setting): ServiceResult
     {
+        $validatedRequest = $request->validated();
         if (isset($validatedRequest['logo']) && $validatedRequest['logo']->isValid()) {
             $logoFormat = $validatedRequest['logo']->extension();
             $logo = 'logo' . '.' . $logoFormat;

@@ -36,9 +36,9 @@ class UserController extends Controller
         return view('admin.user.create');
     }
 
-    public function store(UserStoreRequest $userStoreRequest)
+    public function store(UserStoreRequest $request)
     {
-        $this->userService->createUser($userStoreRequest->validated());
+        $this->userService->createUser($request);
         return redirect()->route('user.index');
     }
 
@@ -49,9 +49,9 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(UserUpdateRequest $userUpdateRequest, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
-        $this->userService->updateUser($userUpdateRequest->validated(), $user);
+        $this->userService->updateUser($request, $user);
         return redirect()->route('user.index');
     }
 

@@ -22,8 +22,9 @@ class PostServices
         return new ServiceResult(true, PostsListApiResource::collection($posts));
     }
 
-    public function createPost(array $validatedRequest): ServiceResult
+    public function createPost(PostStoreRequest $request): ServiceResult
     {
+        $validatedRequest = $request->validated();
         $realTimeStamp = substr($validatedRequest['published_at'], 0, 10);
         $imageName = time() . '.' . $validatedRequest['image']->extension();
         $validatedRequest['image']->storeAs(('posts'), $imageName);
@@ -45,8 +46,9 @@ class PostServices
         return new ServiceResult(true, new PostDetailsApiResource($post));
     }
 
-    public function updatePost(array $validatedRequest, Post $post): ServiceResult
+    public function updatePost(PostUpdateRequest $request, Post $post): ServiceResult
     {
+        $validatedRequest = $request->validated();
         $realTimeStamp = substr($validatedRequest['published_at'], 0, 10);
         if (isset($validatedRequest['image'])) {
             Storage::delete('posts/' . $post->image);

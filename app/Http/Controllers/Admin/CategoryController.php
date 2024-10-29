@@ -29,9 +29,9 @@ class CategoryController extends Controller
         return view('admin.category.create');
     }
 
-    public function store(CategoryStoreRequest $categoryStoreRequest)
+    public function store(CategoryStoreRequest $request)
     {
-        $this->categoryService->addCategory($categoryStoreRequest->validated());
+        $this->categoryService->addCategory($request);
         return redirect()->route('category.index');
     }
 
@@ -42,9 +42,9 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function update(CategoryUpdateRequest $categoryUpdateRequest, Category $category)
+    public function update(CategoryUpdateRequest $request, Category $category)
     {
-        $this->categoryService->updateCategory($categoryUpdateRequest->validated(), $category);
+        $this->categoryService->updateCategory($request, $category);
         return redirect()->route('category.index');
     }
 

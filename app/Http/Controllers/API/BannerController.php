@@ -21,9 +21,9 @@ class BannerController extends Controller
         return Response::withData($result->data)->build()->response();
     }
 
-    public function store(BannerStoreRequest $bannerStoreRequest)
+    public function store(BannerStoreRequest $request)
     {
-        $this->bannerService->createBanner($bannerStoreRequest->validated());
+        $this->bannerService->createBanner($request);
         return Response::withMessage('Banner created successfully')->build()->response();
     }
 
@@ -33,9 +33,9 @@ class BannerController extends Controller
         return Response::withData($result->data)->build()->response();
     }
 
-    public function update(BannerUpdateRequest $bannerUpdateRequest, Banner $banner)
+    public function update(BannerUpdateRequest $request, Banner $banner)
     {
-        $this->bannerService->updateBanner($bannerUpdateRequest->validated(), $banner);
+        $this->bannerService->updateBanner($request, $banner);
         return Response::withMessage('Banner updated successfully')->build()->response();
     }
 

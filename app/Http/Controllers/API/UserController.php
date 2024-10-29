@@ -31,9 +31,9 @@ class UserController extends Controller
         return Response::withData($result->data)->withStatus(200)->build()->response();
     }
 
-    public function store(UserStoreRequest $userStoreRequest)
+    public function store(UserStoreRequest $request)
     {
-        $this->userService->createUser($userStoreRequest->validated());
+        $this->userService->createUser($request);
         return Response::withMessage('User created')->withStatus(200)->build()->response();
     }
 
@@ -43,9 +43,9 @@ class UserController extends Controller
         return Response::withData($result->data)->withStatus(200)->build()->response();
     }
 
-    public function update(UserUpdateRequest $userUpdateRequest, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
-        $this->userService->updateUser($userUpdateRequest->validated(), $user);
+        $this->userService->updateUser($request, $user);
         return Response::withMessage('User updated')->withStatus(200)->build()->response();
     }
 

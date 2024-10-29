@@ -23,8 +23,9 @@ class BannerService
 
     }
 
-    public function createBanner(array $validatedRequest): ServiceResult
+    public function createBanner(BannerStoreRequest $request): ServiceResult
     {
+        $validatedRequest = $request->validated();
         $imageName = time() . '.' . $validatedRequest['image']->extension();
         $validatedRequest['image']->storeAs('banners', $imageName);
         $validatedRequest['image'] = $imageName;
@@ -40,9 +41,9 @@ class BannerService
 
     }
 
-    public function updateBanner(array $validatedRequest, Banner $banner): ServiceResult
+    public function updateBanner(BannerUpdateRequest $request, Banner $banner): ServiceResult
     {
-
+        $validatedRequest = $request->validated();
         if (isset($validatedRequest['image'])) {
             Storage::delete('banners/' . $banner->image);
             $imageName = time() . '.' . $validatedRequest['image']->extension();
