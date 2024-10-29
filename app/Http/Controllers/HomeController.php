@@ -58,10 +58,10 @@ class HomeController extends Controller
         ]);
     }
 
-    public function comment($post, AddCommentRequest $addCommentRequest)
+    public function comment(Post $post, AddCommentRequest $request)
     {
-        $this->appService->comment($post, $addCommentRequest->validated());
-        return redirect()->back()->with('password', 'کامنت شما ثبت و پس از تایید به نمایش در خواهد امد.');
+        $this->appService->comment($post, $request);
+        return redirect()->back()->with('password', __('comment.add'));
     }
     public function changeLang($lang)
     {

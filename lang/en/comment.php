@@ -14,4 +14,6 @@ return [
     'status.unseen' => 'Unseen',
     'status.seen' => 'Seen',
 
+    'add' => 'Your comment has been submitted and will be displayed after approval.',
+
 ];

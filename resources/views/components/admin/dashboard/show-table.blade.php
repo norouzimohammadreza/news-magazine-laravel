@@ -46,7 +46,7 @@
                 <tr>
                     <td>{{$mostCommentsPost->id}}</td>
                     <td>{{$mostCommentsPost->title}}</td>
-                    <td><span class="badge badge-success">{{$mostCommentsPost->comment_count}}</span></td>
+                    <td><span class="badge badge-success">{{$mostCommentsPost->approved_comments_count}}</span></td>
                 </tr>
             @endforeach
                 </tbody>
@@ -69,11 +69,11 @@
                 <tbody>
 
         @foreach($mostCommentsUsers as $mostCommentsUser)
-            @if($mostCommentsUser->comment_count>0)
+            @if($mostCommentsUser->approved_comments_count >0)
                 <tr>
                     <td>{{$mostCommentsUser->id}}</td>
                     <td>{{$mostCommentsUser->name}}</td>
-                    <td><span class="badge badge-warning">{{$mostCommentsUser->comment_count}}</span></td>
+                    <td><span class="badge badge-warning">{{$mostCommentsUser->approved_comments_count}}</span></td>
                 </tr>
             @endif
         @endforeach

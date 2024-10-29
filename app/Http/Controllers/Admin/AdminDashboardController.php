@@ -17,6 +17,7 @@ class AdminDashboardController extends Controller
     {
         $result = $this->adminDashboardServices->getDashboardData();
         $result = $result->data;
+
         return view('admin.index', [
             'categoriesCount' => $result['categoriesCount'],
             'adminsCount' => $result['adminsCount'],

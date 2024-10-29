@@ -3,6 +3,11 @@
         @auth
             <li><span class="fa fa-user"></span><span> {{auth()->user()->name}}</span></li>
             <li><a href="{{route('logout')}}"><span>{{__('main.logout')}}</span></a></li>
+            <li>
+                @if(auth()->user()->is_admin)
+                    <x-go-to-dashbord/>
+                @endif
+            </li>
         @endauth
         @guest
         <li><a href="{{route('register')}}"><span>{{__('main.register')}}</span></a></li>

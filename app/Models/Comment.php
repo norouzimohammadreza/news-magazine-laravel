@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use App\Enums\CommentStatusEnum;
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\Scopes\CommentScopes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Comment extends Model
 {
-    use HasFactory;
+    use HasFactory, CommentScopes, SoftDeletes;
 
     protected $fillable = [
         'body',
@@ -27,13 +28,5 @@ class Comment extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function scopeUnseenComments(Builder $builder): void
-    {
-        $builder->where('status_id', CommentStatusEnum::unseen->value);
-    }
 
-    public function scopeApprovedComments(Builder $builder): void
-    {
-        $builder->where('status_id', CommentStatusEnum::approved->value);
-    }
 }

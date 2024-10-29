@@ -6,10 +6,11 @@ namespace App\Models;
 use App\Models\Scopes\PostScopes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use HasFactory, PostScopes;
+    use HasFactory, PostScopes, SoftDeletes;
 
     protected $fillable = [
         'title',
@@ -38,6 +39,6 @@ class Post extends Model
 
     public function approvedComments()
     {
-        return $this->hasMany(Comment::class)->ApprovedComments();
+        return $this->hasMany(Comment::class)->approvedComments();
     }
 }

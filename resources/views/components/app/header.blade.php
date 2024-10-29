@@ -5,7 +5,7 @@
             <span class="lnr lnr-magnifier"></span>
         </label>
         <span class="Search-close">
-								<span class="lnr lnr-cross"></span>
-                        </span>
+            <span class="lnr lnr-cross"></span>
+       </span>
     </form>
 </div>

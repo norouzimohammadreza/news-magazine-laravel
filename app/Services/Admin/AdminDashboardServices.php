@@ -18,15 +18,17 @@ class AdminDashboardServices
             $adminsCount = User::AdminUser()->count();
             $usersCount = User::NotAdminUser()->count();
             $postsCount = Post::published()->visible()->count();
-            $views = Post::sum('view');
+            $views = Post::published()->visible()->sum('view');
             $commentsCount = Comment::count();
             $unseenComments = Comment::UnseenComments()->count();
             $approvedComments = Comment::ApprovedComments()->count();
             //for tables
-            $mostViewsPosts = Post::orderByDesc('view')->limit(3)->get();
-            $mostCommentsPosts = Post::withCount('comment')
-                ->orderBy('comment_count', 'DESC')->limit(3)->get();
-            $mostCommentsUsers = User::withCount('comment')->orderBy('comment_count', 'DESC')->limit(3)->get();
+            $mostViewsPosts = Post::published()->visible()->orderByDesc('view')->limit(3)->get();
+            $mostCommentsPosts = Post::published()->visible()->withCount('approvedComments')
+                ->orderBy('approved_comments_count', 'DESC')->limit(3)->get();
+            $mostCommentsUsers = User::withCount('approvedComments')
+                ->orderBy('approved_comments_count', 'DESC')->limit(3)->get();
+
         } catch (\Throwable $th) {
             app()[ExceptionHandler::class]->report($th);
             return new ServiceResult(false, $th->getMessage());

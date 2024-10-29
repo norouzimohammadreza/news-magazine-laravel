@@ -45,7 +45,7 @@ Route::middleware(LangMiddleware::class)->group(function () {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
-        Route::get('/', [AdminDashboardController::class, 'index']);
+        Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
         Route::resource('/category', CategoryController::class);
         Route::resource('/user', UserController::class);
         Route::resource('/setting', SettingController::class);

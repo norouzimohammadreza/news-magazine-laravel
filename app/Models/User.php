@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\UserScopes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Builder;
+
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasFactory, Notifiable, HasApiTokens, UserScopes, SoftDeletes;
 
     protected $fillable = [
         'name',
@@ -28,12 +30,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
-    public function scopeAdminUser(Builder $builder): void
+
+    public function approvedComments()
     {
-        $builder->where('is_admin', 1);
-    }
-    public function scopeNotAdminUser(Builder $builder): void
-    {
-        $builder->where('is_admin',0);
+        return $this->hasMany(Comment::class)->approvedComments();
     }
 }

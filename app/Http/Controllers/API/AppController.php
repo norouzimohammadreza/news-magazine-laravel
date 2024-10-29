@@ -33,9 +33,9 @@ class AppController extends Controller
         return Response::withData($result->data)->build()->response();
     }
 
-    public function comment($post, AddCommentRequest $addCommentRequest)
+    public function comment($post, AddCommentRequest $request)
     {
-        $this->appService->comment($post, $addCommentRequest->validated());
-        return Response::withMessage('AddCommentRequest created successfully.')->build()->response();
+        $this->appService->comment($post, $request);
+        return Response::withMessage(__('comment.add'))->build()->response();
     }
 }

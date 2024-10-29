@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\UserPermissionEnum;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +21,7 @@ class IsAdmin
             return redirect('/');
         }
         $user = auth()->user();
-        if ($user->is_admin == 0 and !$request->is('/')) {
+        if (!$user->is_admin == UserPermissionEnum::admin->value and !$request->is('/')) {
 
             return redirect('/');
         }
