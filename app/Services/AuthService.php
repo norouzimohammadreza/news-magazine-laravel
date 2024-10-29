@@ -3,6 +3,9 @@
 namespace App\Services;
 
 use App\Base\ServiceResult;
+use App\Http\Requests\Api\Auth\ForgotPasswordRequest;
+use App\Http\Requests\Api\Auth\LoginRequest;
+use App\Http\Requests\Api\Auth\PasswordConfirmationRequest;
 use App\Http\Requests\Api\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -14,12 +17,12 @@ class AuthService
 {
     public function Register(RegisterRequest $request): ServiceResult
     {
-        $validated = $request->validated();
+        $validatedRequest = $request->validated();
         $verify_token = Str::random(55);
         $user = User::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
+            'name' => $validatedRequest['name'],
+            'email' => $validatedRequest['email'],
+            'password' => Hash::make($validatedRequest['password']),
             'verify_token' => $verify_token
         ]);
         $user->createToken('auth_token')->plainTextToken;
@@ -28,10 +31,11 @@ class AuthService
     }
 
 
-    public function Login(array $request): ServiceResult
+    public function Login(LoginRequest $request): ServiceResult
     {
-        $user = User::where('email', $request['email'])->first();
-        if (!Hash::check($request['password'], $user->password)) {
+        $validatedRequest = $request->validated();
+        $user = User::where('email', $validatedRequest['email'])->first();
+        if (!Hash::check($validatedRequest['password'], $user->password)) {
             return new ServiceResult(false, [
                 'passwordCheck' => false
             ]);
@@ -76,9 +80,10 @@ please click on the link below to verify account
         return new ServiceResult(true);
     }
 
-    public function forgetPassword(array $request): ServiceResult
+    public function forgetPassword(ForgotPasswordRequest $request): ServiceResult
     {
-        $user = User::where('email', $request['email'])->first();
+        $validatedRequest = $request->validated();
+        $user = User::where('email', $validatedRequest['email'])->first();
         if (!$user->forget_token_expire == null && $user->forget_token_expire < now()) {
             return new ServiceResult(false, [
                 'tokenExpired' => false
@@ -122,15 +127,16 @@ please click on the link below to verify account
         return new ServiceResult(true);
     }
 
-    public function confirmPassword(array $request, string $token): ServiceResult
+    public function confirmPassword(PasswordConfirmationRequest $request, string $token): ServiceResult
     {
+        $validatedRequest = $request->validated();
         $user = User::where('forget_token', $token)->first();
         if (!$user->forget_token_expire == null && $user->forget_token_expire < now()) {
             return new ServiceResult(false, [
                 'tokenExpired' => true
             ]);
         }
-        $user->password = Hash::make($request['password']);
+        $user->password = Hash::make($validatedRequest['password']);
         $user->save();
         return new ServiceResult(true);
 

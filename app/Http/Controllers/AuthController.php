@@ -7,7 +7,6 @@ use App\Http\Requests\Api\Auth\ForgotPasswordRequest;
 use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Http\Requests\Api\Auth\PasswordConfirmationRequest;
 use App\Http\Requests\Api\Auth\RegisterRequest;
-use App\Models\User;
 use App\Services\AuthService;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,9 +34,9 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function loginStore(LoginRequest $loginRequest)
+    public function loginStore(LoginRequest $request)
     {
-        $result = $this->authService->login($loginRequest->validated());
+        $result = $this->authService->login($request);
         if (isset($result->data['passwordCheck']) && !$result->data['passwordCheck']) {
             return redirect()->back()->with('error', __('auth_page.wrong_password'));
         }
@@ -66,9 +65,9 @@ class AuthController extends Controller
         return view('auth.reset-password');
     }
 
-    public function forgotPassword(ForgotPasswordRequest $forgotPasswordRequest)
+    public function forgotPassword(ForgotPasswordRequest $request)
     {
-        $result = $this->authService->forgetPassword($forgotPasswordRequest->validated());
+        $result = $this->authService->forgetPassword($request);
         if (isset($result->data['userActive']) && !$result->data['userActive']) {
             return redirect()->back()->with('error', __('auth_page.account_not_verified'));
         }
@@ -89,9 +88,9 @@ class AuthController extends Controller
         return view('auth.new-password', compact('token'));
     }
 
-    public function confirmPassword(PasswordConfirmationRequest $confirmationRequest, $token)
+    public function confirmPassword(PasswordConfirmationRequest $request, $token)
     {
-        $result = $this->authService->confirmPassword($confirmationRequest->validated(), $token);
+        $result = $this->authService->confirmPassword($request, $token);
         if (isset($result->data['tokenExpired']) && $result->data['tokenExpired']) {
             return redirect()->back()->with('error', __('auth_page.token_expired'));
         }

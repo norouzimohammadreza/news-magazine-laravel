@@ -68,8 +68,5 @@ class HomeController extends Controller
        $this->appService->setLanguage($lang);
         return redirect()->back();
     }
-    public function lang()
-    {
-        dd(App::currentLocale());
-    }
+
 }

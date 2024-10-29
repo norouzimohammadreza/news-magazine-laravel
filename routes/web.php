@@ -10,7 +10,10 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TestController;
 use App\Http\Middleware\Auth;
+use App\Http\Middleware\CheckTestEnv;
+use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\LangMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +24,6 @@ Route::middleware(LangMiddleware::class)->group(function () {
     Route::get('post/{post}', [HomeController::class, 'post'])->name('post');
     Route::post('comment/{post}', [HomeController::class, 'comment'])->name('comment');
     Route::get('lang/{lang}', [HomeController::class, 'changeLang'])->name('change-lang');
-    Route::get('lang', [HomeController::class, 'lang'])->name('lang');
 
     Route::middleware(Auth::class)->group(function () {
         Route::get('register', [AuthController::class, 'register'])->name('register');
@@ -35,14 +37,14 @@ Route::middleware(LangMiddleware::class)->group(function () {
         Route::Post('confirm-password/{token}', [AuthController::class, 'confirmPassword'])->name('confirmPassword');
     });
 
-
-    Route::get('check', function () {
-        dd(auth()->user());
+    Route::middleware(CheckTestEnv::class)->group(function () {
+        Route::get('lang', [TestController::class, 'lang'])->name('lang');
+        Route::get('check', [TestController::class, 'check'])->name('check');
     });
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
-    Route::prefix('admin')->middleware(\App\Http\Middleware\IsAdmin::class)->group(function () {
+    Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
         Route::get('/', [AdminDashboardController::class, 'index']);
         Route::resource('/category', CategoryController::class);
         Route::resource('/user', UserController::class);
