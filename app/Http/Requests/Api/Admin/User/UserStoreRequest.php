@@ -25,7 +25,7 @@ class UserStoreRequest extends ApiFormRequest
         return [
             'name' => 'required|min:5|max:50|unique:users',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
+            'password' => 'required|min:8||regex:^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$',
             'is_admin'=>'required'
         ];
     }

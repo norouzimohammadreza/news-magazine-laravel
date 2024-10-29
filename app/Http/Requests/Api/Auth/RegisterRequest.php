@@ -24,8 +24,8 @@ class RegisterRequest extends ApiFormRequest
         return [
             'name' => 'required|min:5|max:50|unique:users',
             'email' => 'required|email|max:100|unique:users',
-            'password' => 'required|min:6|max:48|confirmed',
-            'password_confirmation' => 'required|min:6|max:48|same:password',
+            'password' => 'required|min:8|max:48|confirmed',
+            'password_confirmation' => 'required|min:8|max:48|same:password|regex:^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$',
         ];
     }
 }

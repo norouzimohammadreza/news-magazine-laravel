@@ -22,8 +22,8 @@ class PasswordConfirmationRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'password' => 'required|min:6|max:48|confirmed',
-            'password_confirmation' => 'required|min:6|max:48|same:password',
+            'password' => 'required|min:6|max:48||regex:^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$|confirmed',
+            'password_confirmation' => 'required|min:8|max:48|same:password|regex:^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$',
         ];
     }
 }

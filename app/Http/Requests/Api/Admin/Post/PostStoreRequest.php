@@ -27,7 +27,7 @@ class PostStoreRequest extends ApiFormRequest
             'body' => 'required',
             'published_at' => 'required',
             'image' => 'required|image|max:512',
-            'category_id' => 'required',
+            'category_id' => 'required|integer|exists:categories,id',
         ];
     }
 }

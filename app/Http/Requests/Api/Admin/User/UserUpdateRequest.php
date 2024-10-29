@@ -24,7 +24,6 @@ class UserUpdateRequest extends ApiFormRequest
         return [
             'name' => 'min:5|max:50|unique:users,id',
             'email' => 'email|unique:users',
-            'password' => 'min:6',
         ];
     }
 }

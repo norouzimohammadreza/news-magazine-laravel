@@ -27,7 +27,7 @@ class PostUpdateRequest extends ApiFormRequest
             'body' => 'required',
             'published_at' => 'required',
             'image' => 'image|max:512',
-            'category_id' => 'required',
+            'category_id' => 'required|integer|exists:categories,id',
         ];
     }
 }
