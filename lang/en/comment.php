@@ -8,4 +8,10 @@ return [
     'click to approve' => 'click to approve',
     'click to unapprove' => 'click to unapprove',
     'list_of_comments' => 'List of comments',
+
+    //status
+    'status.approved' => 'Approved',
+    'status.unseen' => 'Unseen',
+    'status.seen' => 'Seen',
+
 ];

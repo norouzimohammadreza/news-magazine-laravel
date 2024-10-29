@@ -23,14 +23,12 @@ class BannerService
 
     }
 
-    public function createBanner(BannerStoreRequest $bannerStoreRequest): ServiceResult
+    public function createBanner(array $validatedRequest): ServiceResult
     {
-        $imageName = time() . '.' . $bannerStoreRequest->file('image')->extension();
-        $bannerStoreRequest->file('image')->storeAs('banners', $imageName);
-        $bannerStoreRequest = $bannerStoreRequest->validated();
-        $bannerStoreRequest['image'] = $imageName;
-        Banner::create($bannerStoreRequest);
-
+        $imageName = time() . '.' . $validatedRequest['image']->extension();
+        $validatedRequest['image']->storeAs('banners', $imageName);
+        $validatedRequest['image'] = $imageName;
+        Banner::create($validatedRequest);
         return new ServiceResult(true);
 
     }
@@ -42,18 +40,18 @@ class BannerService
 
     }
 
-    public function updateBanner(BannerUpdateRequest $bannerUpdateRequest, Banner $banner): ServiceResult
+    public function updateBanner(array $validatedRequest, Banner $banner): ServiceResult
     {
 
-        if ($bannerUpdateRequest->hasFile('image')) {
+        if (isset($validatedRequest['image'])) {
             Storage::delete('banners/' . $banner->image);
-            $imageName = time() . '.' . $bannerUpdateRequest->file('image')->extension();
-            $bannerUpdateRequest->file('image')->storeAs(('banners'), $imageName);
+            $imageName = time() . '.' . $validatedRequest['image']->extension();
+            $validatedRequest['image']->storeAs('banners', $imageName);
         }
 
         $banner->update([
-            'url' => $bannerUpdateRequest->url,
-            'image' => ($bannerUpdateRequest->hasFile('image')) ? $imageName : $banner->image
+            'url' => $validatedRequest['url'],
+            'image' => (isset($validatedRequest['image'])) ? $imageName : $banner->image
         ]);
 
         return new ServiceResult(true);

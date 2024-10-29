@@ -16,24 +16,24 @@ class SettingService
 
     }
 
-    public function setSetting(SettingRequest $settingRequest, Setting $setting): ServiceResult
+    public function setSetting(array $validatedRequest, Setting $setting): ServiceResult
     {
-        if ($settingRequest->hasFile('logo') && $settingRequest->file('logo')->isValid()) {
-            $logoFormat = $settingRequest->file('logo')->extension();
+        if (isset($validatedRequest['logo']) && $validatedRequest['logo']->isValid()) {
+            $logoFormat = $validatedRequest['logo']->extension();
             $logo = 'logo' . '.' . $logoFormat;
-            $settingRequest->file('logo')->move(public_path('setting'), $logo);
+            $validatedRequest['logo']->move(public_path('setting'), $logo);
         }
-        if ($settingRequest->hasFile('icon') && $settingRequest->file('icon')->isValid()) {
-            $iconFormat = $settingRequest->file('icon')->extension();
+        if (isset($validatedRequest['icon']) && $validatedRequest['icon']->isValid()) {
+            $iconFormat = $validatedRequest['icon']->extension();
             $icon = 'icon' . '.' . $iconFormat;
-            $settingRequest->file('icon')->move(public_path('setting'), $icon);
+            $validatedRequest['icon']->move(public_path('setting'), $icon);
         }
         $setting->update([
-            'title' => $settingRequest->title,
-            'description' => $settingRequest->description,
-            'keyword' => $settingRequest->keyword,
-            'logo' => $settingRequest->hasFile('logo') ? $logo : $setting->logo,
-            'icon' => $settingRequest->hasFile('icon') ? $icon : $setting->icon
+            'title' => $validatedRequest['title'],
+            'description' => $validatedRequest['description'],
+            'keyword' => $validatedRequest['keyword'],
+            'logo' => (isset($validatedRequest['logo'])) ? $logo : $setting->logo,
+            'icon' => (isset($validatedRequest['icon'])) ? $icon : $setting->icon
         ]);
         return new ServiceResult(true);
     }

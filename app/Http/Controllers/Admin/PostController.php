@@ -58,7 +58,7 @@ class PostController extends Controller
     public function store(PostStoreRequest $postStoreRequest)
     {
 
-        $this->postServices->createPost($postStoreRequest);
+        $this->postServices->createPost($postStoreRequest->validated());
         return redirect()->route('post.index');
 
     }
@@ -77,7 +77,7 @@ class PostController extends Controller
     public function update(PostUpdateRequest $postUpdateRequest, Post $post)
     {
 
-        $this->postServices->updatePost($postUpdateRequest, $post);
+        $this->postServices->updatePost($postUpdateRequest->validated(), $post);
         return redirect()->route('post.index');
 
     }

@@ -31,8 +31,8 @@ class CategoryController extends Controller
 
     public function store(CategoryStoreRequest $categoryStoreRequest)
     {
-        $this->categoryService->addCategory($categoryStoreRequest);
-        return redirect()->route('admin.category.index');
+        $this->categoryService->addCategory($categoryStoreRequest->validated());
+        return redirect()->route('category.index');
     }
 
     public function edit(Category $category)
@@ -44,7 +44,7 @@ class CategoryController extends Controller
 
     public function update(CategoryUpdateRequest $categoryUpdateRequest, Category $category)
     {
-        $this->categoryService->updateCategory($categoryUpdateRequest, $category);
+        $this->categoryService->updateCategory($categoryUpdateRequest->validated(), $category);
         return redirect()->route('category.index');
     }
 

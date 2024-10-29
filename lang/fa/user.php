@@ -13,4 +13,9 @@ return [
     'enter_email' => 'ایمیل را وارد کنید',
     'enter_password' => 'رمز عبور را وارد کنید',
     'list_of_users' => 'لیست کاربران',
+    'user.active.Active' => 'کاربر فعال است',
+    'user.active.inActive' => 'کاربر غیرفعال است',
+
+    'user.permission.user' => 'کاربر',
+    'user.permission.admin' => 'مدیر',
 ];

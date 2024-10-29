@@ -45,7 +45,7 @@ class SettingController extends Controller
     public function update(SettingRequest $settingRequest, Setting $setting)
     {
 
-        $this->settingService->setSetting($settingRequest, $setting);
+        $this->settingService->setSetting($settingRequest->validated(), $setting);
         return redirect()->route('setting.index');
 
     }

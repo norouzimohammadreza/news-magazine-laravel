@@ -21,62 +21,37 @@ class UserController extends Controller
 
     public function index()
     {
-
         $result = $this->userService->getList();;
         return Response::withData($result)->withStatus(200)->build()->response();
-
     }
 
-    /**
-     * BannerStoreRequest a newly created resource in storage.
-     */
     public function isAdmin(User $user)
     {
-
         $result = $this->userService->isAdmin($user);
         return Response::withData($result->data)->withStatus(200)->build()->response();
-
     }
 
     public function store(UserStoreRequest $userStoreRequest)
     {
-
-        $this->userService->createUser($userStoreRequest);
+        $this->userService->createUser($userStoreRequest->validated());
         return Response::withMessage('User created')->withStatus(200)->build()->response();
-
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(User $user)
     {
-
         $result = $this->userService->showUser($user);
         return Response::withData($result->data)->withStatus(200)->build()->response();
-
     }
 
-    /**
-     * BannerUpdateRequest the specified resource in storage.
-     */
     public function update(UserUpdateRequest $userUpdateRequest, User $user)
     {
-
-        $this->userService->updateUser($userUpdateRequest, $user);
+        $this->userService->updateUser($userUpdateRequest->validated(), $user);
         return Response::withMessage('User updated')->withStatus(200)->build()->response();
-
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(User $user)
     {
-
         $this->userService->deleteUser($user);
         return Response::withMessage('User deleted')->withStatus(200)->build()->response();
-
     }
 }

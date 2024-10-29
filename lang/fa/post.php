@@ -15,5 +15,14 @@ return [
     'add_selected' => 'افزودن انتخاب شده',
     'post_management' => 'مدیریت پست',
     'selected' => '#انتخاب شده',
-    'breaking_news' => '#اخبار_فوری'
+    'breaking_news' => '#اخبار_فوری',
+
+    'post.breaking_news.notBreakingNews' => 'خبر فوری وجود ندارد',
+    'post.breaking_news.isBreakingNews' => 'خبر فوری',
+
+    'post.selected.notSelected' => 'انتخاب شده ای وجود ندارد',
+    'post.selected.isSelected' => 'پست انتخاب شده',
+
+    'post.status.inVisible' => 'نامرئی',
+    'post.status.visible' => 'مرئی',
 ];

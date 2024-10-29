@@ -13,4 +13,11 @@ return [
     'enter_email'=>'Enter Email',
     'enter_password'=>'Enter Password',
     'list_of_users' => 'List of Users',
+
+    'user.active.Active' => 'User is active',
+    'user.active.inActive' => 'User is not active',
+
+    'user.permission.user' => 'User',
+    'user.permission.admin' => 'Admin',
+
 ];

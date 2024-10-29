@@ -34,10 +34,10 @@ class UserService
 
     }
 
-    public function createUser(UserStoreRequest $userStoreRequest): ServiceResult
+    public function createUser(array $validatedRequest): ServiceResult
     {
-        $userStoreRequest['password'] = Hash::make($userStoreRequest['password']);
-        User::create($userStoreRequest->validated());
+        $validatedRequest['password'] = Hash::make($validatedRequest['password']);
+        User::create($validatedRequest);
         return new ServiceResult(true);
     }
 
@@ -47,14 +47,14 @@ class UserService
         return new ServiceResult(true);
     }
 
-    public function updateUser(UserUpdateRequest $userUpdateRequest, User $user): ServiceResult
+    public function updateUser(array $validatedRequest, User $user): ServiceResult
     {
         if ($user->id == auth()->user()->id) {
             return new ServiceResult(true);
         }
 
-        $user->name = $userUpdateRequest['name'];
-        $user->is_admin = $userUpdateRequest['is_admin'];
+        $user->name = $validatedRequest['name'];
+        $user->is_admin = $validatedRequest['is_admin'];
         $user->save();
         return new ServiceResult(true, $user);
     }

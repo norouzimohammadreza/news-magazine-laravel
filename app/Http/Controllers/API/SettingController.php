@@ -17,19 +17,14 @@ class SettingController extends Controller
 
     public function index()
     {
-
         $result = $this->settingService->showSetting();
         return Response::withData($result->data)->build()->response();
-
     }
 
     public function update(SettingRequest $settingRequest, Setting $setting)
     {
-
-        $this->settingService->setSetting($settingRequest, $setting);
+        $this->settingService->setSetting($settingRequest->validated(), $setting);
         return Response::withMessage('SettingRequest is set.')->build()->response();
-
-
     }
 
 }

@@ -19,10 +19,10 @@ class CategoryService
 
     }
 
-    public function addCategory(CategoryStoreRequest $categoryStoreRequest): ServiceResult
+    public function addCategory(array $validatedRequest): ServiceResult
     {
 
-        Category::create($categoryStoreRequest->validated());
+        Category::create($validatedRequest);
         return new ServiceResult(true);
 
     }
@@ -34,10 +34,10 @@ class CategoryService
 
     }
 
-    public function updateCategory(CategoryUpdateRequest $categoryUpdateRequest, Category $category): ServiceResult
+    public function updateCategory(array $validatedRequest, Category $category): ServiceResult
     {
 
-        $category->update($categoryUpdateRequest->validated());
+        $category->update($validatedRequest);
         return new ServiceResult(true, $category);
 
     }

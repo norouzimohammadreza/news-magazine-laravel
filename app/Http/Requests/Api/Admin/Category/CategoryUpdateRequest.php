@@ -23,7 +23,7 @@ class CategoryUpdateRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'title' => 'min:3|max:50'
+            'title' => 'required|min:3|max:50|unique:categories,id'
         ];
     }
 }

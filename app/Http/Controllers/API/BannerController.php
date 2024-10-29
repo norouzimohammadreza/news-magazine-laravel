@@ -15,58 +15,33 @@ class BannerController extends Controller
     {
     }
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-
         $result = $this->bannerService->ListsBanners();
         return Response::withData($result->data)->build()->response();
-
     }
 
-    /**
-     * BannerStoreRequest a newly created resource in storage.
-     */
     public function store(BannerStoreRequest $bannerStoreRequest)
     {
-
-        $this->bannerService->createBanner($bannerStoreRequest);
+        $this->bannerService->createBanner($bannerStoreRequest->validated());
         return Response::withMessage('Banner created successfully')->build()->response();
-
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Banner $banner)
     {
-
         $result = $this->bannerService->showBanner($banner);
         return Response::withData($result->data)->build()->response();
-
     }
 
-    /**
-     * BannerUpdateRequest the specified resource in storage.
-     */
     public function update(BannerUpdateRequest $bannerUpdateRequest, Banner $banner)
     {
-
-        $this->bannerService->updateBanner($bannerUpdateRequest, $banner);
+        $this->bannerService->updateBanner($bannerUpdateRequest->validated(), $banner);
         return Response::withMessage('Banner updated successfully')->build()->response();
-
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Banner $banner)
     {
-
         $this->bannerService->deleteBanner($banner);
         return Response::withMessage('Banner deleted successfully')->build()->response();
-
     }
 }

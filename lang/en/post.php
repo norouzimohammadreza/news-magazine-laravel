@@ -16,4 +16,16 @@ return [
     'post_management' => 'Post Management',
     'selected' => '#selected',
     'breaking_news' => '#breaking_news',
+
+    'post.breaking_news.notBreakingNews' => 'No Breaking News',
+    'post.breaking_news.isBreakingNews' => 'Breaking News',
+
+    'post.selected.notSelected' => 'No Selected',
+    'post.selected.isSelected' => 'Selected Post',
+
+    'post.status.inVisible' => 'Invisible',
+    'post.status.visible' => 'Visible',
+
+
+
 ];

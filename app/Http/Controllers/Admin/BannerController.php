@@ -30,7 +30,7 @@ class BannerController extends Controller
 
     public function store(BannerStoreRequest $bannerStoreRequest)
     {
-        $this->bannerService->createBanner($bannerStoreRequest);
+        $this->bannerService->createBanner($bannerStoreRequest->validated());
         return redirect()->route('banner.index');
     }
 
@@ -43,7 +43,7 @@ class BannerController extends Controller
 
     public function update(BannerUpdateRequest $bannerUpdateRequest, Banner $banner)
     {
-        $this->bannerService->updateBanner($bannerUpdateRequest, $banner);
+        $this->bannerService->updateBanner($bannerUpdateRequest->validated(), $banner);
         return redirect()->route('banner.index');
     }
 

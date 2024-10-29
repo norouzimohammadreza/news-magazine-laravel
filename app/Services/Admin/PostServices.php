@@ -22,18 +22,18 @@ class PostServices
         return new ServiceResult(true, PostsListApiResource::collection($posts));
     }
 
-    public function createPost(PostStoreRequest $postStoreRequest): ServiceResult
+    public function createPost(array $validatedRequest): ServiceResult
     {
-        $realTimeStamp = substr($postStoreRequest['published_at'], 0, 10);
-        $imageName = time() . '.' . $postStoreRequest['image']->extension();
-        $postStoreRequest['image']->storeAs(('posts'), $imageName);
+        $realTimeStamp = substr($validatedRequest['published_at'], 0, 10);
+        $imageName = time() . '.' . $validatedRequest['image']->extension();
+        $validatedRequest['image']->storeAs(('posts'), $imageName);
 
         Post::create([
-            'title' => $postStoreRequest['title'],
-            'summary' => $postStoreRequest['summary'],
-            'body' => $postStoreRequest['body'],
+            'title' => $validatedRequest['title'],
+            'summary' => $validatedRequest['summary'],
+            'body' => $validatedRequest['body'],
             'published_at' => date('Y-m-d H:i:s', (int)$realTimeStamp),
-            'category_id' => $postStoreRequest['category_id'],
+            'category_id' => $validatedRequest['category_id'],
             'image' => $imageName,
             'user_id' => auth()->user()->id,
         ]);
@@ -45,21 +45,21 @@ class PostServices
         return new ServiceResult(true, new PostDetailsApiResource($post));
     }
 
-    public function updatePost(PostUpdateRequest $postUpdateRequest, Post $post): ServiceResult
+    public function updatePost(array $validatedRequest, Post $post): ServiceResult
     {
-        $realTimeStamp = substr($postUpdateRequest['published_at'], 0, 10);
-        if ($postUpdateRequest->hasFile('image')) {
+        $realTimeStamp = substr($validatedRequest['published_at'], 0, 10);
+        if (isset($validatedRequest['image'])) {
             Storage::delete('posts/' . $post->image);
-            $imageName = time() . '.' . $postUpdateRequest->file('image')->extension();
-            $postUpdateRequest->file('image')->storeAs(('posts'), $imageName);
+            $imageName = time() . '.' . $validatedRequest['image']->extension();
+            $validatedRequest['image']->storeAs(('posts'), $imageName);
         }
         $post->update([
-            'title' => $postUpdateRequest->title,
-            'summary' => $postUpdateRequest->summary,
-            'body' => $postUpdateRequest->body,
+            'title' => $validatedRequest['title'],
+            'summary' => $validatedRequest['summary'],
+            'body' => $validatedRequest['body'],
             'published_at' => date('Y-m-d H:i:s', (int)$realTimeStamp),
-            'category_id' => $postUpdateRequest->category_id,
-            'image' => $postUpdateRequest->hasFile('image') ? $imageName : $post->image
+            'category_id' => $validatedRequest['category_id'],
+            'image' => (isset($validatedRequest['image']))? $imageName : $post->image
         ]);
         return new ServiceResult(true);
     }
@@ -89,7 +89,7 @@ class PostServices
         } else {
             $post->breaking_news = PostBreakingNewsEnum::isBreakingNews->value;
         }
-        $post->update();
+        $post->save();
         return new ServiceResult(true);
     }
 

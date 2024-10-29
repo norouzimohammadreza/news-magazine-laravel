@@ -16,13 +16,13 @@ class MenuService
         $menus = Menu::paginate(2);
         return new ServiceResult(true,MenusListApiResources::collection($menus));
     }
-    public function createMenu(MenuStoreRequest $menuStoreRequest) : ServiceResult
+    public function createMenu(array $validatedRequest) : ServiceResult
     {
 
         Menu::create([
-            'title'=> $menuStoreRequest['title'],
-            'url'=> $menuStoreRequest['url'],
-            'parent_id'=> ($menuStoreRequest['parent_id']==0)?null:$menuStoreRequest['parent_id'],
+            'title'=> $validatedRequest['title'],
+            'url'=> $validatedRequest['url'],
+            'parent_id'=> ($validatedRequest['parent_id']==0)?null:$validatedRequest['parent_id'],
 
         ]);
         return new ServiceResult(true);
@@ -31,12 +31,12 @@ class MenuService
     {
         return new ServiceResult(true,new MenuDetailesApiResources($menu));
     }
-    public function updateMenu(MenuUpdateRequest $menuUpdateRequest,Menu $menu) : ServiceResult
+    public function updateMenu(array $validatedRequest,Menu $menu) : ServiceResult
     {
         $menu->update([
-            'title'=> $menuUpdateRequest['title'],
-            'url'=> $menuUpdateRequest['url'],
-            'parent_id'=> ($menuUpdateRequest['parent_id']==0)?null:$menuUpdateRequest['parent_id'],
+            'title'=> $validatedRequest['title'],
+            'url'=> $validatedRequest['url'],
+            'parent_id'=> ($validatedRequest['parent_id']==0)?null:$validatedRequest['parent_id'],
         ]);
         return new ServiceResult(true);
     }
