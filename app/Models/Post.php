@@ -3,13 +3,13 @@
 namespace App\Models;
 
 
-use App\Models\Scopes\Post\PostScopes;
+use App\Models\Scopes\PostScopes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    use HasFactory,PostScopes;
+    use HasFactory, PostScopes;
 
     protected $fillable = [
         'title',
@@ -35,10 +35,9 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
     public function approvedComments()
     {
         return $this->hasMany(Comment::class)->ApprovedComments();
     }
-
-
 }

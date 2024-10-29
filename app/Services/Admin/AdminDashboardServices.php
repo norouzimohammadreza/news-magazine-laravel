@@ -17,7 +17,7 @@ class AdminDashboardServices
             $categoriesCount = Category::count();
             $adminsCount = User::AdminUser()->count();
             $usersCount = User::NotAdminUser()->count();
-            $postsCount = Post::count();
+            $postsCount = Post::published()->visible()->count();
             $views = Post::sum('view');
             $commentsCount = Comment::count();
             $unseenComments = Comment::UnseenComments()->count();

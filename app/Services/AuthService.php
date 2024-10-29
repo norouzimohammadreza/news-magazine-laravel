@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Base\ServiceResult;
+use App\Http\Requests\Api\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -11,19 +12,19 @@ use Illuminate\Support\Str;
 
 class AuthService
 {
-    public function Register(array $request): ServiceResult
+    public function Register(RegisterRequest $request): ServiceResult
     {
+        $validated = $request->validated();
         $verify_token = Str::random(55);
         $user = User::create([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => Hash::make($request['password']),
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
             'verify_token' => $verify_token
         ]);
         $user->createToken('auth_token')->plainTextToken;
         $this->sendMail($user['verify_token'], $user['email']);
         return new ServiceResult(true);
-
     }
 
     public function Login(array $request): ServiceResult

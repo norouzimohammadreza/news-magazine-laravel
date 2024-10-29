@@ -23,10 +23,11 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    public function registerStore(RegisterRequest $registerRequest)
+    public function registerStore(RegisterRequest $request)
     {
-        $this->authService->Register($registerRequest->validated());
-        return redirect()->route('login')->with('verifyMessage', 'Please check your email to verify your account');
+        $this->authService->Register($request);
+        return redirect()->route('login')
+            ->with('verifyMessage', __('auth_page.verify_message'));
     }
 
     public function login()
@@ -38,10 +39,10 @@ class AuthController extends Controller
     {
         $result = $this->authService->login($loginRequest->validated());
         if (isset($result->data['passwordCheck']) && !$result->data['passwordCheck']) {
-            return redirect()->back()->with('error', 'Password is wrong.');
+            return redirect()->back()->with('error', __('auth_page.wrong_password'));
         }
         if (isset($result->data['userActive']) && !$result->data['userActive']) {
-            return redirect()->back()->with('error', 'This account is not verified yet');
+            return redirect()->back()->with('error', __('auth_page.account_not_verified'));
         }
 
         Auth::login($result->data['user']);
@@ -51,7 +52,7 @@ class AuthController extends Controller
     public function verifyAccount($token)
     {
         $this->authService->verifyAccount($token);
-        return redirect()->route('login')->with('verifyMessage', 'Your account is verified');
+        return redirect()->route('login')->with('verifyMessage', __('auth_page.account_verified'));
     }
 
     public function logout()
@@ -69,19 +70,21 @@ class AuthController extends Controller
     {
         $result = $this->authService->forgetPassword($forgotPasswordRequest->validated());
         if (isset($result->data['userActive']) && !$result->data['userActive']) {
-            return redirect()->back()->with('error', 'This account is not verified yet');
+            return redirect()->back()->with('error', __('auth_page.account_not_verified'));
         }
         if (isset($result->data['tokenExpired']) && $result->data['tokenExpired']) {
-            return redirect()->back()->with('error', 'This token is expired yet');
+            return redirect()->back()->with('error', __('auth_page.token_expired'));
         }
-        return redirect()->route('resetPassword')->with('verifyMessage', 'Please check your email to receive new password');
+        return redirect()->route('resetPassword')
+            ->with('verifyMessage', __('auth_page.new_password'));
     }
 
     public function newPassword($token)
     {
         $user = User::where('forget_token', $token)->first();
         if ($user->forget_token_expire < now()) {
-            return redirect()->route('resetPassword')->with('error', 'Your token is Expired');
+            return redirect()->route('resetPassword')
+                ->with('error', __('auth_page.token_expired'));
         }
         return view('auth.new-password', compact('token'));
     }
@@ -90,9 +93,10 @@ class AuthController extends Controller
     {
         $result = $this->authService->confirmPassword($confirmationRequest->validated(), $token);
         if (isset($result->data['tokenExpired']) && $result->data['tokenExpired']) {
-            return redirect()->back()->with('error', 'This token is expired yet');
+            return redirect()->back()->with('error', __('auth_page.token_expired'));
         }
-        return redirect()->route('login')->with('verifyMessage', 'Your password has been changed');
+        return redirect()->route('login')
+            ->with('verifyMessage', __('auth_page.change_password'));
     }
 
 }

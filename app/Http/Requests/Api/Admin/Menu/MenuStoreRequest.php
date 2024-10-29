@@ -24,7 +24,7 @@ class MenuStoreRequest extends ApiFormRequest
         return [
             'title' => 'required|min:3|max:50',
             'url' => 'required|url',
-            'parent_id'=> '',
+            'parent_id'=> 'integer|exists:menu,id',
         ];
     }
 }

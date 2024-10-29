@@ -21,52 +21,52 @@ class AuthController extends Controller
     public function Register(RegisterRequest $registerRequest)
     {
         $this->authService->Register($registerRequest->validated());
-        return Response::withMessage('User created successfully')->build()->response();
+        return Response::withMessage(__('auth_page.register_msg'))->build()->response();
     }
 
     public function login(LoginRequest $loginRequest)
     {
         $result = $this->authService->login($loginRequest->validated());
         if (isset($result->data['passwordCheck']) && !$result->data['passwordCheck']) {
-                return Response::withMessage('Password is wrong.')->build()->response();
+                return Response::withMessage(__('auth_page.wrong_password'))->build()->response();
         }
         if (isset($result->data['userActive']) && !$result->data['userActive']) {
-                return Response::withMessage('This account is not verified yet')->build()->response();
+                return Response::withMessage(__('auth_page.account_not_verified'))->build()->response();
         }
-        return Response::withData($result->data)->withMessage('LoginRequest successful')->build()->response();
+        return Response::withData($result->data)->withMessage(__('auth_page.login_msg'))->build()->response();
     }
 
     public function verifyAccount($token)
     {
         $this->authService->verifyAccount($token);
-        return Response::withMessage('Your account is verified successfully.')->build()->response();
+        return Response::withMessage(__('auth_page.account_verified'))->build()->response();
     }
 
     public function logout()
     {
         $this->authService->logout();
-        return Response::withMessage('User logout successfully.')->build()->response();
+        return Response::withMessage(__('auth_page.logout_msg'))->build()->response();
     }
 
     public function forgotPassword(ForgotPasswordRequest $forgotPasswordRequest)
     {
         $result = $this->authService->forgetPassword($forgotPasswordRequest->validated());
         if (isset($result->data['userActive']) && !$result->data['userActive']) {
-                return Response::withMessage('This account is not verified yet')->build()->response();
+                return Response::withMessage(__('auth_page.account_not_verified'))->build()->response();
         }
         if (isset($result->data['tokenExpired']) && $result->data['tokenExpired']) {
-                return Response::withMessage('This token is expired yet')->build()->response();
+                return Response::withMessage(__('auth_page.token_expired'))->build()->response();
         }
-        return Response::withMessage('Please check your email to receive new password.')->build()->response();
+        return Response::withMessage(__('auth_page.new_password'))->build()->response();
     }
 
     public function confirmPassword(PasswordConfirmationRequest $passwordConfirmationRequest, $token)
     {
         $result = $this->authService->confirmPassword($passwordConfirmationRequest->validated(), $token);
         if (isset($result->data['tokenExpired']) && $result->data['tokenExpired']) {
-                return Response::withMessage('This token is expired yet')->build()->response();
+                return Response::withMessage(__('auth_page.token_expired'))->build()->response();
         }
-        return Response::withMessage('User password is changed successfully.')->build()->response();
+        return Response::withMessage(__('auth_page.change_password'))->build()->response();
     }
 
 

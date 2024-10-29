@@ -17,7 +17,6 @@ class HomeController extends Controller
 
     public function index()
     {
-
         $result = $this->appService->mainPage();
         $data = $result->data;
 
