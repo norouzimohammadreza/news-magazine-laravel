@@ -20,9 +20,6 @@ class MenuFactory extends Factory
         return [
             'title' => fake()->word(),
             'url' => fake()->url,
-            'parent_id' => function () {
-                return Menu::factory()->create()->id;
-            }
         ];
     }
 }
