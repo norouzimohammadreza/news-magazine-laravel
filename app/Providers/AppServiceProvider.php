@@ -25,5 +25,6 @@ class AppServiceProvider extends ServiceProvider
         Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
         Paginator::useBootstrapFour();
 
+
     }
 }
