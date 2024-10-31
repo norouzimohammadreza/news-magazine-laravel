@@ -7,5 +7,5 @@
 
 <link href="<?= asset('admin-panel/css/style.css'); ?>" rel="stylesheet" type="text/css">
 @if(session('lang')=='fa')
-    <x-admin-change-local-font/>
+    <x-change-local-font/>
 @endif
