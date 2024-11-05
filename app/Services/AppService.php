@@ -10,6 +10,7 @@ use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class AppService
@@ -63,6 +64,23 @@ class AppService
         ]);
     }
 
+    public function aboutUs(): ServiceResult
+    {
+        return new ServiceResult(true, [
+            'categories' => $this->setCategories()->data,
+            'mostComments' => $this->setMostComments()->data,
+            'banner' => $this->setBanner()->data,
+        ]);
+    }
+    public function contactUS(): ServiceResult
+    {
+        return new ServiceResult(true, [
+            'categories' => $this->setCategories()->data,
+            'mostComments' => $this->setMostComments()->data,
+            'banner' => $this->setBanner()->data,
+        ]);
+    }
+
     public function showPost(Post $post): ServiceResult
     {
         $post->published()->visible();
@@ -94,19 +112,21 @@ class AppService
         $this->mostComments = Post::published()->visible()
             ->withCount('approvedComments')
             ->orderBy('approved_comments_count', 'DESC')->limit(3)->get();
+        Cache::put('mostComments', $this->mostComments, 3600);
         return new ServiceResult(true, $this->mostComments);
     }
 
     public function setCategories(): ServiceResult
     {
         $this->categories = Category::all();
+        Cache::put('categories', $this->categories, 3600);
         return new ServiceResult(true, $this->categories);
-
     }
 
     public function setBanner(): ServiceResult
     {
         $this->banner = Banner::first();
+        Cache::put('banner', $this->banner, 3600);
         return new ServiceResult(true, $this->banner);
     }
 

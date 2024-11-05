@@ -6,7 +6,6 @@ use App\Http\Requests\Api\App\AddCommentRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Services\AppService;
-use Illuminate\Support\Facades\App;
 
 
 class HomeController extends Controller
@@ -63,10 +62,31 @@ class HomeController extends Controller
         $this->appService->comment($post, $request);
         return redirect()->back()->with('password', __('comment.add'));
     }
+
     public function changeLang($lang)
     {
-       $this->appService->setLanguage($lang);
+        $this->appService->setLanguage($lang);
         return redirect()->back();
     }
 
+    public function about()
+    {
+        $result = $this->appService->aboutUs();
+        $data = $result->data;
+        return view('app.about-us', [
+            'banner' => $data['banner'],
+            'categories' => $data['categories'],
+            'mostComments' => $data['mostComments'],
+        ]);
+    }
+    public function contact()
+    {
+        $result = $this->appService->contactUS();
+        $data = $result->data;
+        return view('app.contact-us', [
+            'banner' => $data['banner'],
+            'categories' => $data['categories'],
+            'mostComments' => $data['mostComments'],
+        ]);
+    }
 }

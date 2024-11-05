@@ -21,6 +21,8 @@ Route::middleware(LangMiddleware::class)->group(function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('category/{category}', [HomeController::class, 'category'])->name('category');
+    Route::get('about/', [HomeController::class, 'about'])->name('about');
+    Route::get('contact/', [HomeController::class, 'contact'])->name('contact');
     Route::get('post/{post}', [HomeController::class, 'post'])->name('post');
     Route::post('comment/{post}', [HomeController::class, 'comment'])->name('comment');
     Route::get('lang/{lang}', [HomeController::class, 'changeLang'])->name('change-lang');
