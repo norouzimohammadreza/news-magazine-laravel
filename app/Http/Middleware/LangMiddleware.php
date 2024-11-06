@@ -12,9 +12,13 @@ class LangMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if(Session::has('lang')) {
+        if ($request->query('lang')) {
+            Session::put('lang', $request->query('lang'));
             App::setLocale(Session::get('lang'));
+            return redirect()->back();
         }
+
+        App::setLocale(Session::get('lang', 'fa'));
         return $next($request);
     }
 }

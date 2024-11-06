@@ -132,7 +132,8 @@ class AppService
 
     public function setLanguage(string $lang): ServiceResult
     {
-        App::setLocale($lang);
+
+        //App::setLocale($lang);
         Session::put('lang', $lang);
         return new ServiceResult(true);
 

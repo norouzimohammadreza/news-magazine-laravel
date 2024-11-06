@@ -14,7 +14,7 @@ class CategoryService
     public function showCategories(): ServiceResult
     {
 
-        $categories = Category::paginate(2);
+        $categories = Category::paginate(6);
         return new ServiceResult(true, CategoriesListApiResource::collection($categories));
 
     }
@@ -45,7 +45,7 @@ class CategoryService
     public function deleteCategory(Category $category): ServiceResult
     {
 
-        $category->delete($category);
+        $category->delete();
         return new ServiceResult(true);
 
     }

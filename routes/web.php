@@ -12,13 +12,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TestController;
 use App\Http\Middleware\RedirectIfAuth;
-use App\Http\Middleware\CheckTestEnv;
 use App\Http\Middleware\IsAdmin;
-use App\Http\Middleware\LangMiddleware;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(LangMiddleware::class)->group(function () {
+
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('category/{category}', [HomeController::class, 'category'])->name('category');
@@ -26,7 +24,8 @@ Route::middleware(LangMiddleware::class)->group(function () {
     Route::get('contact/', [HomeController::class, 'contact'])->name('contact');
     Route::get('post/{post}', [HomeController::class, 'post'])->name('post');
     Route::post('comment/{post}', [HomeController::class, 'comment'])->name('comment');
-    Route::get('lang/{lang}', [HomeController::class, 'changeLang'])->name('change-lang');
+
+    //Route::get('lang/{lang}', [HomeController::class, 'changeLang'])->name('change-lang');
 
     Route::middleware(RedirectIfAuth::class)->group(function () {
         Route::get('register', [AuthController::class, 'register'])->name('register');
@@ -62,5 +61,5 @@ Route::middleware(LangMiddleware::class)->group(function () {
         Route::resource('/comment', CommentController::class);
         Route::get('comment/change-status/{comment}', [CommentController::class, 'change'])->name('comment.status');
         Route::resource('/banner', BannerController::class);
-    });
+
 });

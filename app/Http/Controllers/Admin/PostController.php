@@ -8,6 +8,7 @@ use App\Http\Requests\Api\Admin\Post\PostUpdateRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Services\Admin\PostServices;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PostController extends Controller
 {
@@ -48,7 +49,10 @@ class PostController extends Controller
     public function store(PostStoreRequest $request)
     {
         $this->postServices->createPost($request);
+        Alert::success(__('alert.alerts.create',['name'=>'Post'])
+            ,__('alert.alerts.create_msg',['name'=>'Post']));
         return redirect()->route('post.index');
+
     }
 
     public function edit(Post $post)
@@ -63,12 +67,16 @@ class PostController extends Controller
     public function update(PostUpdateRequest $request, Post $post)
     {
         $this->postServices->updatePost($request, $post);
+        Alert::success(__('alert.alerts.update',['name'=>'Post'])
+            ,__('alert.alerts.update_msg',['name'=>'Post']));
         return redirect()->route('post.index');
     }
 
     public function destroy(Post $post)
     {
         $this->postServices->deletePost($post);
+        Alert::success(__('alert.alerts.delete',['name'=>'Post'])
+            ,__('alert.alerts.delete_msg',['name'=>'Post']));
         return redirect()->route('post.index');
     }
 }

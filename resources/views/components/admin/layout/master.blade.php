@@ -13,6 +13,7 @@
 </head>
 
 <body>
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 <x-admin.layout.header/>
 <div class="container-fluid">
     <div class="row">
