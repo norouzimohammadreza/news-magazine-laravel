@@ -8,7 +8,7 @@ use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\CommentController;
 use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\UserController;
-use App\Http\Middleware\Auth;
+use App\Http\Middleware\RedirectIfAuth;
 use App\Http\Middleware\IsAdmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,7 +23,7 @@ Route::get('/category/{category}', [AppController::class, 'category']);
 Route::get('/post/{post}', [AppController::class, 'post']);
 Route::post('comment/{post}', [AppController::class, 'comment'])->middleware('auth:sanctum');
 
-Route::middleware([Auth::class])->group(function () {
+Route::middleware([RedirectIfAuth::class])->group(function () {
     Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
     Route::get('verify-account/{token}/', [AuthController::class, 'verifyAccount']);

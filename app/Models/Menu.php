@@ -10,7 +10,6 @@ class Menu extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $primaryKey = 'id';
     protected $fillable = [
         'title',
         'url',

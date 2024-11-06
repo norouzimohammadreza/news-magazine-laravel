@@ -11,10 +11,11 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TestController;
-use App\Http\Middleware\Auth;
+use App\Http\Middleware\RedirectIfAuth;
 use App\Http\Middleware\CheckTestEnv;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\LangMiddleware;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(LangMiddleware::class)->group(function () {
@@ -27,7 +28,7 @@ Route::middleware(LangMiddleware::class)->group(function () {
     Route::post('comment/{post}', [HomeController::class, 'comment'])->name('comment');
     Route::get('lang/{lang}', [HomeController::class, 'changeLang'])->name('change-lang');
 
-    Route::middleware(Auth::class)->group(function () {
+    Route::middleware(RedirectIfAuth::class)->group(function () {
         Route::get('register', [AuthController::class, 'register'])->name('register');
         Route::post('register/store', [AuthController::class, 'registerStore'])->name('register.store');
         Route::get('login', [AuthController::class, 'login'])->name('login');
@@ -39,10 +40,12 @@ Route::middleware(LangMiddleware::class)->group(function () {
         Route::Post('confirm-password/{token}', [AuthController::class, 'confirmPassword'])->name('confirmPassword');
     });
 
-    Route::middleware(CheckTestEnv::class)->group(function () {
-        Route::get('lang', [TestController::class, 'lang'])->name('lang');
-        Route::get('check', [TestController::class, 'check'])->name('check');
-    });
+    if(App::isLocal()) {
+        Route::prefix('test')->group(function () {
+            Route::get('lang', [TestController::class, 'lang'])->name('lang');
+            Route::get('check', [TestController::class, 'check'])->name('check');
+        });
+    }
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
