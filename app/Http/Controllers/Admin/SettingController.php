@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Admin\Setting\SettingRequest;
 use App\Models\Setting;
 use App\Services\Admin\SettingService;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class SettingController extends Controller
@@ -46,6 +47,8 @@ class SettingController extends Controller
     {
 
         $this->settingService->setSetting($request, $setting);
+        Alert::success(__('alert.alerts.change', ['name' => __('alert.name.setting')])
+            , __('alert.alerts.change_msg', ['name' => __('alert.name.setting')]));
         return redirect()->route('setting.index');
 
     }

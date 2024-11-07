@@ -32,8 +32,8 @@ class CategoryController extends Controller
 
     public function store(CategoryStoreRequest $request)
     {
-        Alert::success(__('alert.alerts.create',['name'=>'Category'])
-            ,__('alert.alerts.create_msg',['name'=>'Category']));
+        Alert::success(__('alert.alerts.create',['name'=>__('alert.name.category')])
+            ,__('alert.alerts.create_msg',['name'=>__('alert.name.category')]));
         $this->categoryService->addCategory($request);
         return redirect()->route('category.index');
     }
@@ -47,16 +47,16 @@ class CategoryController extends Controller
 
     public function update(CategoryUpdateRequest $request, Category $category)
     {
-        Alert::success(__('alert.alerts.update',['name'=>'Category'])
-            ,__('alert.alerts.update_msg',['name'=>'Category']));
+        Alert::success(__('alert.alerts.update',['name'=>__('alert.name.category')])
+            ,__('alert.alerts.update_msg',['name'=>__('alert.name.category')]));
         $this->categoryService->updateCategory($request, $category);
         return redirect()->route('category.index');
     }
 
     public function destroy(Category $category)
     {
-        Alert::success(__('alert.alerts.delete',['name'=>'Category'])
-            ,__('alert.alerts.delete_msg',['name'=>'Category']));
+        Alert::success(__('alert.alerts.delete', ['name' => __('alert.name.category')])
+            , __('alert.alerts.delete_msg', ['name' => __('alert.name.category')]));
         $this->categoryService->deleteCategory($category);
         return redirect()->route('category.index');
     }

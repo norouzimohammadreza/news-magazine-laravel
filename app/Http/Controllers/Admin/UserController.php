@@ -7,6 +7,7 @@ use App\Http\Requests\Api\Admin\User\UserStoreRequest;
 use App\Http\Requests\Api\Admin\User\UserUpdateRequest;
 use App\Models\User;
 use App\Services\Admin\UserService;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class UserController extends Controller
@@ -39,6 +40,8 @@ class UserController extends Controller
     public function store(UserStoreRequest $request)
     {
         $this->userService->createUser($request);
+        Alert::success(__('alert.alerts.create', ['name' => __('alert.name.user')])
+            , __('alert.alerts.create_msg', ['name' => __('alert.name.user')]));
         return redirect()->route('user.index');
     }
 
@@ -52,12 +55,16 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, User $user)
     {
         $this->userService->updateUser($request, $user);
+        Alert::success(__('alert.alerts.update', ['name' => __('alert.name.user')])
+            , __('alert.alerts.update_msg', ['name' => __('alert.name.user')]));
         return redirect()->route('user.index');
     }
 
     public function destroy(User $user)
     {
         $this->userService->deleteUser($user);
+        Alert::success(__('alert.alerts.delete', ['name' => __('alert.name.user')])
+            , __('alert.alerts.delete_msg', ['name' => __('alert.name.user')]));
         return redirect()->route('user.index');
     }
 }
