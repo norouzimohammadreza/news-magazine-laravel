@@ -18,7 +18,7 @@ class PostServices
 
     public function getPosts(): ServiceResult
     {
-        $posts = Post::paginate(2);
+        $posts = Post::paginate(7);
         return new ServiceResult(true, PostsListApiResource::collection($posts));
     }
 

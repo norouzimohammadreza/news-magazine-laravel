@@ -15,7 +15,7 @@ class UserService
 {
     public function getList(): ServiceResult
     {
-        $users = User::paginate(4);
+        $users = User::paginate(10);
         return new ServiceResult(true, UsersListApiResource::collection($users));
     }
 

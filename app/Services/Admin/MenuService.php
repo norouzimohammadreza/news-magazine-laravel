@@ -13,7 +13,7 @@ class MenuService
 {
     public function getListsMenus() : ServiceResult
     {
-        $menus = Menu::paginate(2);
+        $menus = Menu::paginate(5);
         return new ServiceResult(true,MenusListApiResources::collection($menus));
     }
     public function createMenu(MenuStoreRequest $request) : ServiceResult

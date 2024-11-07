@@ -5,7 +5,7 @@
         <td>{{$user->name}}</td>
         <td>{{$user->email}}</td>
         <td>{{($user->is_admin)? __('user.admin'):__('user.user')}}</td>
-        <td></td>
+        <td>{{$user->created_at}}</td>
         <td class="d-flex">
             @if(!$user->is_admin)
                 <a role="button" class="btn btn-sm btn-success text-white my-0 mx-1"

@@ -40,9 +40,6 @@ class SettingController extends Controller
 
     }
 
-    /**
-     * BannerUpdateRequest the specified resource in storage.
-     */
     public function update(SettingRequest $request, Setting $setting)
     {
 

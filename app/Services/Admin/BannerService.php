@@ -18,7 +18,7 @@ class BannerService
     public function ListsBanners(): ServiceResult
     {
 
-        $banners = Banner::paginate(1);
+        $banners = Banner::paginate(4);
         return new ServiceResult(true, BannersListApiResources::collection($banners));
 
     }
