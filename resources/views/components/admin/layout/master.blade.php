@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" type="image/x-icon" href="{{ asset('setting/icon.jpg') }}">
     <title>{{$title}}</title>
-
+    <x-change-local-font/>
     <x-admin.layout.css-loader/>
     @stack('CkEditorCss')
 </head>
