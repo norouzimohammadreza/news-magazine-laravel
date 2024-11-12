@@ -13,7 +13,6 @@ class AdminDashboardServices
 {
     public function getDashboardData(): ServiceResult
     {
-        try {
             $categoriesCount = Category::count();
             $adminsCount = User::AdminUser()->count();
             $usersCount = User::NotAdminUser()->count();
@@ -22,20 +21,15 @@ class AdminDashboardServices
             $commentsCount = Comment::count();
             $unseenComments = Comment::UnseenComments()->count();
             $approvedComments = Comment::ApprovedComments()->count();
-            //for tables
             $mostViewsPosts = Post::published()->visible()->orderByDesc('view')->limit(3)->get();
             $mostCommentsPosts = Post::published()->visible()->withCount('approvedComments')
                 ->orderBy('approved_comments_count', 'DESC')->limit(3)->get();
             $mostCommentsUsers = User::withCount('approvedComments')
                 ->orderBy('approved_comments_count', 'DESC')->limit(3)->get();
 
-        } catch (\Throwable $th) {
-            app()[ExceptionHandler::class]->report($th);
-            return new ServiceResult(false, $th->getMessage());
-        }
         return new ServiceResult(true, [
-            'categoriesCount' => $categoriesCount,
-            'adminsCount' => $adminsCount,
+            'categoriesCount' => Category::count(),
+            'adminsCount' => User::AdminUser()->count(),
             'usersCount' => $usersCount,
             'postsCount' => $postsCount,
             'views' => $views,
@@ -44,8 +38,7 @@ class AdminDashboardServices
             'approvedComments' => $approvedComments,
             'mostViewsPosts' => $mostViewsPosts,
             'mostCommentsPosts' => $mostCommentsPosts,
-            'mostCommentsUsers' => $mostCommentsUsers
-
+            'mostCommentsUsers' => $mostCommentsUsers,
         ]);
     }
 }

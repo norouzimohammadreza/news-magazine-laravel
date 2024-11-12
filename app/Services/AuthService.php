@@ -30,7 +30,6 @@ class AuthService
         return new ServiceResult(true);
     }
 
-
     public function Login(LoginRequest $request): ServiceResult
     {
         $validatedRequest = $request->validated();
@@ -40,11 +39,13 @@ class AuthService
                 'passwordCheck' => false
             ]);
         }
+
         if (!$user->is_active) {
             return new ServiceResult(false, [
                 'userActive' => false
             ]);
         }
+
         $token = $user->createToken('auth_token')->plainTextToken;
         return new ServiceResult(true, [
             'token' => $token,
@@ -139,6 +140,5 @@ please click on the link below to verify account
         $user->password = Hash::make($validatedRequest['password']);
         $user->save();
         return new ServiceResult(true);
-
     }
 }

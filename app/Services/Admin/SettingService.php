@@ -20,13 +20,11 @@ class SettingService
     {
         $validatedRequest = $request->validated();
         if (isset($validatedRequest['logo']) && $validatedRequest['logo']->isValid()) {
-            $logoFormat = $validatedRequest['logo']->extension();
-            $logo = 'logo' . '.' . $logoFormat;
+            $logo = 'logo' . '.' . $validatedRequest['logo']->extension();
             $validatedRequest['logo']->move(public_path('setting'), $logo);
         }
         if (isset($validatedRequest['icon']) && $validatedRequest['icon']->isValid()) {
-            $iconFormat = $validatedRequest['icon']->extension();
-            $icon = 'icon' . '.' . $iconFormat;
+            $icon = 'icon' . '.' . $validatedRequest['icon']->extension();
             $validatedRequest['icon']->move(public_path('setting'), $icon);
         }
         $setting->update([

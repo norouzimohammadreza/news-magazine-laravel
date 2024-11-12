@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Storage;
 
 class PostServices
 {
-
     public function getPosts(): ServiceResult
     {
         $posts = Post::paginate(7);
@@ -25,6 +24,7 @@ class PostServices
     public function createPost(PostStoreRequest $request): ServiceResult
     {
         $validatedRequest = $request->validated();
+        //fixme
         $realTimeStamp = substr($validatedRequest['published_at'], 0, 10);
         $imageName = time() . '.' . $validatedRequest['image']->extension();
         $validatedRequest['image']->storeAs(('posts'), $imageName);
@@ -49,6 +49,7 @@ class PostServices
     public function updatePost(PostUpdateRequest $request, Post $post): ServiceResult
     {
         $validatedRequest = $request->validated();
+        //fixme
         $realTimeStamp = substr($validatedRequest['published_at'], 0, 10);
         if (isset($validatedRequest['image'])) {
             Storage::delete('posts/' . $post->image);
@@ -94,5 +95,4 @@ class PostServices
         $post->save();
         return new ServiceResult(true);
     }
-
 }

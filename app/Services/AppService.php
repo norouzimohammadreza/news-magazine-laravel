@@ -19,7 +19,6 @@ class AppService
 
     public function mainPage(): ServiceResult
     {
-
         $topSelectedPosts = Post::published()->visible()
             ->withCount('approvedComments')
             ->orderBy('published_at', 'DESC')
@@ -132,11 +131,7 @@ class AppService
 
     public function setLanguage(string $lang): ServiceResult
     {
-
-        //App::setLocale($lang);
         Session::put('lang', $lang);
         return new ServiceResult(true);
-
     }
-
 }

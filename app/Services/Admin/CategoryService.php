@@ -10,13 +10,10 @@ use App\Models\Category;
 
 class CategoryService
 {
-
     public function showCategories(): ServiceResult
     {
-
         $categories = Category::paginate(6);
         return new ServiceResult(true, CategoriesListApiResource::collection($categories));
-
     }
 
     public function addCategory(CategoryStoreRequest $request): ServiceResult
@@ -24,14 +21,11 @@ class CategoryService
         $validatedRequest = $request->validated();
         Category::create($validatedRequest);
         return new ServiceResult(true);
-
     }
 
     public function showCategory(Category $category): ServiceResult
     {
-
         return new ServiceResult(true, new CategoriesListApiResource($category));
-
     }
 
     public function updateCategory(CategoryUpdateRequest $request, Category $category): ServiceResult
@@ -39,15 +33,12 @@ class CategoryService
         $validatedRequest = $request->validated();
         $category->update($validatedRequest);
         return new ServiceResult(true, $category);
-
     }
 
     public function deleteCategory(Category $category): ServiceResult
     {
-
         $category->delete();
         return new ServiceResult(true);
-
     }
 
 }

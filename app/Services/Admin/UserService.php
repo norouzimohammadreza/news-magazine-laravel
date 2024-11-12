@@ -65,7 +65,5 @@ class UserService
     {
         return new ServiceResult(true, new UserDetailesApiResource($user));
     }
-
-
 }
 

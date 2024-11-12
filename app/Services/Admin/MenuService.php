@@ -45,7 +45,5 @@ class MenuService
     {
         $menu->delete();
         return new ServiceResult(true);
-
     }
-
 }

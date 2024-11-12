@@ -1,9 +1,9 @@
+@props([
+    'banners' => [],
+])
 <tbody>
-
 @foreach ($banners as $banner)
-
     <tr>
-
         <td>{{ $banner->id }}</td>
         <td>{{ $banner->url }}</td>
         <td><img style="width: 80px;" src="{{ asset('banners/'.$banner->image) }}" alt=""></td>
@@ -17,9 +17,6 @@
                 <x-slot name="route">{{ route('banner.destroy',$banner) }}</x-slot>
             </x-admin.ui.delete-component>
         </td>
-
     </tr>
-
 @endforeach
-
 </tbody>

@@ -14,13 +14,10 @@ use Illuminate\Support\Facades\Storage;
 
 class BannerService
 {
-
     public function ListsBanners(): ServiceResult
     {
-
         $banners = Banner::paginate(4);
         return new ServiceResult(true, BannersListApiResources::collection($banners));
-
     }
 
     public function createBanner(BannerStoreRequest $request): ServiceResult
@@ -31,14 +28,11 @@ class BannerService
         $validatedRequest['image'] = $imageName;
         Banner::create($validatedRequest);
         return new ServiceResult(true);
-
     }
 
     public function showBanner(Banner $banner): ServiceResult
     {
-
         return new ServiceResult(true, new BannerDetailesApiResource($banner));
-
     }
 
     public function updateBanner(BannerUpdateRequest $request, Banner $banner): ServiceResult
@@ -56,18 +50,12 @@ class BannerService
         ]);
 
         return new ServiceResult(true);
-
     }
 
     public function deleteBanner(Banner $banner): ServiceResult
     {
-
         $banner->delete();
         Storage::delete('banners/' . $banner->image);
         return new ServiceResult(true);
-
-
     }
-
-
 }
