@@ -24,14 +24,13 @@
 
                         </div>
 
-                        <x-app.banner-ads :banner="$banner"/>
 
+                    </div>
                         <x-app.side-bar :mostComments="$mostComments"
                                         :banner="$banner"/>
 
                     </div>
                 </div>
-            </div>
         </section>
     </div>
 

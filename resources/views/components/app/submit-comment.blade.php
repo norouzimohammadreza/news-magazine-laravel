@@ -1,3 +1,6 @@
+@props([
+    'post'
+])
 <div class="comment-form">
     @if(session()->has('password'))
         <div class="mb-2 alert alert-success">

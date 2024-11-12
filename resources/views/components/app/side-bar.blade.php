@@ -1,4 +1,8 @@
-</div>
+@props([
+    'banner',
+    'mostComments'
+])
+
 <div class="col-lg-4">
     <div class="sidebars-area">
         <!-- ads -->

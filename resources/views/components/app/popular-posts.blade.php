@@ -1,3 +1,6 @@
+@props([
+    'popularPosts'
+])
 <div class="popular-post-wrap">
     <h4 class="title">{{__('main.popular_news')}}</h4>
     @foreach($popularPosts as $post)

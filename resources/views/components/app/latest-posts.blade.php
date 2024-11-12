@@ -1,3 +1,6 @@
+@props([
+    'latestPosts'
+])
 <div class="latest-post-wrap">
     <h4 class="cat-title">{{__('main.latest_news')}}</h4>
 @foreach($latestPosts as $post)

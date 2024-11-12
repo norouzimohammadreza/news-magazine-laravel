@@ -1,3 +1,6 @@
+@props([
+    'comments'
+])
 @if(!empty($comments))
 
 <div class="comment-sec-area">

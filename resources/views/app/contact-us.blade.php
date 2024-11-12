@@ -32,12 +32,12 @@
                                 </form>
 
                         </div>
+                    </div>
                         <x-app.side-bar :mostComments="$mostComments"
                                         :banner="$banner"/>
 
                     </div>
                 </div>
-            </div>
         </section>
     </div>
 

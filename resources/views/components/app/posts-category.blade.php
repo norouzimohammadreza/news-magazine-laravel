@@ -1,3 +1,6 @@
+@props([
+    'posts'
+])
 @foreach($posts as $post)
     <div class="single-latest-post row align-items-center">
         <div class="col-lg-5 post-left">

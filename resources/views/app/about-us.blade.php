@@ -34,12 +34,12 @@
                             <a href="{{route('home')}}" class="btn btn-primary active">بازگشت به صفحه اصلی</a>
 
                         </div>
+                    </div>
                         <x-app.side-bar :mostComments="$mostComments"
                                         :banner="$banner"/>
 
                     </div>
                 </div>
-            </div>
         </section>
     </div>
 

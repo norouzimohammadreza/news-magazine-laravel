@@ -30,11 +30,7 @@
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
 
-                    @foreach($categories as $category)
-                        <li class="menu-active">
-                            <a href="{{route('category',$category)}}">{{$category->title}} </a>
-                        </li>
-                    @endforeach
+                <x-app.categories :categories="$categories"/>
                 </ul>
             </nav>
             <x-app.header/>

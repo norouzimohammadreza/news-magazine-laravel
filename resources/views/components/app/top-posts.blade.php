@@ -1,3 +1,7 @@
+@props([
+    'topSelectedPosts',
+    'breakingNews'
+])
 <section class="top-post-area pt-10">
     <div class="container no-padding">
         <div class="row small-gutters">

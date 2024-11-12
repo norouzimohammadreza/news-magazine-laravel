@@ -15,13 +15,12 @@
                         <x-app.latest-posts :latestPosts="$latestPosts"/>
 
                         <x-app.popular-posts :popularPosts="$popularPosts"/>
-
+                    </div>
                         <x-app.side-bar :mostComments="$mostComments"
                                         :banner="$banner"/>
 
                     </div>
                 </div>
-            </div>
         </section>
 
     </div>
