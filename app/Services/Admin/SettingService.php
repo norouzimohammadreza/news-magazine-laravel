@@ -19,20 +19,20 @@ class SettingService
     public function setSetting(SettingRequest $request, Setting $setting): ServiceResult
     {
         $validatedRequest = $request->validated();
-        if (isset($validatedRequest['logo']) && $validatedRequest['logo']->isValid()) {
-            $logo = 'logo' . '.' . $validatedRequest['logo']->extension();
-            $validatedRequest['logo']->move(public_path('setting'), $logo);
+        if (isset($validatedRequest['logo'])) {
+            $logoName = 'logo' . '.' . $validatedRequest['logo']->extension();
+            $validatedRequest['logo']->move(public_path('setting'), $logoName);
         }
-        if (isset($validatedRequest['icon']) && $validatedRequest['icon']->isValid()) {
-            $icon = 'icon' . '.' . $validatedRequest['icon']->extension();
-            $validatedRequest['icon']->move(public_path('setting'), $icon);
+        if (isset($validatedRequest['icon'])) {
+            $iconName = 'icon' . '.' . $validatedRequest['icon']->extension();
+            $validatedRequest['icon']->move(public_path('setting'), $iconName);
         }
         $setting->update([
             'title' => $validatedRequest['title'],
             'description' => $validatedRequest['description'],
             'keyword' => $validatedRequest['keyword'],
-            'logo' => (isset($validatedRequest['logo'])) ? $logo : $setting->logo,
-            'icon' => (isset($validatedRequest['icon'])) ? $icon : $setting->icon
+            'logo' => (isset($validatedRequest['logo'])) ? $logoName : $setting->logo,
+            'icon' => (isset($validatedRequest['icon'])) ? $iconName : $setting->icon
         ]);
         return new ServiceResult(true);
     }

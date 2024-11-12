@@ -6,6 +6,7 @@
     <meta name="author" content="Reza Norouzi">
     <meta charset="UTF-8">
     <title>{{$title}}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('setting/icon.jpg') }}">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
     <x-app.css-loader/>
     @if(session('lang')=='fa')
