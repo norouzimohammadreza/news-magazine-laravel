@@ -1,3 +1,8 @@
+@props([
+    'categories',
+    'post'
+])
+
 <form method="post" action="{{ route('post.update',[$post]) }}" enctype="multipart/form-data">
     @csrf
     @method('PUT')

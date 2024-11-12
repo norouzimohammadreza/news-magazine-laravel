@@ -1,3 +1,8 @@
+@props([
+    'mostCommentsUsers',
+    'mostViewsPosts',
+    'mostCommentsPosts'
+])
 <div class="row mt-2 col-12">
     <div class="col-4">
         <h2 class="h6 pb-0 mb-0">

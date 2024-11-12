@@ -1,3 +1,6 @@
+@props([
+    'menus'
+])
 <form method="post" action="{{route('menu.store')}}">
     @csrf
     <div class="form-group">

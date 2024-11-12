@@ -1,3 +1,7 @@
+@props([
+    'menus',
+    'menu',
+])
 <form method="post" action="{{route('menu.update',[$menu])}}">
     @csrf
     @method('PUT')

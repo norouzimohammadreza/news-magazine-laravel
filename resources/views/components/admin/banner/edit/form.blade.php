@@ -1,3 +1,6 @@
+@props([
+    'banner',
+])
 <form method="post" action="{{ route('banner.update',$banner) }}" enctype="multipart/form-data">
     @csrf
     @method('put')

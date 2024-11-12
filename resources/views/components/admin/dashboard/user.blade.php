@@ -1,3 +1,8 @@
+@props([
+    'usersCount',
+    'adminsCount',
+    'allUser',
+])
 <div class="col-sm-6 col-lg-3">
     <a href="{{route('user.index')}}" class="text-decoration-none">
         <div class="card text-white bg-juicy-orange mb-3">

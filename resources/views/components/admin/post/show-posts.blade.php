@@ -1,3 +1,6 @@
+@props([
+    'posts'
+])
 <tbody>
 @foreach ($posts as $post)
     <tr>
@@ -42,9 +45,7 @@
                                           url="{{route('post.edit',[$post])}}"
                                           name="{{ __('dashboard.edit')}}"/>
 
-                <x-admin.ui.delete-component>
-                    <x-slot name="route">{{ route('post.destroy',[$post]) }}</x-slot>
-                </x-admin.ui.delete-component>
+                <x-admin.ui.delete-component route="{{ route('post.destroy',[$post]) }}" />
             </div>
         </td>
     </tr>

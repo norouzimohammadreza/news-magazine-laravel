@@ -1,3 +1,6 @@
+@props([
+    'comments'
+])
 <tbody>
     @foreach ($comments as $comment )
     <tr>

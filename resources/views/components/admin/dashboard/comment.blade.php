@@ -1,3 +1,8 @@
+@props([
+    'commentsCount',
+    'unseenComments',
+    'approvedComments',
+])
 <div class="col-sm-6 col-lg-3">
     <a href="{{route('comment.index')}}" class="text-decoration-none">
         <div class="card text-white bg-neon-life mb-3">

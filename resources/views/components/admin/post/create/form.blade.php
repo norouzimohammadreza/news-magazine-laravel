@@ -1,3 +1,6 @@
+@props([
+    'categories'
+])
 <form method="post" action="{{route('post.store')}}" enctype="multipart/form-data">
     @csrf
     <div class="form-group">

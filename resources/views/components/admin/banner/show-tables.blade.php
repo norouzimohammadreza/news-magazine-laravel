@@ -13,9 +13,7 @@
                                       url="{{route('banner.edit', $banner)}}"
                                       name="{{__('dashboard.edit')}}"/>
 
-            <x-admin.ui.delete-component>
-                <x-slot name="route">{{ route('banner.destroy',$banner) }}</x-slot>
-            </x-admin.ui.delete-component>
+            <x-admin.ui.delete-component route="{{ route('banner.destroy',$banner) }}"/>
         </td>
     </tr>
 @endforeach

@@ -1,3 +1,6 @@
+@props([
+    'route'
+])
 <form action="{{$route}}" method="post">
     @csrf
     @method('delete')

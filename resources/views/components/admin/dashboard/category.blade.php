@@ -1,4 +1,7 @@
- <div class="col-sm-6 col-lg-3">
+@props([
+    'categoriesCount'
+])
+<div class="col-sm-6 col-lg-3">
         <a href="{{{url('admin/category')}}}" class="text-decoration-none">
             <div class="card text-white bg-gradiant-green-blue mb-3">
                 <div class="card-header d-flex justify-content-between align-items-center"><span><i class="fas fa-clipboard-list">

@@ -1,3 +1,7 @@
+@props([
+    'category'
+])
+
 <section class="row my-3">
     <section class="col-12">
         <form method="post" action="{{route('category.update',[$category])}}">

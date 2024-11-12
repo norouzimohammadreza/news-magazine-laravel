@@ -1,3 +1,7 @@
+@props([
+    'views',
+    'postsCount'
+])
 <div class="col-sm-6 col-lg-3">
     <a href="{{route('post.index')}}" class="text-decoration-none">
         <div class="card text-white bg-dracula mb-3">

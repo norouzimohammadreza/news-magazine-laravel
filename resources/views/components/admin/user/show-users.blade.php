@@ -1,3 +1,6 @@
+@props([
+    'users'
+])
 <tbody>
 @foreach($users as $user)
     <tr>
@@ -17,9 +20,7 @@
             <x-admin.ui.modify-button class="btn btn-sm btn-primary my-0 mx-1 text-white"
                                       url="{{route('user.edit',$user)}}"
                                       name="{{__('dashboard.edit')}}"/>
-            <x-admin.ui.delete-component>
-                <x-slot name="route">{{route('user.destroy',$user)}}</x-slot>
-            </x-admin.ui.delete-component>
+            <x-admin.ui.delete-component route="{{route('user.destroy',$user)}}" />
         </td>
     </tr>
 @endforeach
