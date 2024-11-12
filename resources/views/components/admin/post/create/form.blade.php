@@ -24,7 +24,7 @@
 
     <div class="form-group">
         <label for="published_at">{{__('validation.attributes.published_at')}}</label>
-        <input type="text" class="form-control d-none" id="published_at" name="published_at"  autofocus>
+        <input type="text" class="form-control d-none" id="published_at" name="published_at" autofocus>
         <input type="text" class="form-control" id="published_at_view" autofocus>
         <p class="text-danger">@error('published_at'){{ $message }} @enderror </p>
     </div>

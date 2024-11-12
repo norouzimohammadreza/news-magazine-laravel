@@ -23,7 +23,7 @@ class BannerService
     public function createBanner(BannerStoreRequest $request): ServiceResult
     {
         $validatedRequest = $request->validated();
-        $imageName = time() . '.' . $validatedRequest['image']->extension();
+        $imageName = uniqid() . '.' . $validatedRequest['image']->extension();
         $validatedRequest['image']->storeAs('banners', $imageName);
         $validatedRequest['image'] = $imageName;
         Banner::create($validatedRequest);
@@ -40,7 +40,7 @@ class BannerService
         $validatedRequest = $request->validated();
         if (isset($validatedRequest['image'])) {
             Storage::delete('banners/' . $banner->image);
-            $imageName = time() . '.' . $validatedRequest['image']->extension();
+            $imageName = uniqid() . '.' . $validatedRequest['image']->extension();
             $validatedRequest['image']->storeAs('banners', $imageName);
         }
 

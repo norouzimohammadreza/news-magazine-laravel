@@ -8,14 +8,14 @@
             CKEDITOR.replace('body');
             $("#published_at_view").persianDatepicker({
 
-                format: 'YYYY-MM-DD HH:mm:ss',
+                format: 'YYYY-MM-DD HH:mm',
                 toolbox:{
                     calendarSwitch:{
                         enabled: true
                     }
                 },
                 timePicker: {
-                    enabled: true,
+                    enabled: false,
                 },
                 observer : true,
                 altField: '#published_at'

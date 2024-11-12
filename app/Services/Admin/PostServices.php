@@ -26,9 +26,8 @@ class PostServices
         $validatedRequest = $request->validated();
         //fixme
         $realTimeStamp = substr($validatedRequest['published_at'], 0, 10);
-        $imageName = time() . '.' . $validatedRequest['image']->extension();
+        $imageName = uniqid() . '.' . $validatedRequest['image']->extension();
         $validatedRequest['image']->storeAs(('posts'), $imageName);
-
         Post::create([
             'title' => $validatedRequest['title'],
             'summary' => $validatedRequest['summary'],
@@ -53,7 +52,7 @@ class PostServices
         $realTimeStamp = substr($validatedRequest['published_at'], 0, 10);
         if (isset($validatedRequest['image'])) {
             Storage::delete('posts/' . $post->image);
-            $imageName = time() . '.' . $validatedRequest['image']->extension();
+            $imageName = uniqid() . '.' . $validatedRequest['image']->extension();
             $validatedRequest['image']->storeAs(('posts'), $imageName);
         }
         $post->update([
