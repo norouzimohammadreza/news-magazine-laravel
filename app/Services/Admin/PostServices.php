@@ -12,6 +12,7 @@ use App\Http\Resources\API\Admin\Posts\PostsListApiResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PostServices
 {

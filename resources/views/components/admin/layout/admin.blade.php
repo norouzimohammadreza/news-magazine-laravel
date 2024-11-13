@@ -1,5 +1,8 @@
+@props([
+    'title',
+])
+<x-layouts.master title="{{$title}}">
 <x-admin.layout.css-loader/>
-<x-layouts.master>
 <x-admin.layout.header/>
 <div class="container-fluid">
     <div class="row">

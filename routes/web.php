@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 
-
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('category/{category}', [HomeController::class, 'category'])->name('category');
     Route::get('about/', [HomeController::class, 'about'])->name('about');
@@ -62,5 +61,4 @@ use Illuminate\Support\Facades\Route;
         Route::resource('/comment', CommentController::class);
         Route::get('comment/change-status/{comment}', [CommentController::class, 'change'])->name('comment.status');
         Route::resource('/banner', BannerController::class);
-
 });
