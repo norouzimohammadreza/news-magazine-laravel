@@ -1,4 +1,4 @@
-<x-admin.layout.master>
+<x-admin.layout.admin>
 
     <x-slot name="title">{{__('menu.menus_management')}}</x-slot>
 
@@ -21,4 +21,4 @@
     </section>
 
 
-</x-admin.layout.master>
+</x-admin.layout.admin>

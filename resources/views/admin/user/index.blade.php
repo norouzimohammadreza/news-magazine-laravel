@@ -1,4 +1,4 @@
-<x-admin.layout.master>
+<x-admin.layout.admin>
 
     <x-slot name="title">{{__('user.users_management')}}</x-slot>
 
@@ -20,4 +20,4 @@
         {{$users->links()}}
     </section>
 
-</x-admin.layout.master>
+</x-admin.layout.admin>

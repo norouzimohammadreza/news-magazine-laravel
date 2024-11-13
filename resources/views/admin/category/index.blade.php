@@ -1,4 +1,4 @@
-<x-admin.layout.master>
+<x-admin.layout.admin>
 
     <x-slot name="title">{{__('category.Categories_management')}}</x-slot>
 
@@ -10,4 +10,4 @@
 
     <x-admin.category.show-categories :categories="$categories"/>
 
-</x-admin.layout.master>
+</x-admin.layout.admin>

@@ -1,4 +1,4 @@
-<x-admin.layout.master>
+<x-admin.layout.admin>
 
     <x-slot name="title">{{__('category.edit')}}</x-slot>
 
@@ -6,4 +6,4 @@
 
     <x-admin.category.edit.form :category="$category"/>
 
-</x-admin.layout.master>
+</x-admin.layout.admin>

@@ -1,4 +1,4 @@
-<x-admin.layout.master>
+<x-admin.layout.admin>
 
     <x-slot name="title">{{__('user.edit')}}</x-slot>
 
@@ -6,4 +6,4 @@
 
     <x-admin.user.edit.form :user="$user"/>
 
-</x-admin.layout.master>
+</x-admin.layout.admin>

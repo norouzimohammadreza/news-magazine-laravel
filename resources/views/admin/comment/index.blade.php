@@ -1,4 +1,4 @@
-<x-admin.layout.master>
+<x-admin.layout.admin>
     <x-slot name="title">{{__('comment.comments_management')}}</x-slot>
 
     <div
@@ -26,4 +26,4 @@
         {{$comments->links()}}
     </section>
 
-</x-admin.layout.master>
+</x-admin.layout.admin>

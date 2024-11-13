@@ -1,4 +1,4 @@
-<x-admin.layout.master>
+<x-admin.layout.admin>
 
     <x-slot name="title">{{__('user.create')}}</x-slot>
 
@@ -6,4 +6,4 @@
 
     <x-admin.user.create.form/>
 
-</x-admin.layout.master>
+</x-admin.layout.admin>

@@ -1,4 +1,4 @@
-<x-admin.layout.master>
+<x-admin.layout.admin>
     <x-slot name="title">{{__('banner.banners_management')}}</x-slot>
 
     <x-admin.dashboard-title>
@@ -24,5 +24,5 @@
         </table>
         {{$banners->links()}}
     </div>
-</x-admin.layout.master>
+</x-admin.layout.admin>
 -

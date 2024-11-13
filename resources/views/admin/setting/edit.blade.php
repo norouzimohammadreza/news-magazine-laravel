@@ -1,4 +1,4 @@
-<x-admin.layout.master>
+<x-admin.layout.admin>
 
     <x-slot name="title">{{__('setting.website')}}</x-slot>
 
@@ -54,4 +54,4 @@
         </section>
     </section>
 
-</x-admin.layout.master>
+</x-admin.layout.admin>

@@ -1,4 +1,4 @@
-<x-admin.layout.master>
+<x-admin.layout.admin>
 
     <x-slot name="title">{{__('post.edit')}}</x-slot>
 
@@ -17,4 +17,4 @@
 
     <x-admin.post.ck-editor.js/>
 
-</x-admin.layout.master>
+</x-admin.layout.admin>

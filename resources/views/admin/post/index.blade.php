@@ -1,4 +1,4 @@
-<x-admin.layout.master>
+<x-admin.layout.admin>
 
     <x-slot name="title">{{__('post.post_management')}}</x-slot>
 
@@ -31,5 +31,5 @@
         {{$posts->links()}}
     </div>
 
-</x-admin.layout.master>
+</x-admin.layout.admin>
 

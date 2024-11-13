@@ -1,4 +1,4 @@
-<x-admin.layout.master>
+<x-admin.layout.admin>
 
     <x-slot name="title">{{__('category.create')}}</x-slot>
 
@@ -6,5 +6,5 @@
 
     <x-admin.category.create.form/>
 
-</x-admin.layout.master>
+</x-admin.layout.admin>
 

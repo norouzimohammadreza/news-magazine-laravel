@@ -1,4 +1,4 @@
-<x-admin.layout.master>
+<x-admin.layout.admin>
 
     <x-slot name="title">{{__('banner.create')}}</x-slot>
 
@@ -10,4 +10,4 @@
         </section>
     </section>
 
-</x-admin.layout.master>
+</x-admin.layout.admin>
