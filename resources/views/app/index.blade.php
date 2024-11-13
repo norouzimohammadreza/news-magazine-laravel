@@ -1,9 +1,8 @@
-<x-app.master :categories="$categories">
-
+<x-layouts.master>
     <x-slot name="title">{{__('main.home_title')}}</x-slot>
-
+    <x-app.css-loader/>
+    <x-app.header-layout :categories="$categories"/>
     <div class="site-main-container">
-
         <x-app.top-posts :topSelectedPosts="$topSelectedPosts"
                          :breakingNews="$breakingNews"/>
 
@@ -16,13 +15,13 @@
 
                         <x-app.popular-posts :popularPosts="$popularPosts"/>
                     </div>
-                        <x-app.side-bar :mostComments="$mostComments"
-                                        :banner="$banner"/>
+                    <x-app.side-bar :mostComments="$mostComments"
+                                    :banner="$banner"/>
 
-                    </div>
                 </div>
+            </div>
         </section>
-
     </div>
-
-</x-app.master>
+    <x-app.footer-layout/>
+    <x-app.scripts-js/>
+</x-layouts.master>

@@ -1,7 +1,8 @@
-<x-app.master :categories="$categories">
+<x-layouts.master>
 
     <x-slot name="title">ارتباط با ما</x-slot>
-
+    <x-app.css-loader/>
+    <x-app.header-layout :categories="$categories"/>
     <div class="site-main-container">
         <section class="latest-post-area pb-120">
             <div class="container no-padding">
@@ -42,5 +43,6 @@
                 </div>
         </section>
     </div>
-
-</x-app.master>
+    <x-app.footer-layout/>
+    <x-app.scripts-js/>
+</x-layouts.master>
