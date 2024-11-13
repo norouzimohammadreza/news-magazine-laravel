@@ -1,10 +1,10 @@
 /******************************************************************
-Theme Name: Magazine 
-Description: 
+Theme Name: Magazine
+Description:
 Author: Colorlib
-Author URI: 
+Author URI:
 Version: 1.0
-Created: 
+Created:
 ******************************************************************/
 
 
@@ -23,7 +23,7 @@ Created:
 	1.3	Flexbox
 	1.4	Reset
 2.  Elements
-3.  Menu Style 
+3.  Menu Style
 4.  Sidebar Style
 5.  Archive Style
 6.  About Style
@@ -43,7 +43,6 @@ Created:
 
 /*
 
-$primary-font	: 'Poppins', sans-serif;
 ---------------------------------------------
 
 $primary-color	: #f6214b;
@@ -60,7 +59,7 @@ $black			: #222;
 /* =================================== */
 
 
-/*  Basic Style 
+/*  Basic Style
 /* =================================== */
 
 @font-face {
@@ -130,7 +129,6 @@ $black			: #222;
 
 body {
     color: #777777;
-    /* font-family: "Poppins", sans-serif; */
     font-size: 17px;
     font-weight: 300;
     line-height: 1.625em;
@@ -212,7 +210,6 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Poppins", sans-serif;
     color: #222222;
     line-height: 1.2em !important;
     margin-bottom: 0;
@@ -228,7 +225,6 @@ h6 {
 .h6 {
     margin-bottom: 0;
     margin-top: 0;
-    font-family: "Poppins", sans-serif;
     font-weight: 600;
     color: #222222;
 }
