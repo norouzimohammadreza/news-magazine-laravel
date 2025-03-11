@@ -18,7 +18,8 @@ class User extends Authenticatable
         'email',
         'password',
         'verify_token',
-        'forgot_token'
+        'forgot_token',
+        'is_admin',
     ];
 
     public function post()
