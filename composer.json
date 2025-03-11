@@ -11,6 +11,7 @@
         "laravel/tinker": "^2.9",
         "realrashid/sweet-alert": "^7.2",
         "symfony/browser-kit": "^7.2",
+        "symfony/dom-crawler": "^7.2",
         "symfony/http-client": "^7.2",
         "ybazli/faker": "^1.0"
     },
