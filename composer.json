@@ -6,11 +6,12 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "guzzlehttp/guzzle": "^7.9",
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "realrashid/sweet-alert": "^7.2",
+        "symfony/browser-kit": "^7.2",
+        "symfony/http-client": "^7.2",
         "ybazli/faker": "^1.0"
     },
     "require-dev": {
